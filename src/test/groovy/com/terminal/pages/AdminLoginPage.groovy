@@ -1,0 +1,17 @@
+package com.terminal.pages
+
+import geb.Page
+
+class AdminLoginPage extends Page {
+	//todo: Добавить id на страницу
+    static url="http://marc-project.ru:9090/terminal-company/loginAdmin"
+	static at = { title == "Mark project" }
+
+    static content = {
+
+        loginForm{ $("form", name: "signInForm")}
+		usernameInput { loginForm.find("input", type:"text", name: "j_username") }
+        passwordInput { loginForm.find("input", type: "password", name: "j_password") }
+		loginButton{ loginForm.find("input", type: "submit", class: "button")}
+    }
+}

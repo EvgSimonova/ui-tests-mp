@@ -1,0 +1,1853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><style type="text/css">.gm-style .gm-style-mtc label,.gm-style .gm-style-mtc div{font-weight:400}</style><style type="text/css">.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}</style><link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" /><style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style><style type="text/css">.gm-style{font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:400;text-decoration:none}</style>
+   
+
+
+ <meta charset="utf-8" />
+    <title>Mark project</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- Le styles -->
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton:400,800%7CVollkorn:400,700" />
+    <!--link href="css/bootstrap-responsive.min.css" rel="stylesheet"-->
+    <link rel="stylesheet" href="/terminal-company/resources/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
+    <link rel="stylesheet" href="/terminal-company/resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/terminal-company/resources/css/global.css" />
+    <link rel="stylesheet" href="/terminal-company/resources/css/jquery.jscrollpane.codrops2.css" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="/terminal-company/resources/js/jquery-1.8.2.min.js" style=""></script>
+    <!-- the mousewheel plugin -->
+    <script src="/terminal-company/resources/js/jquery.mousewheel.js" type="text/javascript"></script>
+    <!-- the jScrollPane script -->
+    
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script><script type="text/javascript" src="https://maps.gstatic.com/maps-api-v3/api/js/18/14/intl/ru_ALL/main.js"></script>
+    
+    <script src="/terminal-company/resources/js/popup.js" type="text/javascript"></script>
+    <script src="/terminal-company/resources/js/jquery.jscrollpane.min.js" type="text/javascript"></script>
+    <script src="/terminal-company/resources/js/scroll-startstop.events.jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/terminal-company/resources/js/jquery.ikSelect.js"></script>
+    <script src="/terminal-company/resources/js/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
+        
+    
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $(".sub").change(function(){
+          if($(this).attr("checked") == "checked")
+          {
+              $(this).parent().parent().children().children(".sub-inner").attr("checked",true);
+          }
+          else
+          {
+              $(this).parent().parent().children().children(".sub-inner").attr("checked",false);
+          }
+      });
+          $(".sub-inner").change(function(){
+              if($(".sub-inner").length == 0)
+          {
+              $(".sub").attr("checked",false);
+          }
+      });
+          
+      });
+    </script>
+    
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $("#col-a").change(function(){
+          if($(this).attr("checked") == "checked")
+          {
+              $("#scrollbarY li").addClass("active");
+          }
+          else
+          {
+              $("#scrollbarY li").removeClass("active");
+          }
+      });
+      });
+    </script>
+    
+    <script>
+      $(document).ready(function(){
+        $('.singin ul li:first').addClass('first');
+        if('.filter:visible'){
+          //$('.row-fluid .span10.main-cont').removeClass('full');
+        }
+        $('#showFilter').click(function(){
+          $(this).hide();
+          $('.row-fluid .span2.filter').show(400);
+          $('.row-fluid .span10.main-cont').removeClass('full');
+        })
+        $('#hideFilter').click(function(){
+          $('.row-fluid .span2.filter').hide();
+          $('#showFilter').show(200);
+          $('.row-fluid .span10.main-cont').addClass('full');
+        })
+      
+        $('.term-list ul li').click(function(){
+          if($(this).find('input:checkbox').attr("checked") == 'checked'){
+            $(this).addClass('active');
+          } 
+          else{
+             $(this).removeClass('active');
+          }
+        })
+
+        var blockHeight = $(window).height();
+        $('.jspContainer, #scrollbarY').css('height', blockHeight - 270);
+
+        
+
+
+      })
+      $(window).resize(function(){
+        var blockHeight = $(window).height();
+        $('.filter, .groups ').css('height', blockHeight-270);
+        //$('.jspContainer, #scrollbarY').css('height', blockHeight - 300);
+
+        var filterwidth = $('.filter').width();
+        if(filterwidth &gt; 200) {
+          $('.filter span.title, a.select').removeClass('full-size');
+        }
+        if(filterwidth &lt; 200) {
+          $('.filter span.title, a.select').addClass('full-size');
+        }
+      })
+
+      $(function() {
+        $( "#slider-range" ).slider({ // полузки цены
+          range: true,
+          min: 5,
+          max: 90,
+          values: [ 7, 35 ],
+          slide: function( event, ui ) {
+            $( "#amount" ).val(ui.values[0]);
+            $( "#amount1" ).val(ui.values[1]);
+
+          }
+        });
+        $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ));
+        $( "#amount1" ).val($( "#slider-range" ).slider( "values", 1 ));
+        
+      });
+      
+  </script>
+    
+    <!--scripts------------------------------------------------------------------------------>
+      <script type="text/javascript">
+      $(function() {
+      
+        // the element we want to apply the jScrollPane
+        var $el         = $('#scrollbarY').jScrollPane({
+          verticalGutter  : -16
+        }),
+            
+        // the extension functions and options  
+          extensionPlugin   = {
+            
+            extPluginOpts : {
+              // speed for the fadeOut animation
+              mouseLeaveFadeSpeed : 500,
+              // scrollbar fades out after hovertimeout_t milliseconds
+              hovertimeout_t    : 1000,
+              // if set to false, the scrollbar will be shown on mouseenter and hidden on mouseleave
+              // if set to true, the same will happen, but the scrollbar will be also hidden on mouseenter after "hovertimeout_t" ms
+              // also, it will be shown when we start to scroll and hidden when stopping
+              useTimeout      : false,
+              // the extension only applies for devices with width &gt; deviceWidth
+              deviceWidth     : 980
+            },
+            hovertimeout  : null, // timeout to hide the scrollbar
+            isScrollbarHover: false,// true if the mouse is over the scrollbar
+            elementtimeout  : null, // avoids showing the scrollbar when moving from inside the element to outside, passing over the scrollbar
+            isScrolling   : false,// true if scrolling
+            addHoverFunc  : function() {
+              
+              // run only if the window has a width bigger than deviceWidth
+              if( $(window).width() &lt;= this.extPluginOpts.deviceWidth ) return false;
+              
+              var instance    = this;
+              
+              // functions to show / hide the scrollbar
+              $.fn.jspmouseenter  = $.fn.show;
+              $.fn.jspmouseleave  = $.fn.fadeOut;
+              
+              // hide the jScrollPane vertical bar
+              var $vBar     = this.getContentPane().siblings('.jspVerticalBar').hide();
+              
+              /*
+               * mouseenter / mouseleave events on the main element
+               * also scrollstart / scrollstop - @James Padolsey : http://james.padolsey.com/javascript/special-scroll-events-for-jquery/
+               */
+              $el.bind('mouseenter.jsp',function() {
+                
+                // show the scrollbar
+                $vBar.stop( true, true ).jspmouseenter();
+                
+                if( !instance.extPluginOpts.useTimeout ) return false;
+                
+                // hide the scrollbar after hovertimeout_t ms
+                clearTimeout( instance.hovertimeout );
+                instance.hovertimeout   = setTimeout(function() {
+                  // if scrolling at the moment don't hide it
+                  if( !instance.isScrolling )
+                    $vBar.stop( true, true ).jspmouseleave( instance.extPluginOpts.mouseLeaveFadeSpeed || 0 );
+                }, instance.extPluginOpts.hovertimeout_t );
+                
+                
+              }).bind('mouseleave.jsp',function() {
+                
+                // hide the scrollbar
+                if( !instance.extPluginOpts.useTimeout )
+                  $vBar.stop( true, true ).jspmouseleave( instance.extPluginOpts.mouseLeaveFadeSpeed || 0 );
+                else {
+                clearTimeout( instance.elementtimeout );
+                if( !instance.isScrolling )
+                    $vBar.stop( true, true ).jspmouseleave( instance.extPluginOpts.mouseLeaveFadeSpeed || 0 );
+                }
+                
+              });
+              
+              if( this.extPluginOpts.useTimeout ) {
+                
+                $el.bind('scrollstart.jsp', function() {
+                
+                  // when scrolling show the scrollbar
+                  clearTimeout( instance.hovertimeout );
+                  instance.isScrolling  = true;
+                  $vBar.stop( true, true ).jspmouseenter();
+                  
+                }).bind('scrollstop.jsp', function() {
+                  
+                  // when stop scrolling hide the scrollbar (if not hovering it at the moment)
+                  clearTimeout( instance.hovertimeout );
+                  instance.isScrolling  = false;
+                  instance.hovertimeout   = setTimeout(function() {
+                    if( !instance.isScrollbarHover )
+                      $vBar.stop( true, true ).jspmouseleave( instance.extPluginOpts.mouseLeaveFadeSpeed || 0 );
+                  }, instance.extPluginOpts.hovertimeout_t );
+                  
+                });
+                
+                // wrap the scrollbar
+                // we need this to be able to add the mouseenter / mouseleave events to the scrollbar
+                var $vBarWrapper  = $('&lt;div/&gt;').css({
+                  position  : 'absolute',
+                  left    : $vBar.css('left'),
+                  top     : $vBar.css('top'),
+                  right   : $vBar.css('right'),
+                  bottom    : $vBar.css('bottom'),
+                  //width   : $vBar.width(),
+                  height    : $vBar.height()
+                }).bind('mouseenter.jsp',function() {
+                  
+                  clearTimeout( instance.hovertimeout );
+                  clearTimeout( instance.elementtimeout );
+                  
+                  instance.isScrollbarHover = true;
+                  
+                  // show the scrollbar after 100 ms.
+                  // avoids showing the scrollbar when moving from inside the element to outside, passing over the scrollbar                
+                  instance.elementtimeout = setTimeout(function() {
+                    $vBar.stop( true, true ).jspmouseenter();
+                  }, 100 ); 
+                  
+                }).bind('mouseleave.jsp',function() {
+                  
+                  // hide the scrollbar after hovertimeout_t
+                  clearTimeout( instance.hovertimeout );
+                  instance.isScrollbarHover = false;
+                  instance.hovertimeout = setTimeout(function() {
+                    // if scrolling at the moment don't hide it
+                    if( !instance.isScrolling )
+                      $vBar.stop( true, true ).jspmouseleave( instance.extPluginOpts.mouseLeaveFadeSpeed || 0 );
+                  }, instance.extPluginOpts.hovertimeout_t );
+                  
+                });
+                
+                $vBar.wrap( $vBarWrapper );
+              
+              }
+            
+            }
+            
+          },
+          
+          // the jScrollPane instance
+          jspapi      = $el.data('jsp');
+          
+        // extend the jScollPane by merging 
+        $.extend( true, jspapi, extensionPlugin );
+        if (typeof jspapi == 'undefined'){
+        	return;
+        }
+        
+        jspapi.addHoverFunc();
+         var blockHeight = $(window).height();
+         
+        $('#scrollbarY, .jspContaine').css('height', blockHeight-270)
+      });
+        $(window).resize(function(){
+           var blockHeight = $(window).height();
+        $('#scrollbarY, .jspContaine').css('height', blockHeight - 270);
+       // $('r').css('height', blockHeight - 310);
+
+        })
+
+    </script>
+    <script type="text/javascript">
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&amp;]" + name + "=([^&amp;#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+       
+    var isOpenCreateTab = getParameterByName('panel');
+    $(document).ready(function(){
+    	$("#success").hide();
+        if (isOpenCreateTab==="create"){
+            $(".edit-holder.create").fadeIn(200);
+        } else if (isOpenCreateTab==="create_error"){
+        	$("#create_error").show();
+        	$(".edit-holder.create").fadeIn(200);
+        } else if (isOpenCreateTab.indexOf('edit_error') !== -1){
+        	showEditPanel(isOpenCreateTab.replace("edit_error", ""));
+        	$("#"+isOpenCreateTab).show();
+        } else if (isOpenCreateTab){
+        	showEditPanel(isOpenCreateTab);
+        } else {
+        	$("#success").show();
+        }
+        });
+    $(document).ready(function(){
+    	 var group = getParameterByName('group');
+    	 var place = getParameterByName('place');
+    	 var type = getParameterByName('type');
+    	 if (group){
+    		 $("#group"+group).toggleClass("activeTab");
+    	 } else if (place){
+    		 $("#place"+place).toggleClass("activeTab");
+    	 } else if (type){
+    		 $("#type"+type).toggleClass("activeTab");
+    	 } else {
+    		 $("#all").toggleClass("activeTab");
+    	 }
+        });
+	</script>
+    
+      <!--uniform-->
+    <script type="text/javascript" src="/terminal-company/resources/js/jquery.uniform.js"></script>
+    <script charset="utf-8" type="text/javascript">
+      $(function(){
+        $(".file").uniform();
+      });
+    </script>
+    <!--end uniform-->
+    
+      <script src="/terminal-company/resources/js/script-ini.js" type="text/javascript"></script> 
+  <script type="text/javascript" charset="UTF-8" src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/14/intl/ru_ALL/%7Bcommon,util,geocoder,map%7D.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/14/intl/ru_ALL/%7Bonion%7D.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/14/intl/ru_ALL/%7Bcontrols%7D.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/14/intl/ru_ALL/%7Bstats,marker%7D.js"></script><script type="text/javascript" charset="UTF-8" src="https://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate?1shttp%3A%2F%2Fmarc-project.ru%3A9090%2Fterminal-company%2Fowner%2Fterminals&amp;5e1&amp;callback=_xdc_._tqgf4t&amp;token=103532"></script><script type="text/javascript" charset="UTF-8" src="https://mts1.googleapis.com/vt?pb=%211m4%211m3%211i11%212i1884%213i1228%211m4%211m3%211i11%212i1884%213i1229%212m3%211e0%212sm%213i279000000%213m9%212sru-RU%213sUS%215e18%2112m1%211e47%2112m3%211e37%212m1%211ssmartmaps%214e3%2120m1%211b1&amp;callback=_xdc_._twpnpr&amp;token=48902"></script></head>
+  <body>
+    <div id="wrapper">
+      
+      
+
+
+
+<!--header-->
+<div class="header no-b">
+	<div class="row-fluid">
+		<div class="span8 logo">
+			<h1>
+				<a title="" href="/terminal-company/terminal-company">marc <span>project</span></a>
+			</h1>
+		</div>
+		
+		
+
+
+
+
+
+	
+	
+	
+		
+	
+
+
+	<div class="span4 navbar singin user-top">
+		Удачного дня, <a href="/terminal-company/owner/personalAccount">mihailov-ta+spam44@ya.ru</a> (<a href="/terminal-company/logout">Выйти</a>)
+	</div>
+
+
+		
+		<div class="clear"></div>
+	</div>
+</div>
+<!--end header-->
+ 
+      
+      
+      <div class="container-fluid">
+        
+        
+        
+
+
+	<!--user menu-->
+        <div class="user-menu">
+          <ul>
+            <li class="item1 active"><a href="/terminal-company/owner/terminals">Список Терминалов</a></li>
+            <li class="item2 money "><a href="/terminal-company/owner/balance">Деньги</a></li>
+            <li class="item3 "><a href="/terminal-company/owner/statistic">Статистика</a></li>
+            <li class="item5 "><a href="/terminal-company/owner/settings">Настройки</a></li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <!-- end user menu--> 
+        
+        
+        <div class="row-fluid ">
+          <div class="">
+            
+            <div class="top-line">
+            </div>
+            
+            
+            <div class="row-fluid main-content chose">
+              
+              <!--left-->
+              <div class="groups">
+                <div class="cont">
+                  
+                  <div class="image-action">
+                    <form action="">
+                      
+                      <div class="add-group"><a class="btn" href="#">Добавить терминал</a></div>
+                      
+                      <!--image menu-->
+                      <div class="image-menu">
+                      	<label><b>Группы :</b></label>
+                        <label><a href="/terminal-company/owner/terminals" id="all" class="activeTab"> Все (3) </a></label>
+                        
+                        <label><a href="/terminal-company/owner/terminals?status=1" id="activeStatus">Активные (2)</a></label>
+                        <label><a href="/terminal-company/owner/terminals?status=2" id="unActiveStatus">Неактивные (1)</a></label>
+                       	
+                      </div>
+                      <!-- end image menu-->
+                      
+                      <!--image menu-->
+                      <div id="groups" class="image-menu">
+                      	
+                        
+                        
+                      	
+                      	
+                                              
+                        <div class="group-menu">
+                          <ul style="display: none;">
+                            <li class="item-1"><a href="#">Добавить группу</a></li>
+                            <li class="item-2"><a href="#">Переименовать группу</a></li>
+                            <li class="item-3"><a href="#">Удалить группу</a></li>
+                            <li class="item-4"><a href="#">Остановить терминалы</a></li>
+                            <li class="item-5"><a href="#">Удалить терминалы</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      
+                      <!-- end image menu-->
+                      
+                      <!--image menu-->
+                      <div class="image-menu bottom">
+                        <label><b>Тип устройства :</b></label>
+                        
+                      		<label><a href="/terminal-company/owner/terminals?type=1" id="type1"> Монитор (3)</a></label>
+                      	
+                      	
+                      	
+                      		<label><a href="/terminal-company/owner/terminals?type=2" id="type2"> Банкомат(0)</a></label>
+                      	
+                      		<label><a href="/terminal-company/owner/terminals?type=3" id="type3"> Смартфон(0)</a></label>
+                      	
+                      </div>
+                      <!-- end image menu-->
+                      
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+              <!-- end left-->
+              
+              <!--center-->
+              <div class="span5 term-list">
+                <div class="cont">
+                  
+                  <div class="tabbable">
+                    
+                    <div class="tab-content">
+                      <!--tab-->
+                     <div id="listTerminals" class="tab-pane">
+                      
+                      <div id="scrollbarY" class="jp-container" style="height: 683px; overflow: hidden; padding: 0px;">
+                        
+                      <div class="jspContainer" style="height: 683px;"><div class="jspPane" style="padding: 0px; top: 0px;"><ul>
+                        
+
+                        <li id="terminal29153">
+                          <label onclick="showEditRight(29153)">
+                            <input type="checkbox" name="subtopic" id="checker" /> 
+                            <a class="image" title="" href="#"><img alt="" src="/terminal-company/member/getImage/29203" /></a>
+                            <h3>Монитор №29153 адрес  Клязьма,</h3>
+                            <p>Описание изображения</p>
+                            <p class="count">Описание изображения</p>
+                            <p class="count">Описание изображения</p>
+                          </label>
+                          <a onclick="setPauseId(29153)" id="29153" class="start" href="#"></a><div onclick="setDeleteId(29153); " class="close up"></div>
+                        </li>
+
+                        
+
+                        <li id="terminal39250">
+                          <label onclick="showEditRight(39250)">
+                            <input type="checkbox" name="subtopic" id="checker" /> 
+                            <a class="image" title="" href="#"><img alt="" src="/terminal-company/member/getImage/39300" /></a>
+                            <h3>Монитор №39250 адрес  Клязьма,</h3>
+                            <p>Описание изображения</p>
+                            <p class="count">Описание изображения</p>
+                            <p class="count">Описание изображения</p>
+                          </label>
+                          <a onclick="setPauseId(39250)" id="39250" class="pause" href="#"></a><div onclick="setDeleteId(39250); " class="close up"></div>
+                        </li>
+
+                        
+
+                        <li id="terminal29152">
+                          <label onclick="showEditRight(29152)">
+                            <input type="checkbox" name="subtopic" id="checker" /> 
+                            <a class="image" title="" href="#"><img alt="" src="/terminal-company/member/getImage/30200" /></a>
+                            <h3>Монитор №29152 адрес  Клязьма,</h3>
+                            <p>Описание изображения</p>
+                            <p class="count">Описание изображения</p>
+                            <p class="count">Описание изображения</p>
+                          </label>
+                          <a onclick="setPauseId(29152)" id="29152" class="pause" href="#"></a><div onclick="setDeleteId(29152); " class="close up"></div>
+                        </li>
+
+                        
+                                                                  
+                        </ul></div></div></div>
+                     </div>
+                     <!--end tab-->
+                     
+                    
+                   </div>
+                  </div>
+                </div>
+              </div>
+              <!-- end center-->
+              
+              <!--right-->
+              		
+              	<div id="show29153" class="none right-info">
+                 <!--terminal preview-->
+                 <div class="image-preview terminal">
+                  
+                  <h3>Фото терминала:</h3>
+                  <div data="images29153" class="photo-box">
+                  	
+                    <div class="photo">
+                      <a href="#"><img alt="" src="/terminal-company/member/getImage/29203" /></a>
+                      <div terminalid="29153" imageid="29203" class="close-image"></div>
+                    </div>
+                    
+                    
+                     <div style="display: none;" data="errors29153" class="alert alert-error"> Разрешено только 3 фотографии</div>                  
+                    <div class="load-line right">
+                          <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-undefined"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" data="file29153" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                   		 </div>
+                          <div class="close-image"></div>
+                    </div>  
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="name">Описание:</div>
+                    <p>
+                      Терминал находится нв первом этаже справа от входа. В форме кубика рубика, на каждой грани установлена одна плазма
+                      <span onclick="showEditPanel(29153)" class="edit-btn"></span>
+                    </p>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Время работы:</div>
+                        с 8:00 до 23:00
+                        <span onclick="showEditPanel(29153)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Проходимость:</div>
+                        23000 чел.\за час
+                        <span onclick="showEditPanel(29153)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Стоимость:</div>
+                        500.0 руб.\сутки
+                        <span onclick="showEditPanel(29153)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Номер в системе:</div>
+                        29153
+                        <span onclick="showEditPanel(29153)" class="edit-btn"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Тип устройства:</div>
+                         Монитор
+                    </div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Адрес размещения:</div>
+                      Клязьма , 
+                      <span onclick="showEditPanel(29153)" class="edit-btn"></span> 
+                    </div>
+                  </div>
+                  <div class="map">
+                    <a onclick="placeMarkerFloat(29153 ); setEditId(29153);" class="open-map" href="#">Просмотреть карту</a>
+                  </div>
+                 </div>
+                 <!-- end terminal preview-->
+               </div>
+               	
+              	<div id="show39250" class="none right-info">
+                 <!--terminal preview-->
+                 <div class="image-preview terminal">
+                  
+                  <h3>Фото терминала:</h3>
+                  <div data="images39250" class="photo-box">
+                  	
+                    <div class="photo">
+                      <a href="#"><img alt="" src="/terminal-company/member/getImage/39300" /></a>
+                      <div terminalid="39250" imageid="39300" class="close-image"></div>
+                    </div>
+                    
+                    
+                     <div style="display: none;" data="errors39250" class="alert alert-error"> Разрешено только 3 фотографии</div>                  
+                    <div class="load-line right">
+                          <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-undefined"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" data="file39250" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                   		 </div>
+                          <div class="close-image"></div>
+                    </div>  
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="name">Описание:</div>
+                    <p>
+                      Терминал находится нв первом этаже справа от входа. В форме кубика рубика, на каждой грани установлена одна плазма
+                      <span onclick="showEditPanel(39250)" class="edit-btn"></span>
+                    </p>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Время работы:</div>
+                        с 8:00 до 23:00
+                        <span onclick="showEditPanel(39250)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Проходимость:</div>
+                        23000 чел.\за час
+                        <span onclick="showEditPanel(39250)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Стоимость:</div>
+                        500.0 руб.\сутки
+                        <span onclick="showEditPanel(39250)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Номер в системе:</div>
+                        39250
+                        <span onclick="showEditPanel(39250)" class="edit-btn"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Тип устройства:</div>
+                         Монитор
+                    </div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Адрес размещения:</div>
+                      Клязьма , 
+                      <span onclick="showEditPanel(39250)" class="edit-btn"></span> 
+                    </div>
+                  </div>
+                  <div class="map">
+                    <a onclick="placeMarkerFloat(39250 ); setEditId(39250);" class="open-map" href="#">Просмотреть карту</a>
+                  </div>
+                 </div>
+                 <!-- end terminal preview-->
+               </div>
+               	
+              	<div id="show29152" class="none right-info">
+                 <!--terminal preview-->
+                 <div class="image-preview terminal">
+                  
+                  <h3>Фото терминала:</h3>
+                  <div data="images29152" class="photo-box">
+                  	
+                    <div class="photo">
+                      <a href="#"><img alt="" src="/terminal-company/member/getImage/30200" /></a>
+                      <div terminalid="29152" imageid="30200" class="close-image"></div>
+                    </div>
+                    
+                    
+                     <div style="display: none;" data="errors29152" class="alert alert-error"> Разрешено только 3 фотографии</div>                  
+                    <div class="load-line right">
+                          <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-undefined"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" data="file29152" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                   		 </div>
+                          <div class="close-image"></div>
+                    </div>  
+                    <div class="clear"></div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="name">Описание:</div>
+                    <p>
+                      Терминал находится нв первом этаже справа от входа. В форме кубика рубика, на каждой грани установлена одна плазма1
+                      <span onclick="showEditPanel(29152)" class="edit-btn"></span>
+                    </p>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Время работы:</div>
+                        с 8:00 до 23:00
+                        <span onclick="showEditPanel(29152)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Проходимость:</div>
+                        23000 чел.\за час
+                        <span onclick="showEditPanel(29152)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Стоимость:</div>
+                        500.0 руб.\сутки
+                        <span onclick="showEditPanel(29152)" class="edit-btn"></span>
+                    </div>
+                    <div class="line">
+                      <div class="name left">Номер в системе:</div>
+                        29152
+                        <span onclick="showEditPanel(29152)" class="edit-btn"></span>
+                    </div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Тип устройства:</div>
+                         Монитор
+                    </div>
+                  </div>
+                  
+                  <div class="desc">
+                    <div class="line">
+                      <div class="name left">Адрес размещения:</div>
+                      Клязьма , 
+                      <span onclick="showEditPanel(29152)" class="edit-btn"></span> 
+                    </div>
+                  </div>
+                  <div class="map">
+                    <a onclick="placeMarkerFloat(29152 ); setEditId(29152);" class="open-map" href="#">Просмотреть карту</a>
+                  </div>
+                 </div>
+                 <!-- end terminal preview-->
+               </div>
+                 
+              <!-- end right-->
+              
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+    </div>      
+    
+
+
+	<!--footer-->
+    <div id="footer">
+      <div class="footer-inner">
+          <div class="license">Copyright © Your Company Name</div>
+          
+          <!--footer menu-->
+          <div class="footer-menu">
+            <ul>
+              <li><a class="open-help" href="#">Помощь</a></li>
+            </ul>
+            <div class="clear"></div>
+          </div>
+          <!-- end footer menu-->
+          <div class="clear"></div>
+      </div>
+    </div>
+    <!--end footer-->
+    
+    <!--image requirement-->
+    <div class="requirement-holder">
+      <div class="requirement-box">
+        <div class="title">Требования к изображению</div>
+        
+        <div class="line">
+          <span>Технические требования:</span>
+          <p>Формат: jpg, phg, gif, tiff</p>
+          <p>Разрешение: 320х680, 1200х1800, 2500х3400</p>
+        </div>
+        
+        <div class="line">
+          <span>Этические требования:</span>
+          <p>На изображении не должны присутствовать:</p>
+          <p>Любые фрагменты не удовлетворяющие Российскому законадательству в части распространенния информации, а так же запрещенные законом тематики.</p>
+        </div>
+        <div class="help">Если у вас возникли вопросы, обратитесь в <a href="#">службу поддержки</a></div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end image requirement-->
+    
+    <!--help box-->
+    <div class="help-holder">
+      <div class="help-box">
+        <div class="title">Подсказка по разделу..........................</div>
+        <div class="inner-title">Заголовок для раздела подсказки</div>
+        <div class="text-box">
+          Значимость этих проблем настолько очевидна, что укрепление и развитие структуры требуют определения и уточнения систем массового участия. Разнообразный и богатый опыт консультация с широким активом способствует подготовки и реализации систем массового участия. Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по разработке модели развития. Разнообразный и богатый опыт начало повседневной работы по формированию позиции способствует подготовки и реализации дальнейших направлений развития.
+          <ol>
+            <li><span>Значимость этих проблем настолько очевидна</span></li>
+            <li><span>Значимость этих проблем настолько очевидна</span></li>
+            <li><span>Значимость этих проблем настолько очевидна</span></li>
+          </ol>
+        </div>
+        <div class="inner-title form-title">Если не нашли ответа - заполните форму ниже</div>
+        <div class="help-form">
+          <form action="">
+          <div class="param-line">
+            <label for="">Ваше имя:</label>
+            <input type="text" class="text" />
+            <div class="clear"></div>
+          </div>
+          <div class="param-line">
+            <label for="">Ваш вопрос:</label>
+            <div class="clear"></div>
+          </div>
+          <textarea></textarea>
+          <div class="param-line bottom">
+            <input type="button" value="отправить" class="button" />
+          </div>
+          </form>
+        </div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end help box-->
+ 
+    </div>
+           
+    
+    <!--group-action-->
+    <div class="group-action-holder item-1" style="display: none;">
+      <div class="group-action">
+        <div class="title">Создание новой группы</div>
+        <div class="line">
+          <label for="">Имя новой группы</label>
+          <input type="text" id="newGroupName" class="text" />
+          <div class="clear"></div>
+        </div>
+        <div class="button-line">
+          <input type="button" onclick="createGroup()" value="Создать" class="btn" />
+          <div class="clear"></div>
+        </div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!--end group-action-->
+    
+    <!--group-action-->
+    <div class="group-action-holder item-2">
+      <div class="group-action">
+        <div class="title">Переименовать группу</div>
+        <div class="line">
+          <label for="">Новое название группы</label>
+          <input type="text" id="editGroupName" class="text" />
+          <div class="clear"></div>
+        </div>
+        <div class="button-line">
+          <input type="button" onclick="editGroup()" value="Переименовать" class="btn" />
+          <div class="clear"></div>
+        </div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+    <!--group-action-->
+    <div class="group-action-holder item-3">
+      <div class="group-action">
+        <div class="title">Удаление группы</div>
+        <p>Вы уверены что хотите удалить группу</p>
+        <p>(Все терминалы из этой группы будут переведены в группу Активные)</p>
+        <a onclick="deleteGroup()" class="delete" href="#">Удалить</a>
+        
+        <div class="clear"></div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+    <!--group-action-->
+    <div class="group-action-holder item-4">
+      <div class="group-action">
+        <div class="title">Остановить терминалы</div>
+        <p>Вы уверены что хотите остановить терминалы ?</p>
+        <a onclick="stopTerminals()" class="delete" href="#">Остановить</a>
+        <div class="clear"></div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+    <!--group-action-->
+    <div class="group-action-holder item-5">
+      <div class="group-action">
+        <div class="title">Удалить терминалы</div>
+        <p>Вы уверены что хотите удалить терминалы ?</p>
+        <a onclick="deleteTerminals()" class="delete" href="#">Удалить</a>
+        <div class="clear"></div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+    <!--group-action-->
+    <div class="group-action-holder item-6">
+      <div class="group-action">
+        <div class="title">Остановить терминал</div>
+        <p>Вы уверены что хотите остановить(запустить) терминал ?</p>
+        <a onclick="stopTerminal()" class="delete" href="#">Да</a>
+        <input type="hidden" id="pauseId" />
+        <a class="delete" href="#">Нет</a>
+        <div class="clear"></div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+     <!--group-action-->
+    <div class="group-action-holder item-8">
+      <div class="group-action">
+        <div class="title">Удалить терминал</div>
+        <p>Вы уверены что хотите удалить терминал ?</p>
+        <a onclick="deleteTerminal()" class="delete" href="#">Да</a>
+        <input type="hidden" id="deleteId" />
+        <a class="delete" href="#">Нет</a>
+        <div class="clear"></div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+    <!--group-action-->
+    <div class="group-action-holder item-7">
+      <div class="group-action">
+        <div class="title">Местоположение на карте</div>
+        <div class="prev-map">
+          <div style="width: 300px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden;" id="map" class="map"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;" class="gm-style"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; position: absolute; left: -69px; top: -253px;"></div><div style="width: 256px; height: 256px; position: absolute; left: -69px; top: 3px;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -69px; top: -253px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -69px; top: 3px;"></div></div></div></div><div style="position: absolute; z-index: 0; left: 0px; top: 0px;"><div style="overflow: hidden;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"><div style="width: 256px; height: 256px; position: absolute; left: -69px; top: -253px; opacity: 1; transition: opacity 200ms ease-out 0s;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://mts0.googleapis.com/vt?pb=%211m4%211m3%211i11%212i1884%213i1228%212m3%211e0%212sm%213i279000000%213m9%212sru-RU%213sUS%215e18%2112m1%211e47%2112m3%211e37%212m1%211ssmartmaps%214e0%2120m1%211b1" draggable="false" /></div><div style="width: 256px; height: 256px; position: absolute; left: -69px; top: 3px; opacity: 1; transition: opacity 200ms ease-out 0s;"><img style="width: 256px; height: 256px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://mts0.googleapis.com/vt?pb=%211m4%211m3%211i11%212i1884%213i1229%212m3%211e0%212sm%213i279000000%213m9%212sru-RU%213sUS%215e18%2112m1%211e47%2112m3%211e37%212m1%211ssmartmaps%214e0%2120m1%211b1" draggable="false" /></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a style="position: static; overflow: visible; float: none; display: inline;" target="_blank" href="http://maps.google.com/maps?ll=-33.8688,151.2195&amp;z=11&amp;t=m&amp;hl=ru-RU&amp;gl=US&amp;mapclient=apiv3" title="Нажмите, чтобы отобразить эту область в Картах Google"><div style="width: 62px; height: 26px; cursor: pointer;"><img style="position: absolute; left: 0px; top: 0px; width: 62px; height: 26px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/google_white2.png" draggable="false" /></div></a></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 0px; bottom: 0px; width: 12px;"><div draggable="false" style="-moz-user-select: none;" class="gm-style-cc"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto,Arial,sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">Картографические данные</a><span style="display: none;"></span></div></div></div><div style="background-color: white; padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto,Arial,sans-serif; color: rgb(34, 34, 34); box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2); z-index: 10000002; display: none; width: 0px; height: 0px; position: absolute; left: 5px; top: 5px;"><div style="padding: 0px 0px 10px; font-size: 16px;">Картографические данные</div><div style="font-size: 13px;"></div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt3.png" draggable="false" /></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto,Arial,sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);"></div></div><div class="gmnoprint gm-style-cc" style="z-index: 1000001; position: absolute; -moz-user-select: none; right: 0px; bottom: 0px;" draggable="false"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto,Arial,sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);" href="http://www.google.com/intl/ru-RU_US/help/terms_maps.html" target="_blank">Условия использования</a></div></div><div draggable="false" style="-moz-user-select: none; display: none; position: absolute; right: 0px; bottom: 0px;" class="gm-style-cc"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="background-color: rgb(245, 245, 245); width: auto; height: 100%; margin-left: 1px;"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto,Arial,sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right;"><a target="_new" title="Сообщить об ошибке на карте или снимке" style="font-family: Roboto,Arial,sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;" href="http://maps.google.com/maps?ll=-33.8688,151.2195&amp;z=11&amp;t=m&amp;hl=ru-RU&amp;gl=US&amp;mapclient=apiv3&amp;skstate=action:mps_dialog$apiref:1&amp;output=classic">Сообщить об ошибке на карте</a></div></div><div class="gmnoprint" style="margin: 5px; -moz-user-select: none; position: absolute; left: 0px; top: 0px;" draggable="false" controlwidth="32" controlheight="84"><div controlwidth="32" controlheight="40" style="cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; position: absolute; left: 0px; top: 0px;"><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px;"><img style="position: absolute; left: -9px; top: -102px; width: 1028px; height: 214px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/cb_scout2.png" draggable="false" /></div><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img style="position: absolute; left: -107px; top: -102px; width: 1028px; height: 214px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/cb_scout2.png" draggable="false" /></div><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img style="position: absolute; left: -58px; top: -102px; width: 1028px; height: 214px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/cb_scout2.png" draggable="false" /></div><div style="width: 32px; height: 40px; overflow: hidden; position: absolute; left: 0px; top: 0px; visibility: hidden;"><img style="position: absolute; left: -205px; top: -102px; width: 1028px; height: 214px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/cb_scout2.png" draggable="false" /></div></div><div class="gmnoprint" style="opacity: 0.6; display: none; position: absolute;" controlwidth="0" controlheight="0"><div style="width: 22px; height: 22px; overflow: hidden; position: absolute; cursor: pointer;" title="Повернуть карту на 90 градусов"><img style="position: absolute; left: -38px; top: -360px; width: 59px; height: 492px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt3.png" draggable="false" /></div></div><div class="gmnoprint" controlwidth="20" controlheight="39" style="position: absolute; left: 6px; top: 45px;"><div style="width: 20px; height: 39px; overflow: hidden; position: absolute;"><img style="position: absolute; left: -39px; top: -401px; width: 59px; height: 492px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px;" src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt3.png" draggable="false" /></div><div style="position: absolute; left: 0px; top: 2px; width: 20px; height: 17px; cursor: pointer;" title="Увеличить"></div><div style="position: absolute; left: 0px; top: 19px; width: 20px; height: 17px; cursor: pointer;" title="Уменьшить"></div></div></div><div class="gmnoprint gm-style-mtc" style="margin: 5px; z-index: 0; position: absolute; cursor: pointer; text-align: left; width: 85px; right: 0px; top: 0px;"><div style="direction: ltr; overflow: hidden; text-align: left; position: relative; color: rgb(0, 0, 0); font-family: Roboto,Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 1px 6px; border-radius: 2px; background-clip: padding-box; border: 1px solid rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.3); font-weight: 500;" draggable="false" title="Изменить тип карты">Карта<img src="https://maps.gstatic.com/mapfiles/arrow-down.png" draggable="false" style="-moz-user-select: none; border: 0px none; padding: 0px; margin: -2px 0px 0px; position: absolute; right: 6px; top: 50%; width: 7px; height: 4px;" /></div><div style="background-color: white; z-index: -1; padding-top: 2px; background-clip: padding-box; border-width: 0px 1px 1px; border-style: none solid solid; border-color: -moz-use-text-color rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15); -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none; box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.3); position: relative; text-align: left; display: none;"><div style="color: black; font-family: Roboto,Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px; font-weight: 500;" draggable="false" title="Показать карту с названиями объектов">Карта</div><div style="color: black; font-family: Roboto,Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px;" draggable="false" title="Показать спутниковую карту">Спутник</div><div style="margin: 1px 0px; border-top: 1px solid rgb(235, 235, 235);"></div><div style="color: rgb(0, 0, 0); font-family: Roboto,Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px 8px 3px 3px; direction: ltr; text-align: left; white-space: nowrap;" draggable="false" title="Показать карту рельефа с названиями объектов"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img style="position: absolute; left: -52px; top: -44px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 68px; height: 67px;" src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" /></div></span><label style="vertical-align: middle; cursor: pointer;">Рельеф</label></div><div style="margin: 1px 0px; border-top: 1px solid rgb(235, 235, 235); display: none;"></div><div style="color: rgb(184, 184, 184); font-family: Roboto,Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px 8px 3px 3px; direction: ltr; text-align: left; white-space: nowrap; display: none;" draggable="false" title="Чтобы просмотреть карту под углом 45 градусов, увеличьте масштаб."><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(241, 241, 241); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden; display: none;"><img style="position: absolute; left: -52px; top: -44px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 68px; height: 67px;" src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" /></div></span><label style="vertical-align: middle; cursor: pointer;">45°</label></div><div style="color: rgb(0, 0, 0); font-family: Roboto,Arial,sans-serif; -moz-user-select: none; font-size: 11px; background-color: rgb(255, 255, 255); padding: 3px 8px 3px 3px; direction: ltr; text-align: left; white-space: nowrap; display: none;" draggable="false" title="Показать спутниковую карту с названиями объектов"><span role="checkbox" style="box-sizing: border-box; position: relative; line-height: 0; font-size: 0px; margin: 0px 5px 0px 0px; display: inline-block; background-color: rgb(255, 255, 255); border: 1px solid rgb(198, 198, 198); border-radius: 1px; width: 13px; height: 13px; vertical-align: middle;"><div style="position: absolute; left: 1px; top: -2px; width: 13px; height: 11px; overflow: hidden;"><img style="position: absolute; left: -52px; top: -44px; -moz-user-select: none; border: 0px none; padding: 0px; margin: 0px; width: 68px; height: 67px;" src="https://maps.gstatic.com/mapfiles/mv/imgs8.png" draggable="false" /></div></span><label style="vertical-align: middle; cursor: pointer;">Названия объектов</label></div></div></div></div></div>
+        </div>
+        <div class="close"></div>
+      </div>
+    </div>
+    <!-- end group-action-->
+    
+    
+
+
+
+    
+    <!--edit-->
+     
+    <div id="edit29153" class="edit-holder adt">
+      <div class="edit-box">
+        <form id="editTerminal29153" onsubmit="editTerminal(29153)" method="POST" action="/terminal-company/owner/terminals/edit">
+          
+          <div class="line">
+            <div style="display: none;" id="edit_error29153" class="alert alert-error"></div>
+            <div class="clear"></div>
+          </div>
+          <div class="line">
+            <label for="">Номер в системе:</label>
+            29153
+            <input type="hidden" value="29153" name="terminalId" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Статус</label> 
+            <select name="terminalStatus">
+            	
+            		<option value="ACTIVE"> ACTIVE</option>
+            	
+            		<option value="INACTIVE" selected="selected"> INACTIVE</option>
+            	
+            </select>
+            <div class="clear"></div>
+          </div>
+                  
+          
+          <div class="line">
+            <label for="">Добавить адрес терминала:</label>
+            <input type="hidden" value="56.0015333" name="mapLat" id="mapLat29153" />
+            <input type="hidden" value="37.625418800000034" name="mapLng" id="mapLng29153" />
+            <input type="text" value="Клязьма" id="address29153" name="address" class="text" />
+            <input type="button" onclick="codeEditAddress(29153)" value="Найти на карте" class="btn" />
+            <a onclick="placeMarkerFloat(29153 ); setEditId(29153);" class="open-map" href="#">указать на карте</a>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Наименование терминала:</label>
+            <input type="text" value="Новый терминал для тестирования 1" name="name" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Описание:</label>
+            <textarea cols="" rows="" name="description">Терминал находится нв первом этаже справа от входа. В форме кубика рубика, на каждой грани установлена одна плазма</textarea>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип заведения:</label>
+            <select class="terminalGroup" name="terminalGroup">
+            	
+                
+            </select>
+            
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип устройства:</label>
+            <select name="terminalType">
+            	
+            		<option value="1" selected="selected">  Монитор</option>
+            	
+            		<option value="2">  Банкомат</option>
+            	
+            		<option value="3">  Смартфон</option>
+            	
+            </select>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Возраст посетителей:</label>
+        
+             <div class="counts">        
+                <p>
+                   <span class="no-wrap slide-input first">от <input type="text" value="5" style="" id="1amount29153" /><input type="hidden" value="5" id="minAge29153" name="minAge" /></span>
+                   <span class="no-wrap slide-input"> до <input type="text" value="83" style="" id="2amount29153" /><input type="hidden" value="5" id="maxAge29153" name="maxAge" /> </span>
+                   </p><div class="clear"></div>
+                <p></p>
+                <div id="slider-range29153" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 91.7647%;"></div><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 0%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 91.7647%;"></a></div>
+              </div>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в будние дни:</label>
+            <input type="text" value="1000" name="weekdayAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в выходные дни:</label>
+            <input type="text" value="23000" name="weekendAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Режим работы:</label>
+            <span>с  <input type="text" value="8:00" name="startWorkTime" />   до <input type="text" value="23:00" name="endWorkTime" /></span>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Установленная ОС:</label>
+            <input type="text" value="Linux Mint" name="operationSystem" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Стоимость размещения <br />(1 слот в течение одного дня):</label>
+            <input type="text" value="500.0" name="cost" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Загрузить фотографии:</label>
+            <div class="clear"></div>
+            <div data="images29153" class="photo-box">
+              
+                    <div class="photo">
+                      <a href="#"><img alt="" src="/terminal-company/member/getImage/29203" /></a>
+                      <div terminalid="29153" imageid="29203" class="close-image"></div>
+                    </div>
+                    
+               
+              <div style="display: none;" data="errors29153" class="alert alert-error"> Разрешено только 3 фотографии</div>
+              <div class="load-line right">
+                    <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-undefined"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" data="file29153" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                    </div>
+                    <div class="clear"></div>
+              </div>  
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="line">
+            
+            <input type="submit" value="Сохранить" class="btn" />
+            <div class="clear"></div>
+          </div>
+        </form>
+        <div class="close"></div>
+        
+      </div>
+    </div>
+    <script>
+    $( "#slider-range29153" ).slider({//ползунок показов
+        range: true,
+        min: 5,
+        max: 90,
+        values: [ 5, 83 ],
+        slide: function( event, ui ) {
+          $( "#1amount29153" ).val(ui.values[0]);
+          $( "#2amount29153" ).val(ui.values[1]);
+
+        }
+      });
+      $( "#1amount29153" ).val($( "#slider-range29153" ).slider( "values", 0 ));
+      $( "#2amount29153" ).val($( "#slider-range29153" ).slider( "values", 1 ));
+          
+    </script>
+     
+    <div id="edit39250" class="edit-holder adt">
+      <div class="edit-box">
+        <form id="editTerminal39250" onsubmit="editTerminal(39250)" method="POST" action="/terminal-company/owner/terminals/edit">
+          
+          <div class="line">
+            <div style="display: none;" id="edit_error39250" class="alert alert-error"></div>
+            <div class="clear"></div>
+          </div>
+          <div class="line">
+            <label for="">Номер в системе:</label>
+            39250
+            <input type="hidden" value="39250" name="terminalId" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Статус</label> 
+            <select name="terminalStatus">
+            	
+            		<option value="ACTIVE" selected="selected"> ACTIVE</option>
+            	
+            		<option value="INACTIVE"> INACTIVE</option>
+            	
+            </select>
+            <div class="clear"></div>
+          </div>
+                  
+          
+          <div class="line">
+            <label for="">Добавить адрес терминала:</label>
+            <input type="hidden" value="56.0015333" name="mapLat" id="mapLat39250" />
+            <input type="hidden" value="37.625418800000034" name="mapLng" id="mapLng39250" />
+            <input type="text" value="Клязьма" id="address39250" name="address" class="text" />
+            <input type="button" onclick="codeEditAddress(39250)" value="Найти на карте" class="btn" />
+            <a onclick="placeMarkerFloat(39250 ); setEditId(39250);" class="open-map" href="#">указать на карте</a>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Наименование терминала:</label>
+            <input type="text" value="Новый терминал для тестирования 1" name="name" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Описание:</label>
+            <textarea cols="" rows="" name="description">Терминал находится нв первом этаже справа от входа. В форме кубика рубика, на каждой грани установлена одна плазма</textarea>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип заведения:</label>
+            <select class="terminalGroup" name="terminalGroup">
+            	
+                
+            </select>
+            
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип устройства:</label>
+            <select name="terminalType">
+            	
+            		<option value="1" selected="selected">  Монитор</option>
+            	
+            		<option value="2">  Банкомат</option>
+            	
+            		<option value="3">  Смартфон</option>
+            	
+            </select>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Возраст посетителей:</label>
+        
+             <div class="counts">        
+                <p>
+                   <span class="no-wrap slide-input first">от <input type="text" value="3" style="" id="1amount39250" /><input type="hidden" value="3" id="minAge39250" name="minAge" /></span>
+                   <span class="no-wrap slide-input"> до <input type="text" value="83" style="" id="2amount39250" /><input type="hidden" value="3" id="maxAge39250" name="maxAge" /> </span>
+                   </p><div class="clear"></div>
+                <p></p>
+                <div id="slider-range39250" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 91.7647%;"></div><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 0%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 91.7647%;"></a></div>
+              </div>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в будние дни:</label>
+            <input type="text" value="1000" name="weekdayAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в выходные дни:</label>
+            <input type="text" value="23000" name="weekendAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Режим работы:</label>
+            <span>с  <input type="text" value="8:00" name="startWorkTime" />   до <input type="text" value="23:00" name="endWorkTime" /></span>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Установленная ОС:</label>
+            <input type="text" value="Linux Mint" name="operationSystem" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Стоимость размещения <br />(1 слот в течение одного дня):</label>
+            <input type="text" value="500.0" name="cost" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Загрузить фотографии:</label>
+            <div class="clear"></div>
+            <div data="images39250" class="photo-box">
+              
+                    <div class="photo">
+                      <a href="#"><img alt="" src="/terminal-company/member/getImage/39300" /></a>
+                      <div terminalid="39250" imageid="39300" class="close-image"></div>
+                    </div>
+                    
+               
+              <div style="display: none;" data="errors39250" class="alert alert-error"> Разрешено только 3 фотографии</div>
+              <div class="load-line right">
+                    <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-undefined"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" data="file39250" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                    </div>
+                    <div class="clear"></div>
+              </div>  
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="line">
+            
+            <input type="submit" value="Сохранить" class="btn" />
+            <div class="clear"></div>
+          </div>
+        </form>
+        <div class="close"></div>
+        
+      </div>
+    </div>
+    <script>
+    $( "#slider-range39250" ).slider({//ползунок показов
+        range: true,
+        min: 5,
+        max: 90,
+        values: [ 3, 83 ],
+        slide: function( event, ui ) {
+          $( "#1amount39250" ).val(ui.values[0]);
+          $( "#2amount39250" ).val(ui.values[1]);
+
+        }
+      });
+      $( "#1amount39250" ).val($( "#slider-range39250" ).slider( "values", 0 ));
+      $( "#2amount39250" ).val($( "#slider-range39250" ).slider( "values", 1 ));
+          
+    </script>
+     
+    <div id="edit29152" class="edit-holder adt">
+      <div class="edit-box">
+        <form id="editTerminal29152" onsubmit="editTerminal(29152)" method="POST" action="/terminal-company/owner/terminals/edit">
+          
+          <div class="line">
+            <div style="display: none;" id="edit_error29152" class="alert alert-error"></div>
+            <div class="clear"></div>
+          </div>
+          <div class="line">
+            <label for="">Номер в системе:</label>
+            29152
+            <input type="hidden" value="29152" name="terminalId" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Статус</label> 
+            <select name="terminalStatus">
+            	
+            		<option value="ACTIVE" selected="selected"> ACTIVE</option>
+            	
+            		<option value="INACTIVE"> INACTIVE</option>
+            	
+            </select>
+            <div class="clear"></div>
+          </div>
+                  
+          
+          <div class="line">
+            <label for="">Добавить адрес терминала:</label>
+            <input type="hidden" value="56.0015333" name="mapLat" id="mapLat29152" />
+            <input type="hidden" value="37.625418800000034" name="mapLng" id="mapLng29152" />
+            <input type="text" value="Клязьма" id="address29152" name="address" class="text" />
+            <input type="button" onclick="codeEditAddress(29152)" value="Найти на карте" class="btn" />
+            <a onclick="placeMarkerFloat(29152 ); setEditId(29152);" class="open-map" href="#">указать на карте</a>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Наименование терминала:</label>
+            <input type="text" value="Новый терминал для тестирования 1" name="name" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Описание:</label>
+            <textarea cols="" rows="" name="description">Терминал находится нв первом этаже справа от входа. В форме кубика рубика, на каждой грани установлена одна плазма1</textarea>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип заведения:</label>
+            <select class="terminalGroup" name="terminalGroup">
+            	
+                
+            </select>
+            
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип устройства:</label>
+            <select name="terminalType">
+            	
+            		<option value="1" selected="selected">  Монитор</option>
+            	
+            		<option value="2">  Банкомат</option>
+            	
+            		<option value="3">  Смартфон</option>
+            	
+            </select>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Возраст посетителей:</label>
+        
+             <div class="counts">        
+                <p>
+                   <span class="no-wrap slide-input first">от <input type="text" value="5" style="" id="1amount29152" /><input type="hidden" value="5" id="minAge29152" name="minAge" /></span>
+                   <span class="no-wrap slide-input"> до <input type="text" value="83" style="" id="2amount29152" /><input type="hidden" value="5" id="maxAge29152" name="maxAge" /> </span>
+                   </p><div class="clear"></div>
+                <p></p>
+                <div id="slider-range29152" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header" style="left: 0%; width: 91.7647%;"></div><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 0%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 91.7647%;"></a></div>
+              </div>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в будние дни:</label>
+            <input type="text" value="1000" name="weekdayAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в выходные дни:</label>
+            <input type="text" value="23000" name="weekendAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Режим работы:</label>
+            <span>с  <input type="text" value="8:00" name="startWorkTime" />   до <input type="text" value="23:00" name="endWorkTime" /></span>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Установленная ОС:</label>
+            <input type="text" value="Linux Mint" name="operationSystem" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Стоимость размещения <br />(1 слот в течение одного дня):</label>
+            <input type="text" value="500.0" name="cost" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Загрузить фотографии:</label>
+            <div class="clear"></div>
+            <div data="images29152" class="photo-box">
+              
+                    <div class="photo">
+                      <a href="#"><img alt="" src="/terminal-company/member/getImage/30200" /></a>
+                      <div terminalid="29152" imageid="30200" class="close-image"></div>
+                    </div>
+                    
+               
+              <div style="display: none;" data="errors29152" class="alert alert-error"> Разрешено только 3 фотографии</div>
+              <div class="load-line right">
+                    <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-undefined"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" data="file29152" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                    </div>
+                    <div class="clear"></div>
+              </div>  
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="line">
+            
+            <input type="submit" value="Сохранить" class="btn" />
+            <div class="clear"></div>
+          </div>
+        </form>
+        <div class="close"></div>
+        
+      </div>
+    </div>
+    <script>
+    $( "#slider-range29152" ).slider({//ползунок показов
+        range: true,
+        min: 5,
+        max: 90,
+        values: [ 5, 83 ],
+        slide: function( event, ui ) {
+          $( "#1amount29152" ).val(ui.values[0]);
+          $( "#2amount29152" ).val(ui.values[1]);
+
+        }
+      });
+      $( "#1amount29152" ).val($( "#slider-range29152" ).slider( "values", 0 ));
+      $( "#2amount29152" ).val($( "#slider-range29152" ).slider( "values", 1 ));
+          
+    </script>
+    
+    
+    <!-- end edit-->
+        
+    
+   
+
+
+
+    
+    <!--edit-->
+    <div class="edit-holder create">
+      <div class="edit-box">
+        <form onsubmit="saveTerminal()" enctype="multipart/form-data" method="POST" action="/terminal-company/owner/terminals" id="newTerminal">
+          
+          <div class="line">
+          	
+          		<div style="display: none;" id="create_error" class="alert alert-error"></div>
+          	
+            
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Добавить терминал в группу:</label>
+            	<select name="terminalStatus">
+            	
+            		<option value="ACTIVE"> ACTIVE</option>
+            	
+            		<option value="INACTIVE"> INACTIVE</option>
+            	
+            	</select>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Добавить адрес терминала:</label>
+            <input type="hidden" value="" name="mapLat" id="mapLat" />
+            <input type="hidden" value="" name="mapLng" id="mapLng" />
+            <input type="text" placeholder="Введите адрес" id="pac-input" name="address" class="text" />
+            <input type="button" onclick="codeNewAddress()" value="Найти на карте" class="btn" />
+            <a onclick="setEditId(null)" class="open-map" href="#">указать на карте</a>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Наименование терминала:</label>
+            <input type="text" value="" name="name" id="name" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Описание:</label>
+            <textarea name="description" id="description"></textarea>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип заведения:</label>
+            	<select class="terminalGroup" name="terminalGroup">
+            	
+                
+            	</select>
+               	
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Тип устройства:</label>
+            <select name="terminalType" id="terminalType">
+				<option value="1"> Монитор</option><option value="2"> Банкомат</option><option value="3"> Смартфон</option>
+			</select>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Возраст посетителей:</label>
+        
+             <div class="counts">        
+                <p>
+                   <span class="no-wrap slide-input first">от <input type="text" style="" id="amount" /><input type="hidden" value="" name="minAge" id="minAge" /></span>
+                   <span class="no-wrap slide-input"> до <input type="text" style="" id="amount1" /><input type="hidden" value="" name="maxAge" id="maxAge" /> </span>
+                   </p><div class="clear"></div>
+                <p></p>
+                <div id="slider-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header" style="left: 2.35294%; width: 32.9412%;"></div><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 2.35294%;"></a><a href="#" class="ui-slider-handle ui-state-default ui-corner-all" style="left: 35.2941%;"></a></div>
+              </div>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в будние дни:</label>
+            <input type="text" value="" name="weekdayAudience" id="weekdayAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Охват аудитории в выходные дни:</label>
+            <input type="text" value="" name="weekendAudience" id="weekendAudience" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Режим работы:</label>
+            <span>с  <input type="text" value="" name="startWorkTime" id="startWorkTime" />   до <input type="text" value="" name="endWorkTime" id="endWorkTime" /></span>
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Установленная ОС:</label>
+            <input type="text" value="" name="operationSystem" id="operationSystem" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Стоимость размещения <br />(1 слот в течение одного дня):</label>
+            <input type="text" value="" name="cost" id="cost" />
+            <div class="clear"></div>
+          </div>
+          
+          <div class="line">
+            <label for="">Загрузить фотографии:</label>
+            <div class="clear"></div>
+            <div class="photo-box">
+              <div class="photo">
+                <a href="#"></a>
+                <div class="close-image"></div>
+              </div>
+                            
+              <div class="load-line right">
+                    <div id="uniform-undefined" class="uploader">
+                    	<div class="uploader" id="uniform-newFile"><input type="file" style="opacity: 0;" size="21.5" class="file" name="file" id="newFile" /><span class="filename" style="-moz-user-select: none;">No file selected</span><span class="action" style="-moz-user-select: none;">Загрузить изображение</span></div>
+                    	
+                    </div>
+                    <div class="clear"></div>
+              </div>  
+              <div class="clear"></div>
+            </div>
+          </div>
+          <div class="line">
+            
+            <input type="submit" value="Сохранить" class="btn" />
+            <div class="clear"></div>
+          </div>
+        </form>
+        <div class="close"></div>
+        
+      </div>
+    </div>
+    <!-- end edit-->
+         
+    
+    <script type="text/javascript">
+	$(".select").ikSelect();	
+    </script>
+    
+    <script type="text/javascript">
+    	function setPauseId(id){
+    		$("#pauseId").val(id);
+    	}
+    	function stopTerminal(){
+    		$.post( "/terminal-company/owner/terminals/pauseorrun", { id: $("#pauseId").val() }, function() {
+    			var id=$("#pauseId").val();
+    			if ($("#"+id).hasClass("pause")){	
+    				$("#"+id).toggleClass("start");
+    				$("#"+id).removeClass("pause");
+    			} else {
+    				$("#"+id).toggleClass("pause");
+    				$("#"+id).removeClass("start");
+    			}}).fail(function() {
+    			    alert( "error" );
+    			  });
+    	}
+    	
+    	function showEditPanel(id) {
+    		$("#edit"+id).fadeIn(200);
+    	}
+    	function showEditRight(id) {
+    		$(".right-info").hide();
+    		$("#show"+id).show();
+    	}
+    	    	
+    </script>
+    <script src="/terminal-company/resources/js/map.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	
+   		function setDeleteId(id){
+			$("#deleteId").val(id);
+			
+		}
+   		
+   		function deleteTerminal(){
+    		$.post( "/terminal-company/owner/terminals/delete", { id: $("#deleteId").val() }, function() {
+    			var id=$("#deleteId").val();
+    			$("#terminal"+id).css({display:'none'});
+    			})
+    			  .fail(function() {
+    			    alert( "error" );
+    			  });
+    	}
+   		
+    	
+    	  
+    </script>
+    <script type="text/javascript">
+        	function editTerminal(id) {
+        		$("#minAge"+id).val($("#1amount"+id).val());
+        		$("#maxAge"+id).val($("#2amount"+id).val());
+        		$("#mapLat"+id).val(marker.getPosition().lat());
+        		$("#mapLng"+id).val(marker.getPosition().lng());
+        	}
+        	
+    </script>
+    <script type="text/javascript">
+        	function saveTerminal() {
+        		$("#newTerminal").attr('action', "/terminal-company/owner/terminals/save");
+        		$("#minAge").val($("#amount").val());
+        		$("#maxAge").val($("#amount1").val());
+        		
+        	};
+   </script>
+   <script type="text/javascript">
+   	function stopTerminals(){
+   		var ids=[];
+   		$(".active a").each(function( index ) {
+   		  console.log( $( this ).attr("id") );
+   		  ids.push($( this ).attr("id"));
+   		});
+   		$.post( "/terminal-company/owner/terminals/pauseTerminalGroup", { 'id[]': ids }, function() {
+   				$(".active a").each(function( index ) {
+   	   		 	 	var id=$( this ).attr("id");
+   	   		 		$("#"+id).toggleClass("run");
+					$("#"+id).removeClass("pause");
+   	   			});
+			   				
+			}).fail(function() {
+			    alert( "error" );
+			  });
+   	}
+   
+   	function deleteTerminals(){
+   		var ids=[];
+   		$(".active a").each(function( index ) {
+   		  console.log( $( this ).attr("id") );
+   		  ids.push($( this ).attr("id"));
+   		});
+   		$.post( "/terminal-company/owner/terminals/deleteTerminalGroup", { 'id[]': ids }, function() {
+   				$(".active a").each(function( index ) {
+   	   		 	 	var id=$( this ).attr("id");
+   	   		 		$("#terminal"+id).css({display:'none'});
+   	   			});
+			   				
+			}).fail(function() {
+			    
+			  });
+   	}
+   	
+   	function createGroup(){
+   		$.post( "/terminal-company/owner/terminals/createTerminalGroup", { group: $("#newGroupName").val() }, function(data) {
+   			$("#groups").append('&lt;label class="total"&gt;&lt;a href="/terminal-company/owner/terminals?group='+data+'"&gt;'+$("#newGroupName").val()+'(0)&lt;/a&gt;&lt;/label&gt;');
+   			$("select[name='terminalGroup']").append('&lt;option value="'+data+'"&gt;'+ $("#newGroupName").val() +'&lt;/option&gt;');			
+		}).fail(function() {
+		    
+		  });
+   	}
+   	function editGroup(){
+   		var groupId= $(".activeTab").attr("id").replace("group",""); 
+   		var text=$(".activeTab").text(); 
+   		text=text.substring(text.lastIndexOf("("),text.lastIndexOf(")")+1); 
+   		$.post( "/terminal-company/owner/terminals/editTerminalGroup", { group: groupId , name : $("#editGroupName").val() }, function() {
+   			$(".activeTab").text($("#editGroupName").val()+" " +text);
+   			$("option[value='"+groupId+"']").text($("#editGroupName").val());
+		}).fail(function() {
+		    
+		  });
+   	}
+   	function deleteGroup(){
+   		var groupId= $(".activeTab").attr("id").replace("group",""); 
+   		
+   		$.post( "/terminal-company/owner/terminals/removeTerminalGroup", { group: groupId }, function() {
+   			$(".activeTab").remove();
+   			$("option[value='"+groupId+"']").remove();
+		}).fail(function() {
+		    
+		  });
+   	}
+   </script>
+   <script type="text/javascript">
+   	$(".file").on("change", function() {
+   		var data = $(this).attr('data');
+   		if (typeof data !== 'undefined' &amp;&amp; data !== false) {
+   			var image=this.files[0];
+   			var terminalId=data.replace("file", "");
+   			var postData = new FormData();
+   			postData.append('image',image);
+   			postData.append('terminalId',terminalId);
+   			
+   			$("div[data='errors"+terminalId+"']").hide();
+   		 $.ajax({
+             url: "/terminal-company/owner/terminals/addImageToTerminal",
+             type: 'POST',
+             dataType: 'json',
+             processData: false,
+             contentType: false,
+             data: postData
+         })
+         .success(function(data) {
+        	 $("div[data='images"+terminalId+"']").prepend ('&lt;div class="photo"&gt; ' +
+             '&lt;a href="#"&gt;&lt;img src="/terminal-company/member/getImage/'+data+'" alt=""/&gt;&lt;/a&gt;'+'&lt;div class="close-image" data="'+data+'"&gt;&lt;/div&gt;&lt;/div&gt;');
+           		
+   			  })
+         .fail(function() {
+        	 	$("div[data='errors"+terminalId+"']").show();
+   			  });
+   		 
+   			
+   		} 
+   		
+    });
+   	
+   	$(".close-image").click(function(){
+   		var imageId = $(this).attr('imageId');
+   		var terminalId = $(this).attr('terminalId');
+   		if (typeof imageId !== 'undefined' &amp;&amp; imageId !== false &amp;&amp; typeof terminalId !== 'undefined' &amp;&amp; terminalId !== false) {
+   			$.post( "/terminal-company/owner/terminals/deleteTerminalImage", { terminalId: terminalId, imageId:imageId }, function() {
+   				$("div[imageId='"+imageId+"']").parent().css({display:'none'});
+   				$("div[data='errors"+terminalId+"']").css({display:'none'});
+   			}).fail(function() {
+   			    
+   			  });
+   			
+   			
+   		} else {
+   			$('#filePreview').attr('src', "");
+   		}	
+    });
+   	
+   	function readURL(input) {
+
+   	    if (input.files &amp;&amp; input.files[0]) {
+   	        var reader = new FileReader();
+
+   	        reader.onload = function (e) {
+   	            $('#filePreview').attr('src', e.target.result);
+   	        }
+
+   	        reader.readAsDataURL(input.files[0]);
+   	    }
+   	}
+
+   	$("#newFile").change(function(){
+   	    readURL(this);
+   	});
+   	   	
+   </script>
+  
+  
+</body></html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+
+<title>Mark project</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<!-- Le styles -->
+<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Neuton:400,800%7CVollkorn:400,700" />
+<link rel="stylesheet" href="/terminal-company/resources/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="/terminal-company/resources/css/ui-lightness/jquery-ui-1.10.0.custom.min.css" />
+<link rel="stylesheet" href="/terminal-company/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/terminal-company/resources/css/global.css" />
+<link rel="stylesheet" href="/terminal-company/resources/css/jquery.jscrollpane.codrops2.css" />
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js'/>"></script>
+    <![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+<script src="/terminal-company/resources/js/popup.js" type="text/javascript"></script>
+<!-- the mousewheel plugin -->
+<script src="/terminal-company/resources/js/jquery.mousewheel.js" type="text/javascript"></script>
+<!-- the jScrollPane script -->
+<script src="/terminal-company/resources/js/jquery.jscrollpane.min.js" type="text/javascript"></script>
+<script src="/terminal-company/resources/js/scroll-startstop.events.jquery.js" type="text/javascript"></script>
+<script src="/terminal-company/resources/js/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	function blockPasswordInputField() {
+		var check = $('#regPassCB').prop("checked");
+		if (check) {
+			$('#password').val('').prop('disabled', true);
+			$('#confirm_password').val('').prop('disabled', true);
+		} else {
+			$('#password').prop('disabled', false);
+			$('#confirm_password').prop('disabled', false);
+		}
+	}
+</script>
+<style>
+.errorblock {
+	color: #ff0000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	padding: 8px;
+	margin: 16px;
+}
+
+.successRegister {
+	color: #164D00;
+	background-color: #DCFFCF;
+	border: 3px solid #288C00;
+	padding: 8px;
+	margin: 16px;
+}
+</style>
+</head>
+<body>
+
+	<!--wrapper-->
+	<div id="wrapper">
+
+		<!--header-->
+		<div class="header no-b">
+			<div class="row-fluid">
+				<div class="span8 logo">
+					<h1>
+						<a title="" href="/terminal-company">marc <span>project</span></a>
+					</h1>
+				</div>
+				
+					<div class="span4 navbar singin">
+						<ul class="nav nav-pills pull-right">
+							<li class="presentation"><a title="" href="#">Презентация системы</a></li>
+							<li class="line"><a class="sign" title="" href="#">Вход</a></li>
+							<li class=""><a class="reg" title="" href="#">Регистрация</a></li>
+						</ul>
+					</div>
+				
+				
+				
+
+
+
+
+
+
+				<div class="clear"></div>
+			</div>
+		</div>
+		<!--end header-->
+		
+			<div class="errorblock">
+				Логин или пароль были введены неправильно.<br />
+			</div>
+		
+		
+		
+		<!--container-->
+		<div class="container-fluid">
+
+			
+			
+			
+
+			<!--description block-->
+			<div class="desc-block">
+
+				<!--desc text-->
+				<div class="desc-text">
+					<div class="text">
+						Быстрое и простое размещение рекламы не выходя из дома или офиса . <br />Донесите информацию до
+						покупателя о своих товарах и услугах по всему городу в определенное время определенным людям . Начните
+						продавать прямо сейчас без регистрации и лишней мороки . Донесите информацию до покупателя о своих
+						товарах и услугах по всему городу в определенное время . <a href="/terminal-company/member/createCompany/addTerminal">Попробовать сейчас.</a>
+					</div>
+					<div class="image">
+						<a href="#"><img alt="" src="/terminal-company/resources/images/girl.jpg" /></a>
+
+						<div class="image-text">Я запустил компанию с помощью Марк Проджект за 10 минут!</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<!--end desc text-->
+
+				<!--step block-->
+				<div class="step-block">
+					<div class="step-title">Как это работает</div>
+
+					<!--step box-->
+					<div class="step-box left">
+						<div class="image">
+							<img alt="" src="/terminal-company/resources/images/step1.jpg" />
+						</div>
+						<div class="name">Выбор терминалов</div>
+						<div class="text">Выбираете терминалы для показа вышего рекламного объявления</div>
+					</div>
+					<!-- end step box-->
+
+					<!--step box-->
+					<div class="step-box">
+						<div class="image">
+							<img alt="" src="/terminal-company/resources/images/step2.jpg" />
+						</div>
+						<div class="name">Загрузка изображений</div>
+						<div class="text">Выбираете терминалы для показа вышего рекламного объявления</div>
+					</div>
+					<!-- end step box-->
+
+					<!--step box-->
+					<div class="step-box">
+						<div class="image">
+							<img alt="" src="/terminal-company/resources/images/step3.jpg" />
+						</div>
+						<div class="name">Оплата рекламы</div>
+						<div class="text">Выбираете терминалы для показа вышего рекламного объявления</div>
+					</div>
+					<!-- end step box-->
+
+					<!--step box-->
+					<div class="step-box right">
+						<div class="image">
+							<img alt="" src="/terminal-company/resources/images/step4.jpg" />
+						</div>
+						<div class="name">Показ рекламы</div>
+						<div class="text">Выбираете терминалы для показа вышего рекламного объявления</div>
+					</div>
+					<!-- end step box-->
+
+					<div class="clear"></div>
+				</div>
+				<!-- end step block-->
+
+			</div>
+			<!-- end description block-->
+
+		</div>
+		<!--container-->
+
+	</div>
+	<!-- end wrapper-->
+
+    
+
+
+
+<!--sign box-->
+<div class="sign-holder">
+	<div class="sign-box">
+		<div class="title">Вход в систему</div>
+		<form method="POST" action="/terminal-company/j_spring_security_check" name="signInForm">
+
+
+			<div class="input-line">
+				<label for="">Электронная почта:</label> <input type="text" name="j_username" class="text" />
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line">
+				<label for="">Пароль:</label> <input type="password" name="j_password" class="text" />
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line bottom">
+				<input type="submit" value="войти" class="button" /> <a class="forgot-password" href="#">забыл
+					пароль?</a>
+			</div>
+			<div class="clear"></div>
+		</form>
+		<div class="inner-title bottom">Вход через социальные сервисы:</div>
+		<div class="social">
+			<a href="https://www.facebook.com/dialog/oauth?client_id=294100380771286&amp;redirect_uri=https://real-directt.ru:8443/terminal-company/fblogin&amp;response_type=code"><img alt="" src="/terminal-company/resources/images/social1.jpg" /></a> <a href="https://accounts.google.com/o/oauth2/auth?redirect_uri=https://real-directt.ru:8443/terminal-company%2Fglogin&amp;response_type=code&amp;client_id=880740004077-kt6o3kqtlt96kf1k9hhfnbcsfanfgob4.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile"><img alt="" src="/terminal-company/resources/images/social2.jpg" /></a> <a href="http://oauth.vk.com/authorize?client_id=4430985&amp;redirect_uri=https://real-directt.ru:8443/terminal-company/vklogin&amp;response_type=code"><img alt="" src="/terminal-company/resources/images/social3.jpg" /></a> <a href="https://oauth.yandex.ru/authorize?response_type=code&amp;client_id=48ab84bfbc1848aea29f3a789116e8a0"><img alt="" src="/terminal-company/resources/images/social4.jpg" /></a>
+		</div>
+
+		<div class="close"></div>
+	</div>
+</div>
+<!-- end sign box-->
+
+
+    
+
+
+
+<script type="text/javascript">
+    function blockPasswordInputField() {
+        var check = $('#regPassCB').prop("checked");
+        if (check) {
+            $('#password').val('').prop('disabled', true);
+            $('#confirm_password').val('').prop('disabled', true);
+        } else {
+            $('#password').prop('disabled', false);
+            $('#confirm_password').prop('disabled', false);
+        }
+    }
+</script>
+
+<!--reg box-->
+<div class="reg-holder">
+	<div class="reg-box">
+		<div class="title">Регистрация в системе</div>
+		<div class="inner-title">Обычная регистрация:</div>
+		<form onsubmit="return validateRegisterForm(this);" method="POST" action="/terminal-company/register_new_user" name="register_form">
+
+			<div class="input-line">
+				<label for="">Электронная почта<span>?</span>:
+				</label> <input type="text" name="email" class="text" />
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line">
+				<label for="">Пароль<span>?</span>:
+				</label> <input type="password" name="password" class="text" id="password" /> <input type="checkbox" onchange="blockPasswordInputField()" id="regPassCB" name="generatePassword" class="checkbox" /> <label class="right" for="">Сгенерировать код и выслать мне на почту</label>
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line">
+				<label for="">Повторить пароль<span>?</span>:
+				</label> <input type="password" name="confirm_password" class="text" id="confirm_password" />
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line">
+				<label class="right" for="">Зарегистрироваться как:</label> <select style="width: 180px" name="role">
+					<option value="user">Рекламодатель</option>
+					<option value="owner">Владелец терминала</option>
+				</select>
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line bottom">
+				<input type="submit" value="зарегистрироваться" class="button" />
+			</div>
+
+			<div class="clear"></div>
+		</form>
+		<div class="inner-title bottom">Регистрация через социальные сервисы:</div>
+		<div class="social">
+			<a href="https://www.facebook.com/dialog/oauth?client_id=294100380771286&amp;redirect_uri=https://real-directt.ru:8443/terminal-company/fblogin&amp;response_type=code"><img alt="" src="/terminal-company/resources/images/social1.jpg" /></a> <a href="https://accounts.google.com/o/oauth2/auth?redirect_uri=https://real-directt.ru:8443/terminal-company%2Fglogin&amp;response_type=code&amp;client_id=880740004077-kt6o3kqtlt96kf1k9hhfnbcsfanfgob4.apps.googleusercontent.com&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile"><img alt="" src="/terminal-company/resources/images/social2.jpg" /></a> <a href="http://oauth.vk.com/authorize?client_id=4430985&amp;redirect_uri=https://real-directt.ru:8443/terminal-company/vklogin&amp;response_type=code"><img alt="" src="/terminal-company/resources/images/social3.jpg" /></a> <a href="https://oauth.yandex.ru/authorize?response_type=code&amp;client_id=48ab84bfbc1848aea29f3a789116e8a0"><img alt="" src="/terminal-company/resources/images/social4.jpg" /></a>
+		</div>
+
+		<div class="close"></div>
+	</div>
+</div>
+<!-- end reg box-->
+
+
+    
+
+
+
+<!--pasword box-->
+<div class="password-holder">
+	<div class="password-box">
+		<div class="title">Восстановление пароля</div>
+		<form method="POST" name="forgotPasswordForm">
+
+			<div class="input-line">
+				<label for="forgot-password-email">Электронная почта:</label> <input type="text" name="forgot-password-email" id="forgot-password-email" class="text" />
+
+				<div class="clear"></div>
+			</div>
+
+			<div class="input-line bottom">
+				<input type="button" value="Восстановить" class="button" />
+			</div>
+			<div class="clear"></div>
+		</form>
+		<div class="line" id="password-box-id"></div>
+		<div class="line feedback">
+			<p>Проверьте вашу почту.</p>
+
+			<p>Информация по восстановлению доступа к сайту отправлена на указанный адрес</p>
+		</div>
+		<div class="help">
+			Если у вас возникли вопросы, обратитесь в <a href="#">службу поддержки</a>
+		</div>
+		<div class="close"></div>
+	</div>
+</div>
+
+<!-- end pasword box-->
+
+
+
+	<!--footer-->
+	<div id="footer">
+		<div class="footer-inner">
+			<div class="license">Copyright © Your Company Name</div>
+
+			<!--footer menu-->
+			<div class="footer-menu">
+				<ul>
+					<li><a href="#">Контакты</a></li>
+					<li><a href="#">Станьте партнером </a></li>
+					<li><a href="#">Интернет-магазин</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+			<!-- end footer menu-->
+
+			<div class="clear"></div>
+		</div>
+	</div>
+	<!--end footer-->
+
+	<!--presentation box-->
+	<div class="presentation-holder">
+		<div class="presentation-box">
+			<div class="title">Презентация системы</div>
+			<div class="video-box">
+				<img alt="" src="/terminal-company/resources/images/video.jpg" />
+			</div>
+			<div class="close"></div>
+		</div>
+	</div>
+	<!-- end presentation box-->
+
+
+
+</body></html>

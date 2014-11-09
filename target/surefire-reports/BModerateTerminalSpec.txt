@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: BModerateTerminalSpec
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 75.48 sec <<< FAILURE!
+can get to adminLogin page and Login as admin(BModerateTerminalSpec)  Time elapsed: 75.015 sec  <<< FAILURE!
+geb.error.RequiredPageContentNotPresent: The required page content 'findedTerminalAddress - SimplePageContent (owner: AdminModerateTerminalPage, args: [], value: null)' is not present
+	at geb.content.TemplateDerivedPageContent.require(TemplateDerivedPageContent.groovy:66)
+	at geb.content.PageContentTemplate.create_closure1(PageContentTemplate.groovy:63)
+	at geb.content.PageContentTemplate.create_closure1(PageContentTemplate.groovy)
+	at geb.content.PageContentTemplate.create(PageContentTemplate.groovy:82)
+	at geb.content.PageContentTemplate.get(PageContentTemplate.groovy:54)
+	at geb.content.PageContentSupport.getContent(PageContentSupport.groovy:43)
+	at geb.content.PageContentSupport.propertyMissing(PageContentSupport.groovy:59)
+	at geb.Browser.propertyMissing(Browser.groovy:210)
+	at geb.spock.GebSpec.propertyMissing(GebSpec.groovy:58)
+	at BModerateTerminalSpec.can get to adminLogin page and Login as admin(BModearteTerminalSpec.groovy:43)
