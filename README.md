@@ -1,29 +1,19 @@
-# README #
+# Описание #
+ 
+Тесты для веб-прилоежения marc-project
 
-UI тесты для веб-приложения.
+
+### Как пользоваться? ###
+
+* Установить maven
+* Установить selenium firefox webdriver
+* Установить geb
+* Скачать репозиторий
+* Перейти в папку с репозиторием
+* Запустить команду mvn clean install
 
 
-### What is this repository for? ###
+### С кем общаться если что-то не получается? ###
 
-* Quick summary
-* Version
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Тимур Михайлов
+* Женя Меркурьев
