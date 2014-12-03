@@ -36,5 +36,7 @@ class MainPage extends Page {
 		forgotPasswordEmail{forgotPasswordForm.find("input", name: "forgot-password-email", type: "text")}
 		forgotPasswordButton{forgotPasswordForm.find("input", type: "button")}
 		feedbackInfo{ $("div.feedback").next()}
+		
+		demoModeLink{ $("a", text: "Попробовать сейчас.")}
     }
 }
