@@ -5,7 +5,7 @@ import geb.Page
 class AdminPersonalAccountPage extends Page {
 
 	//todo: Добавить id на страницу
-    static url="http://marc-project.ru:9090/terminal-company/admin"
+    static url=StaticData.getServerName()+"/admin"
 	static at = { title == "Mark project" }
 
     static content = {

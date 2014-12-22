@@ -4,7 +4,7 @@ import geb.Page
 
 class AdminModerateTerminalPage extends Page {
 	//todo: Добавить id на страницу
-    static url="http://marc-project.ru:9090/terminal-company/admin/terminals"
+    static url=StaticData.getServerName()+"/admin/terminals"
 	static at = { title == "Mark project" }
 
     static content = {

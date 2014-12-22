@@ -4,7 +4,7 @@ import geb.Page
 
 class DemoCreateCompanyPage extends Page {
 	//todo: Добавить id на страницу
-    static url="http://marc-project.ru:9090/terminal-company/member/createCompany/addTerminal"
+    static url=StaticData.getServerName()+"/member/createCompany/addTerminal"
 	static at = { title == "Mark project" }
 
     static content = {
@@ -35,6 +35,6 @@ class DemoCreateCompanyPage extends Page {
 		bottomButtons{ $("div.nav-box.short")}
 		nextButton{ bottomButtons.find("input", type: "button", class: "button.next-button")}
 		
-		
+		currentCampaignsLink{ $("div.user-menu li.item2 a")}
     }
  }

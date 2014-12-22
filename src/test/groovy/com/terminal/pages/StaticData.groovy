@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat
 
 
 def static getServerName(){
-	return "http://real-directt.ru:9090"
+	//return "http://real-directt.ru:9090/terminal-company"
+	return "http://terminal-company.herokuapp.com/"
 }
 
 def static setUserName(input){

@@ -7,7 +7,7 @@ import geb.Page
 class OwnerTerminalListPage extends OwnerPersonalAccountPage {
     //todo добавить id на страницу
 	//todo добавить в переменные терминал над которым производятся действия
-    static url = StaticData.getServerName()+"/terminal-company/owner/terminals" 
+    static url = StaticData.getServerName()+"/owner/terminals" 
 	 static at = { title == "Mark project" }
 	
 	

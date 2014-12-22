@@ -5,7 +5,8 @@
 */
 
 import org.openqa.selenium.firefox.FirefoxDriver
+import com.terminal.pages.StaticData
 
 driver = { new FirefoxDriver() }
 
-baseUrl = "http://marc-project.ru:9090/terminal-company/"
+baseUrl = StaticData.getServerName()

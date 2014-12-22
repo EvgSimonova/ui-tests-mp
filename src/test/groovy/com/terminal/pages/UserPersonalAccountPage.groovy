@@ -10,5 +10,10 @@ class UserPersonalAccountPage extends Page {
         createCompanyLink { $("div.user-menu li.item1 a") }
         myPicturesLink { $("a", href: contains("userImages")) }
         createLink { $("div.create-link a") }
+		
+		topBar{ $("div.span4.navbar.singin.user-top")}
+		userNameLink{ topBar.children()}
+		logoutLink{ topBar.children().next()}
+		
     }
 }
