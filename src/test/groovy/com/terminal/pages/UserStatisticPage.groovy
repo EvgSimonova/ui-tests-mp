@@ -10,6 +10,6 @@ class UserStatisticPage extends Page {
 
     static content = {
 		headText{ $("H1.company")}
-				
+		balancePageLink{  $("div.user-menu li.item4 a")}		
 	}
 }
