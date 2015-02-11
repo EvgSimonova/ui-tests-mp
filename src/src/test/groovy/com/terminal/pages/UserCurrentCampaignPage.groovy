@@ -18,6 +18,5 @@ class UserCurrentCampaignPage extends Page {
 		applyDateFilterButon{ dateFilterPane.find("input", type: "button",id:"filterByDate")}
 		
 		statisticPageLink{ $("div.user-menu li.item3 a")}
-		balancePageLink{  $("div.user-menu li.item4 a")}
 	}
 }

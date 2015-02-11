@@ -1,13 +1,13 @@
 
-
 import com.terminal.pages.AdminPersonalAccountPage
 import com.terminal.pages.AdminLoginPage
-import com.terminal.pages.StaticData
+import com.terminal.pages.AdminModerateImagePage
 import geb.spock.GebReportingSpec
+import com.terminal.pages.StaticData
 
-class T005_AdminLoginSpec extends GebReportingSpec {
+class T201_ModerateImageSpec extends GebReportingSpec {
 
-  	def "can get to adminLogin page and login as admin"() {
+    def "Moderate image"() {
         when:
         to AdminLoginPage
         at AdminLoginPage
@@ -24,6 +24,16 @@ class T005_AdminLoginSpec extends GebReportingSpec {
 
         then:
         at AdminPersonalAccountPage
-		logoutButton.displayed
+		imageModerationLink.displayed
+		
+		when:
+		imageModerationLink.click()
+		
+		then:
+		at AdminModerateImagePage
+		imageModerationLink.displayed
+		contentTable.displayed
+        
+		
     }
 }

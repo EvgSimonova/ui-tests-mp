@@ -10,7 +10,11 @@ class AdminPersonalAccountPage extends Page {
 
     static content = {
 		logoutButton{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
+		
 		leftMenuBlock{ $("div.container-fluid")}
+		
 		terminalModreationLink{ leftMenuBlock.children().children().children().children().children().children().find("a", text: contains("Модерация терминалов"))}
+		
+		imageModerationLink{ leftMenuBlock.find("a", text: "Картинки")}
     }
 }

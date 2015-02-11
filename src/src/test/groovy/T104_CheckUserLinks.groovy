@@ -8,6 +8,7 @@ import com.terminal.pages.DemoCreateCompanyPage
 import com.terminal.pages.UserCurrentCampaignPage
 import com.terminal.pages.UserStatisticPage
 import com.terminal.pages.UserBalancePage
+import com.terminal.pages.UserSettingsPage
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 import java.text.SimpleDateFormat
@@ -82,15 +83,31 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
 		then:
 		at UserStatisticPage
 		headText.displayed
+		balanceLink.displayed
 		
-		//check balamce page
+		//check the balance page
 		when:
-		balancePageLink.click()
+		balanceLink.click()
 		
 		then:
 		at UserBalancePage
-		roboBoxForm.displayed
-		outsumInput.displayed
+		headText.displayed
+		settingsLink.displayed
+		outSumInput.displayed
 		addMoneyButton.displayed
+		
+		//check the settings page
+		when:
+		settingsLink.click()
+		
+		then:
+		at UserSettingsPage
+		headText.displayed
+		passwordForm.displayed
+		newPasswordInput.displayed
+		confirmPasswordInput.displayed
+		oldPasswordInput.displayed
+		savePasswordButton.displayed
+		
     }
 }

@@ -33,7 +33,7 @@ class MainPage extends Page {
 		remindPasswordDialog{ $("div.password-box")}
 		forgotPasswordLink{$("a.forgot-password")}
 		forgotPasswordForm{remindPasswordDialog.find("form", name: "forgotPasswordForm")}
-		forgotPasswordEmail{forgotPasswordForm.find("input", name: "forgot-password-email", type: "text")}
+		forgotPasswordEmail{forgotPasswordForm.find("input", id: "forgot-password-email", type: "text")}
 		forgotPasswordButton{forgotPasswordForm.find("input", type: "button")}
 		feedbackInfo{ $("div.feedback").next()}
 		

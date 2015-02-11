@@ -18,6 +18,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		groupMenuButton{ $("div.group-menu")}
 		createGroupLink{ $("div.group-menu li.item-1 a")}
 		renameGroupLink {$("div.group-menu li.item-2 a")}
+		balancePageLink{ $("div.user-menu li.item2.money a")}
 		
 		createGroupHolder{ $("div.group-action-holder.item-1")}
 		createGroupDialog{ createGroupHolder.children()}
@@ -57,7 +58,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		saveTerminalButton{createTerminalForm.find("input", type:"submit", class:"btn")}
 		
 		terminalPane{ $("div.jspPane")}
-		terminalName{ terminalPane.find("h3", text: contains("Клязьма"))}
+		terminalName{ terminalPane.find("h3", text: contains("Moscow"))}
 		
 		//for stop terminal
 		stopTerminalLink{ terminalPane.find("a.pause")}

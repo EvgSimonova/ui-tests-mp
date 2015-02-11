@@ -4,6 +4,7 @@ import com.terminal.pages.MainPage
 import com.terminal.pages.OwnerPersonalAccountPage
 import com.terminal.pages.OwnerTerminalListPage
 import com.terminal.pages.UserPersonalAccountPage
+import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
 import java.text.SimpleDateFormat
 
@@ -24,8 +25,8 @@ class T103_StopTerminalSpec extends GebReportingSpec {
         }
 
         when:
-        usernameInputOnLoginForm << "mihailov-ta+spam44@ya.ru"
-        passwordInputOnLoginForm << "123"
+		StaticData.setOwnerName(usernameInputOnLoginForm)
+		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         loginButton.click()
 
         then:

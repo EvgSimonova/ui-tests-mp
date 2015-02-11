@@ -33,7 +33,7 @@ class DemoCreateCompanyPage extends Page {
 		addedToCampaignTab{ middleTabs.children().find("li", text: "Добавленные в компанию")}
 		
 		bottomButtons{ $("div.nav-box.short")}
-		nextButton{ bottomButtons.find("input", type: "button", class: "button.next-button")}
+		nextButton{ bottomButtons.children().next()}
 		
 		currentCampaignsLink{ $("div.user-menu li.item2 a")}
     }
