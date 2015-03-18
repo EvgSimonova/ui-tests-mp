@@ -5,6 +5,7 @@ import com.terminal.pages.AdminLoginPage
 import com.terminal.pages.AdminModerateTerminalPage
 import geb.spock.GebReportingSpec
 import com.terminal.pages.StaticData
+import org.openqa.selenium.ElementNotVisibleException
 
 class T006_BModerateTerminalSpec extends GebReportingSpec {
 	//todo: Реализовать вызов метода для логина администратора
@@ -58,7 +59,11 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
 		editTerminalDialog.displayed
 		
 		when:
-		terminalModerateStatus = "true"
+		try{
+			terminalModerateStatus = "true"
+		}catch(ElementNotVisibleException e){
+			println e
+		}	
 		
 		then:
 		editTerminalDialog.displayed

@@ -16,6 +16,9 @@ class UserBalancePage extends Page {
 		robokassaForm{ $("form", id:"robokassa")}
 		outSumInput{ robokassaForm.find("input", id:"outsum")}
 		addMoneyButton{ robokassaForm.find("input", type:"button", name:"addMoney")}
-				
+		sucessBlock{ $("div.successblock")}
+		errorBlock{ $("div.errorblock")}
+		
+
 	}
 }

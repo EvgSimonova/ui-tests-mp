@@ -2,9 +2,9 @@ package com.terminal.pages
 
 import geb.Page
 
-class UserPersonalAccountPage extends Page {
-
-    static at = { $("meta", name: "pageId").@content == "member:personalAccount" }
+class UserContentPage extends Page {
+    static url=StaticData.getServerName()+"member/userImages"
+    static at = {title == "Mark project" }
 
     static content = {
         createCompanyLink { $("div.user-menu li.item1 a") }
@@ -15,6 +15,12 @@ class UserPersonalAccountPage extends Page {
 		userNameLink{ topBar.children()}
 		logoutLink{ topBar.children().next()}
 		balanceLink{ $("div.user-menu li.item4 a")}
+		
+		imageUploadForm{ $("form", id:"imageUploadForm")}
+		fileNameSpan{imageUploadForm.children().children().children()}
+		
+		conentList{ $("div.tabbable")}
+		contentListImg{ conentList.find("H3")}
 		
     }
 }

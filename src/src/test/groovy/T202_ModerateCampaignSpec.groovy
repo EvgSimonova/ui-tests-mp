@@ -1,11 +1,12 @@
 
 import com.terminal.pages.AdminPersonalAccountPage
 import com.terminal.pages.AdminLoginPage
-import com.terminal.pages.AdminModerateImagePage
+import com.terminal.pages.AdminModerateCampaignPage
 import geb.spock.GebReportingSpec
 import com.terminal.pages.StaticData
+import org.openqa.selenium.ElementNotVisibleException
 
-class T201_ModerateImageSpec extends GebReportingSpec {
+class T202_ModerateCampaignSpec extends GebReportingSpec {
 
     def "Moderate image"() {
         when:
@@ -24,20 +25,20 @@ class T201_ModerateImageSpec extends GebReportingSpec {
 
         then:
         at AdminPersonalAccountPage
-		imageModerationLink.displayed
+		campaignModerationLink.displayed
 		
 		when:
-		imageModerationLink.click()
+		campaignModerationLink.click()
 		
 		then:
-		at AdminModerateImagePage
-		imageModerationLink.displayed
+		at AdminModerateCampaignPage
+		campaignModerationLink.displayed
 		contentTable.displayed
 		firstRow.displayed
-		imgIdLink.displayed
+		campaignNamedLink.displayed
 		
 		when:
-		imgIdLink.click()
+		campaignNamedLink.click()
 		
 		then:
         //waitFor{moderationForm.displayed}
@@ -52,7 +53,7 @@ class T201_ModerateImageSpec extends GebReportingSpec {
 		
 		when:
 		try{moderatinoStatusSelect="TRUE"
-		}catch(Exception e){
+		}catch(ElementNotVisibleException e){
 		 println e
 		}
 		
@@ -65,10 +66,10 @@ class T201_ModerateImageSpec extends GebReportingSpec {
 		saveButton.click()
 		
 		then:
-		imageModerationLink.displayed
+		campaignModerationLink.displayed
 		contentTable.displayed
 		firstRow.displayed
-		imgIdLink.displayed
+		campaignNamedLink.displayed
 
 		
 		

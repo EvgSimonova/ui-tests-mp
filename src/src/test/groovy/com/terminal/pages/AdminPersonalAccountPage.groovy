@@ -16,5 +16,6 @@ class AdminPersonalAccountPage extends Page {
 		terminalModreationLink{ leftMenuBlock.children().children().children().children().children().children().find("a", text: contains("Модерация терминалов"))}
 		
 		imageModerationLink{ leftMenuBlock.find("a", text: "Картинки")}
+		campaignModerationLink{ leftMenuBlock.find("a", text: "Модерация кампаний")}
     }
 }

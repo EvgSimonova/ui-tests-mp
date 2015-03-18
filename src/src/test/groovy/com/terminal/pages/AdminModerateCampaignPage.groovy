@@ -2,7 +2,7 @@ package com.terminal.pages
 
 import geb.Page
 
-class AdminModerateImagePage extends Page {
+class AdminModerateCampaignPage extends Page {
 	//todo: Добавить id на страницу
     static url=StaticData.getServerName()+"/admin/contentModeration"
 	static at = { title == "Mark project" }
@@ -10,10 +10,10 @@ class AdminModerateImagePage extends Page {
     static content = {
 		logoutButton{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
 		leftMenuBlock{ $("div.container-fluid")}
-		imageModerationLink{ leftMenuBlock.find("a", text: "Картинки")}
+		campaignModerationLink{ leftMenuBlock.find("a", text: "Модерация кампаний")}
 		contentTable{ $("table.sortable")}
-		firstRow{ contentTable.children()}
-		imgIdLink{ firstRow.find("td", class:"evenselected").children()}
+		firstRow{ contentTable.children().next().children()}
+		campaignNamedLink{ firstRow.find("a", class:"campaignId")}
 		
 		editBoxDialog{ $("div.edit-box")}
 		moderationForm{ editBoxDialog.find("form", class: "form")}

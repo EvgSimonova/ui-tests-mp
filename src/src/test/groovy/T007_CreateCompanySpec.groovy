@@ -2,6 +2,7 @@
 import com.terminal.pages.MainPage
 import com.terminal.pages.DemoCreateCompanyPage
 import com.terminal.pages.AddCampaingImagePage
+import com.terminal.pages.AddCampaingParamsPage
 import com.terminal.utils.*
 import org.openqa.selenium.firefox.FirefoxDriver
 import java.util.concurrent.TimeUnit;
@@ -127,10 +128,10 @@ class T007_CreateCompanySpec extends GebReportingSpec {
 		imageLi.click()
 
 		then:
-		imageLi.displayed
-		bottomButtons.displayed
+		waitFor{imageLi.displayed}
+		waitFor{bottomButtons.displayed}
 		
-		/*
+		
 		when:
 		addImageToCampaignBtn.click()
 	
@@ -140,7 +141,14 @@ class T007_CreateCompanySpec extends GebReportingSpec {
 		waitFor{bottomButtons.displayed}
 		waitFor{nextButton.displayed}
 		waitFor{imageLi.displayed}
-		*/
+		
+		when:
+		nextButton.click()
+		
+		then:
+		waitFor{at AddCampaingParamsPage}
+		waitFor{campaignNameInput.displayed}
+		
 		
     }
 }
