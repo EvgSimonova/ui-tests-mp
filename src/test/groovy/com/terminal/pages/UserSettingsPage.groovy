@@ -16,5 +16,7 @@ class UserSettingsPage extends Page {
 		confirmPasswordInput{ passwordForm.find("input", id:"confirmPassword", type:"password")}
 		oldPasswordInput{ passwordForm.find("input", id:"oldPassword", type:"password")}
 		savePasswordButton{ passwordForm.find("input", class:"button", type:"submit")}
+		
+		contentLink{$("div.user-menu li.item3.content a")}
 	}
 }

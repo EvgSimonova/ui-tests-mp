@@ -35,6 +35,6 @@ class DemoCreateCompanyPage extends Page {
 		bottomButtons{ $("div.nav-box.short")}
 		nextButton{ bottomButtons.children().next()}
 		
-		currentCampaignsLink{ $("div.user-menu li.item2 a")}
+		currentCampaignsLink{ $("div.user-menu li.item2.campaigns a")}
     }
  }

@@ -14,7 +14,7 @@ class UserPersonalAccountPage extends Page {
 		topBar{ $("div.span4.navbar.singin.user-top")}
 		userNameLink{ topBar.children()}
 		logoutLink{ topBar.children().next()}
-		balanceLink{ $("div.user-menu li.item4 a")}
+		balanceLink{ $("div.user-menu li.item5.payment a")}
 		
     }
 }

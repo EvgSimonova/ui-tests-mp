@@ -55,7 +55,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		endWorkTimeInput{createTerminalForm.find("input", type:"text", id:"endWorkTime")}
 		operationSystemInput{createTerminalForm.find("input", type:"text", id:"operationSystem")}
 		costInput{createTerminalForm.find("input", type:"text", id:"cost")}
-		saveTerminalButton{createTerminalForm.find("input", type:"button", class:"btn")}
+		saveTerminalButton{createTerminalForm.find("input", type:"button", class:"btn", id:"saveButton")}
 		
 		terminalPane{ $("div.jspPane")}
 		terminalName{ terminalPane.find("h3", text: contains("Moscow"))}

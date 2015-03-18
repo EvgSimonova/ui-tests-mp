@@ -9,6 +9,7 @@ import com.terminal.pages.UserCurrentCampaignPage
 import com.terminal.pages.UserStatisticPage
 import com.terminal.pages.UserBalancePage
 import com.terminal.pages.UserSettingsPage
+import com.terminal.pages.UserContentPage
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 import java.text.SimpleDateFormat
@@ -68,13 +69,13 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
 		currentCampaignsLink.click()
 		
 		then:
-		at UserCurrentCampaignPage
-		headText.displayed
-		currentCampaignsLink.displayed
-		dateFilterPane.displayed
-		dateFromInput.displayed
-		dateToInput.displayed
-		applyDateFilterButon.displayed
+		waitFor{at UserCurrentCampaignPage}
+		waitFor{headText.displayed}
+		waitFor{currentCampaignsLink.displayed}
+		waitFor{dateFilterPane.displayed}
+		waitFor{dateFromInput.displayed}
+		waitFor{dateToInput.displayed}
+		waitFor{applyDateFilterButon.displayed}
 		
 		//check the statistic page
 		when:
@@ -108,6 +109,15 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
 		confirmPasswordInput.displayed
 		oldPasswordInput.displayed
 		savePasswordButton.displayed
+		contentLink.displayed
+		
+		when:
+		contentLink.click()
+		
+		then:
+		at UserContentPage
+		logoutLink.displayed
+		conentList.displayed
 		
     }
 }

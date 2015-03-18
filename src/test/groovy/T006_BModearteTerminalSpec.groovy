@@ -40,11 +40,11 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
 		searchTerminalButton.click()
 		
 		then:
-		at AdminModerateTerminalPage
-		terminalAddressInput.displayed
-		terminalsTable.displayed
-		findedTerminalAddress.displayed
-		findedTerminalNumberLink.displayed
+		waitFor{at AdminModerateTerminalPage}
+		waitFor{terminalAddressInput.displayed}
+		waitFor{terminalsTable.displayed}
+		waitFor{findedTerminalAddress.displayed}
+		waitFor{findedTerminalNumberLink.displayed}
 		
 		when:
 		findedTerminalNumberLink.click()

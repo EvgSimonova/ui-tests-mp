@@ -45,9 +45,9 @@ class T203_RechargeUserBalanceSpec extends GebReportingSpec {
 		addMoneyButton.click()
 		
 		then:
-		at RobokassaPage
-		sucessUrl.displayed
-		sucessButton.displayed
+		waitFor{at RobokassaPage}
+		waitFor{sucessUrl.displayed}
+		waitFor{sucessButton.displayed}
 		
 		when:
 		sucessButton.click()

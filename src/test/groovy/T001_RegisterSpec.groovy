@@ -14,9 +14,9 @@ class T001_RegisterSpec extends GebReportingSpec {
         registrationLink.click()
 
         then:
-        at MainPage
-        registrationDialog.displayed
-        form.displayed
+        waitFor{at MainPage}
+        waitFor{registrationDialog.displayed}
+        waitFor{form.displayed}
 
         when:
         generatePasswordCheckbox = true

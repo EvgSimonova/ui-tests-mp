@@ -11,7 +11,7 @@ class UserBalancePage extends Page {
     static content = {
 		headText{ $("H1.company")}
 		
-		settingsLink{ $("div.user-menu li.item5 a")}
+		settingsLink{ $("div.user-menu li.item6 a")}
 		
 		robokassaForm{ $("form", id:"robokassa")}
 		outSumInput{ robokassaForm.find("input", id:"outsum")}
