@@ -46,9 +46,10 @@ class T004_CreateNewTerminalSpec extends GebReportingSpec {
 		addTerminalButton.click()
 		
 		then:
-		createTerminalHolder.displayed
-		createTerminalDialog.displayed
-		createTerminalForm.displayed
+		waitFor{createTerminalHolder.displayed}
+		waitFor{createTerminalDialog.displayed}
+		waitFor{createTerminalForm.displayed}
+		waitFor{terminalAddressInput.displayed}
 			
 		
 		when:

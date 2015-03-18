@@ -38,7 +38,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		createTerminalHolder{ $("div.edit-holder.create")}
 		createTerminalDialog{ createTerminalHolder.find("div.edit-box")}
 		createTerminalForm{ createTerminalDialog.find("form", id: "newTerminal")}
-		terminalAddressInput{ createTerminalForm.find("input", name:"address", type: "text")}
+		terminalAddressInput{ createTerminalForm.find("input", name:"address-create", type: "text")}
 		findTerminalOnMapButton{ createTerminalForm.find("input", type: "button", class:"btn")}
 		showMapLink{ createTerminalForm.find("a.open-map")}
 		showMapDialog{ $("div.prev-map")}
@@ -55,7 +55,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		endWorkTimeInput{createTerminalForm.find("input", type:"text", id:"endWorkTime")}
 		operationSystemInput{createTerminalForm.find("input", type:"text", id:"operationSystem")}
 		costInput{createTerminalForm.find("input", type:"text", id:"cost")}
-		saveTerminalButton{createTerminalForm.find("input", type:"submit", class:"btn")}
+		saveTerminalButton{createTerminalForm.find("input", type:"button", class:"btn")}
 		
 		terminalPane{ $("div.jspPane")}
 		terminalName{ terminalPane.find("h3", text: contains("Moscow"))}
