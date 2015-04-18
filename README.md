@@ -6,8 +6,6 @@
 ### Как пользоваться? ###
 
 * Установить maven
-* Установить selenium firefox webdriver
-* Установить geb
 * Скачать репозиторий
 * Перейти в папку с репозиторием
 * Запустить команду mvn clean install (mvn -Dtest=TestCircle test)
