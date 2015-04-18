@@ -9,7 +9,8 @@ class MainPage extends Page {
     static content = {
 
         messageBox { $("div.successRegister") }
-
+	
+	//login elements
         loginLink { $("a.sign") }
         loginDialog { $("div.sign-box") }
         closeDialogLink { loginDialog.find("div.close") }
@@ -18,6 +19,7 @@ class MainPage extends Page {
         passwordInputOnLoginForm { loginForm.find("input", name: "j_password", type: "password") }
         loginButton { loginForm.find("input", type: "submit") }
 
+	//register elements
         registrationLink { $("a.reg") }
         registrationDialog { $("div.reg-box") }
         form { registrationDialog.find("form", name: "register_form") }
@@ -27,6 +29,11 @@ class MainPage extends Page {
         generatePasswordCheckbox { form.find("input", name: "generatePassword", type: "checkbox") }
         roleSelect { form.find("select", name: "role") }
         registerButton { form.find("input", type: "submit") }
+
+	//social register block
+	socialButtonsBlock{ registrationDialog.find("div.social")}
+	fbRegisterButton{ socialButtonsBlock.children().children()}
+
 		
 		errblock{ $("div.errorblock")}
 		

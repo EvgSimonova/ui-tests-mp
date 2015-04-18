@@ -31,7 +31,7 @@ def static setAdminName(input){
 }
 
 def static setAdminPassword(input){
-	input << "111"
+	input << "111111"
 }
 
 
