@@ -11,5 +11,6 @@ class FacebookLoginPage extends Page {
 	//login elements
         emailInput { $("input", name: "email", type: "text") }
 	passwordInput{ $("input", name: "pass", type: "password")}
+	loginbutton{ $("input", type: "submit", name: "login")}
     }
 }

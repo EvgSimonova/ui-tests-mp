@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 
 class T0011_RegisterSocialSpec extends GebReportingSpec {
 
-    def "register as user facebook"() {
+    def "register as facebook user"() {
         when:
         to MainPage
         at MainPage
@@ -19,20 +19,28 @@ class T0011_RegisterSocialSpec extends GebReportingSpec {
         waitFor{at MainPage}
         waitFor{registrationDialog.displayed}
         waitFor{form.displayed}
-	//waitFor{fbRegisterButton.displayed}
+	waitFor{fbRegisterButton.displayed}
 
         when:
         fbRegisterButton.click()
-
+	
+	//stackoverflow.com/questions/25368067/geb-spock-if-then-else-logic-how-to-check-for-a-record-and-do-one-thing-if
         then:
-	if (waitFor{ at UserPersonalAccountPage}){
-		waitFor{ createCompanyLink.displayed}
-		waitFor{ myPicturesLink.displayed}
-		waitFor{ userNameLink.displayed}
-		waitFor{ logoutLink.displayed}
-	}else if( waitFor{at FacebookLoginPage}){
-		waitFor{emailInput.displayed}
-		waitFor{passwordInput.displayed}
-	}
+	waitFor{ at FacebookLoginPage}		
+	waitFor{emailInput.displayed}
+	waitFor{passwordInput.displayed}
+	waitFor{loginbutton.displayed}
+
+	when:
+	emailInput << "project.mark@yandex.ru"
+	passwordInput << "456Fl@br"
+	loginbutton.click()
+
+	then:
+	at UserPersonalAccountPage
+	userNameLink.displayed
+	logoutLink.displayed
+	createCompanyLink.displayed
+	myPicturesLink.displayed
     }
 }
