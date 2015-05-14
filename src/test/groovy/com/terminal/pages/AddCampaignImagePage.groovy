@@ -26,7 +26,7 @@ class AddCampaingImagePage extends Page {
 		addImageToCampaignBtn{ rigthButtons.children()}
 		
 		bottomButtons{ $("div.nav-box")}
-		nextButton{ bottomButtons.children().next()}
+		nextButton{ bottomButtons.children().next().next()}
 
 		
     }

@@ -10,8 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver
 //import org.openqa.selenium.ie.InternetExplorerDriver
 import com.terminal.pages.StaticData
 
-driver = { new FirefoxDriver() }
-//driver = { new ChromeDriver() }
+//driver = { new FirefoxDriver() }
+driver = { new ChromeDriver() }
 //driver = { new InternetExplorerDriver() }
 
 
