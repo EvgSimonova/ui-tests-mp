@@ -26,8 +26,11 @@ class AdminModerateTerminalPage extends Page {
 		
 		editTerminalDialog{ $("div.edit-box")}
 		
+		terminalStatus{ editTerminalDialog.find("select", name: "terminalStatus")}
 		terminalModerateStatus{ editTerminalDialog.find("select", name: "moderate")}
 		saveTerminalButton{ editTerminalDialog.find("input", type: "submit", class: "btn")}
+		
+		inactivatedTerminalStatus{ findedTerminalAddress.next()}
 		
     }
 }

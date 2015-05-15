@@ -7,9 +7,8 @@ import geb.spock.GebReportingSpec
 import com.terminal.pages.StaticData
 import org.openqa.selenium.ElementNotVisibleException
 
-class T006_BModerateTerminalSpec extends GebReportingSpec {
-	//todo: Реализовать вызов метода для логина администратора
-  	def "can get to adminLogin page and Login as admin"() {
+class T009_InactivateTerminalSpec extends GebReportingSpec {
+  	def "can get to adminLogin page and inactivate a Terminal"() {
         when:
         to AdminLoginPage
         at AdminLoginPage
@@ -32,13 +31,6 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
 
         then:
 		at AdminModerateTerminalPage
-		terminalAddressInput.displayed
-        		
-		when:
-		StaticData.setTerminalAddress(terminalAddressInput)
-		searchTerminalButton.click()
-		
-		then:
 		waitFor{at AdminModerateTerminalPage}
 		waitFor{terminalAddressInput.displayed}
 		waitFor{terminalsTable.displayed}
@@ -59,7 +51,7 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
 		
 		when:
 		try{
-			terminalModerateStatus = "true"
+			terminalStatus = "INACTIVE"
 		}catch(ElementNotVisibleException e){
 			println e
 		}	
@@ -73,6 +65,8 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
 		
 		then:
 		at AdminModerateTerminalPage
+		inactivatedTerminalStatus.displayed
+		inactivatedTerminalStatus.text()=='INACTIVE'
 
     }
 	
