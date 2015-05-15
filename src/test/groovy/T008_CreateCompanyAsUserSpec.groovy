@@ -4,10 +4,14 @@ import com.terminal.pages.UserPersonalAccountPage
 import com.terminal.pages.AddCampaingParamsPage
 import com.terminal.pages.AddCampaingImagePage
 import com.terminal.pages.AddCampaingTerminalPage
+import com.terminal.pages.DemoCreateCompanyCheckAndConfirmPage
+import com.terminal.pages.DemoCreateCompanyStartCompanyPage
 import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
 import java.text.SimpleDateFormat
 import org.openqa.selenium.Keys
+import java.util.Date.*
+import java.util.concurrent.TimeUnit
 
 
 class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
@@ -51,9 +55,9 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		
 		when:
 		campaignNameInput <<  "Тестовая кампания " +new SimpleDateFormat("dd.MM.yyyy").format(new Date())
-		campaignStartdateInput << new SimpleDateFormat("dd.MM.yyyy").format(new Date())
+		campaignStartdateInput << new SimpleDateFormat("dd/MM/yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(2)))
 		campaignStartTimeInput << "10:00:00"
-		campaignEnddateInput << new SimpleDateFormat("dd.MM.yyyy").format(new Date()+5)
+		campaignEnddateInput << new SimpleDateFormat("dd/MM/yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(3)))
 		campaignEndTimeInput << "23:00:00"
 		nextButton.click()
 		
@@ -153,6 +157,29 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		terminalPane.displayed
 		addTerminalToCompanyDutton.displayed
 		addedToCampaignTab.displayed
+		
+		when:
+		addedToCampaignTab.click()
+		
+		then:
+		addedToCampaignTab.displayed
+		bottomButtons.displayed
+		nextButton.displayed
+		
+		when:
+		nextButton.click()
+		
+		then:
+		at DemoCreateCompanyCheckAndConfirmPage
+		createCampaignButton.displayed
+		
+		when:
+		createCampaignButton.click()
+		
+		then:
+		at DemoCreateCompanyStartCompanyPage
+		header.displayed
+		
 		
 		
 		

@@ -39,8 +39,8 @@ class AddCampaingTerminalPage extends Page {
 		rigthButtons{ $("div.right-buttons")}
 		addImageToCampaignBtn{ rigthButtons.children()}
 		
-		bottomButtons{ $("div.nav-box")}
-		nextButton{ bottomButtons.children().next()}
+		bottomButtons{ $("div.nav-box.short")}
+		nextButton{ $("input.button.next-button")}
 
 		
     }
