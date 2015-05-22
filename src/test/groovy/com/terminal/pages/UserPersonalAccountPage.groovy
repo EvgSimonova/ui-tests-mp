@@ -8,6 +8,7 @@ class UserPersonalAccountPage extends Page {
 
     static content = {
         createCompanyLink { $("div.user-menu li.item1 a") }
+		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
         myPicturesLink { $("a", href: contains("userImages")) }
         createLink { $("div.create-link a") }
 		

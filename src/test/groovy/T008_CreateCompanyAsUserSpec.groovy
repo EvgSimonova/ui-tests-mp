@@ -23,7 +23,7 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
         loginLink.click()
 
         then:
-        at MainPage
+        waitFor{at MainPage}
         waitFor {
             loginDialog.displayed
         }
@@ -140,9 +140,11 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		waitFor{mapCanvas.displayed}
 		waitFor{terminalsContainer.displayed}
 		waitFor{terminalPane.displayed}
+		waitFor{allTerminalDiv.displayed}
 		
 		when:
-		terminalPane.click()
+		//terminalPane.click()
+		allTerminalDiv.click()
 		
 		then:
 		terminalsContainer.displayed
@@ -170,15 +172,15 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		nextButton.click()
 		
 		then:
-		at DemoCreateCompanyCheckAndConfirmPage
-		createCampaignButton.displayed
+		waitFor{at DemoCreateCompanyCheckAndConfirmPage}
+		waitFor{createCampaignButton.displayed}
 		
 		when:
 		createCampaignButton.click()
 		
 		then:
-		at DemoCreateCompanyStartCompanyPage
-		header.displayed
+		waitFor{at DemoCreateCompanyStartCompanyPage}
+		waitFor{header.displayed}
 		
 		
 		

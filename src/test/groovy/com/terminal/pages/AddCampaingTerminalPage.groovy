@@ -26,6 +26,7 @@ class AddCampaingTerminalPage extends Page {
 		terminalsContainer{ $("div.jspPane")}
 		terminalPane{ terminalsContainer.children().find("h3", text: contains("Second"))}
 
+		allTerminalDiv{ $("div.all-check")}
 		terminalsContainer{ $("div.jspPane")}
 		terminalPane{ terminalsContainer.children().find("h3", text: contains("Second"))}
 		
