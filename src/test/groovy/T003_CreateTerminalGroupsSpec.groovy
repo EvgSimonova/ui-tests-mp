@@ -48,7 +48,7 @@ class T003_CreateTerminalGroupsSpec extends GebReportingSpec {
 		createGroupLink.click()
 				
 		then:
-		createGroupDialog.displayed
+		waitFor{createGroupDialog.displayed}
 		
 		when:
 		StaticData.setTerminalGroupName(groupNameInput)
@@ -59,7 +59,6 @@ class T003_CreateTerminalGroupsSpec extends GebReportingSpec {
 		waitFor{group1Link.displayed}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
-		waitFor{statisticLink.displayed}
 		waitFor{settingsLink.displayed}
 		waitFor{logoutLink.displayed}
 		waitFor{addTerminalButton.displayed}
@@ -101,7 +100,6 @@ class T003_CreateTerminalGroupsSpec extends GebReportingSpec {
 		waitFor{renamedGroup1Link.displayed}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
-		waitFor{statisticLink.displayed}
 		waitFor{settingsLink.displayed}
 		waitFor{logoutLink.displayed}
 		waitFor{addTerminalButton.displayed}
