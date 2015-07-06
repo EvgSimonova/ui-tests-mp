@@ -55,9 +55,9 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		
 		when:
 		campaignNameInput <<  "Тестовая кампания " +new SimpleDateFormat("dd.MM.yyyyHH:mm:ss").format(new Date())
-		campaignStartdateInput << new SimpleDateFormat("dd/MM/yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(2)))
-		campaignStartTimeInput << "10:00:00"
-		campaignEnddateInput << new SimpleDateFormat("dd/MM/yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(3)))
+		campaignStartdateInput << new SimpleDateFormat("dd.MM.yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(2)))
+		campaignStartTimeInput << "10:00"
+		campaignEnddateInput << new SimpleDateFormat("dd.MM.yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(3)))
 		campaignEndTimeInput << "23:00:00"
 		nextButton.click()
 		

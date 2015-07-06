@@ -38,7 +38,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		createTerminalHolder{ $("div.edit-holder.create")}
 		createTerminalDialog{ createTerminalHolder.find("div.edit-box")}
 		createTerminalForm{ createTerminalDialog.find("form", id: "newTerminal")}
-		terminalAddressInput{ createTerminalForm.find("input", name:"address-create", type: "text")}
+		terminalAddressInput{ createTerminalForm.find("input", name:"street", type: "text")}
 		findTerminalOnMapButton{ createTerminalForm.find("input", type: "button", class:"btn")}
 		showMapLink{ createTerminalForm.find("a.open-map")}
 		showMapDialog{ $("div.prev-map")}

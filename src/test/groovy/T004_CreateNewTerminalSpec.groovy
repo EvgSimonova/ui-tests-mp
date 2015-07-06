@@ -65,7 +65,6 @@ class T004_CreateNewTerminalSpec extends GebReportingSpec {
 		StaticData.setTerminalName(terminalNameInput)
 		StaticData.setTerminalDescription(terminalDescriptionTextarea)
 		//todo: добавить выбор группы
-		terminalTypeSelect="50"
 		audienceAgeBeginInput<< Keys.chord(Keys.BACK_SPACE)
 		audienceAgeBeginInput<< "3"
 		audienceAgeEndInput<< Keys.chord(Keys.BACK_SPACE)
@@ -86,7 +85,6 @@ class T004_CreateNewTerminalSpec extends GebReportingSpec {
 		terminalName.displayed
 		terminalsListLink.displayed
 		moneyLink.displayed
-		statisticLink.displayed
 		settingsLink.displayed
 		logoutLink.displayed
 		addTerminalButton.displayed		

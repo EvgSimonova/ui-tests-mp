@@ -34,7 +34,7 @@ class AddCampaingTerminalPage extends Page {
 		addTerminalToCompanyDutton{ rigthButtonsPane.children()}
 		
 		middleTabs{ $("div.tabbable")}
-		addedToCampaignTab{ middleTabs.children().find("li", text: "Добавленные в компанию")}
+		addedToCampaignTab{ middleTabs.children().find("li", text: "Добавленные в кампанию")}
 
 		
 		rigthButtons{ $("div.right-buttons")}
