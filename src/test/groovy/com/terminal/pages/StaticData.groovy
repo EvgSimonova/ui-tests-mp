@@ -1,5 +1,6 @@
 package com.terminal.pages
 import java.text.SimpleDateFormat
+import java.util.concurrent.TimeUnit
 
 
 def static getServerName(){
@@ -54,4 +55,29 @@ def static setTerminalGroupName(input){
 
 def static renameTerminalGroupName(input){
 	input<< "Переименованная группа терминалов 1 - "+new SimpleDateFormat("yyyyMMdd").format(new Date())
+}
+
+
+def static setCampaingName(input){
+	input << "Тестовая кампания "+new SimpleDateFormat("yyyy.MM.dd hh:mm:ss").format(new Date())
+}
+
+def static setCampaignStartDate(input){
+	input <<  new SimpleDateFormat("dd.MM.yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(2)))
+}
+
+def static setCampaignStartTime(input){
+	input << "10:00"
+}
+
+def static setCampaignEndDate(input){
+	input <<  new SimpleDateFormat("dd.MM.yyyy").format(new Date((new Date()).getTime()+ TimeUnit.DAYS.toMillis(3)))
+}
+
+def static setCampaignEndTime(input){
+	input << "23:00"
+}
+
+def static setUserEmail(input){
+	input << "mihailov-ta@ya.ru"
 }

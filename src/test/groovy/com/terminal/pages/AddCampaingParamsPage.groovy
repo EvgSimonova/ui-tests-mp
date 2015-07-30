@@ -19,7 +19,14 @@ class AddCampaingParamsPage extends Page {
 		campaignEnddateInput{ paramsForm.find("input", id:"endDate")}
 		campaignEndTimeInput{ paramsForm.find("input", id:"endTime")}
 		
-		rigthButtons{ $("div.right-buttons")}
+		userEmail{ paramsForm.find("input", id:"newEmail") }
+		
+		recaptchaDiv{ $("div.g-recaptcha")}
+		iframe{ recaptchaDiv.children().children().children()}
+		
+		myFrame(page: FramePage){iframe}		
+		
+		rigthButtons{ paramsForm.find("div.right-buttons")}
 		addImageToCampaignBtn{ rigthButtons.children()}
 		
 		bottomButtons{ $("div.nav-box.short")}
@@ -27,4 +34,13 @@ class AddCampaingParamsPage extends Page {
 
 		
     }
+	
+
+ }
+ 
+ class FramePage extends Page{
+	static content={
+		captchaCheckbox{ $("div.recaptcha-checkbox-checkmark")}
+		
+	}
  }

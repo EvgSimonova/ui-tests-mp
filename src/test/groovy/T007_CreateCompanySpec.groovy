@@ -3,6 +3,7 @@ import com.terminal.pages.MainPage
 import com.terminal.pages.DemoCreateCompanyPage
 import com.terminal.pages.AddCampaingImagePage
 import com.terminal.pages.AddCampaingParamsPage
+import com.terminal.pages.StaticData
 import com.terminal.utils.*
 import org.openqa.selenium.firefox.FirefoxDriver
 import java.util.concurrent.TimeUnit;
@@ -22,7 +23,39 @@ class T007_CreateCompanySpec extends GebReportingSpec {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         demoModeLink.click()
 
-        then:
+		then:
+		waitFor{at AddCampaingParamsPage}
+		waitFor{campaignNameInput.displayed}
+		waitFor{campaignStartdateInput.displayed}
+		waitFor{campaignStartTimeInput.displayed}
+		waitFor{campaignEnddateInput.displayed}
+		waitFor{campaignEndTimeInput.displayed}
+		waitFor{userEmail.displayed}
+		waitFor{recaptchaDiv.displayed}
+		waitFor{iframe.displayed}
+		withFrame(myFrame){
+			waitFor{captchaCheckbox.displayed}
+		}
+		
+		when:
+		StaticData.setCampaingName(campaignNameInput)
+		StaticData.setCampaignStartDate(campaignStartdateInput)
+		StaticData.setCampaignEndDate(campaignEnddateInput)
+		StaticData.setCampaignEndTime(campaignEndTimeInput)
+		StaticData.setUserEmail(userEmail)
+		withFrame(myFrame){
+			captchaCheckbox.click()
+		}
+		
+		
+		
+		then:
+		waitFor{at AddCampaingParamsPage}
+		waitFor{campaignNameInput.displayed}
+		
+		
+		/*
+		then:
         waitFor{at DemoCreateCompanyPage}
         waitFor{addressFilterLink.displayed}
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
@@ -144,11 +177,8 @@ class T007_CreateCompanySpec extends GebReportingSpec {
 		
 		when:
 		nextButton.click()
-		
-		then:
-		waitFor{at AddCampaingParamsPage}
-		waitFor{campaignNameInput.displayed}
-		
+
+		*/
 		
     }
 }
