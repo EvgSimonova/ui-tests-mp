@@ -63,7 +63,6 @@ class T007_CreateCompanySpec extends GebReportingSpec {
 		when:
 		addressFilterLink.click()
 				
-		
 		then:
 		waitFor{at DemoCreateCompanyPage}
 		waitFor{addressFilterPane.displayed}

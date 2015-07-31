@@ -66,10 +66,10 @@ class T202_ModerateCampaignSpec extends GebReportingSpec {
 		saveButton.click()
 		
 		then:
-		campaignModerationLink.displayed
-		contentTable.displayed
-		firstRow.displayed
-		campaignNamedLink.displayed
+		waitFor{campaignModerationLink.displayed}
+		waitFor{contentTable.displayed}
+		waitFor{firstRow.displayed}
+		waitFor{campaignNamedLink.displayed}
 
 		
 		

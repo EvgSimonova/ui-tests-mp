@@ -65,10 +65,10 @@ class T201_ModerateImageSpec extends GebReportingSpec {
 		saveButton.click()
 		
 		then:
-		imageModerationLink.displayed
-		contentTable.displayed
-		firstRow.displayed
-		imgIdLink.displayed
+		waitFor{imageModerationLink.displayed}
+		waitFor{contentTable.displayed}
+		waitFor{firstRow.displayed}
+		waitFor{imgIdLink.displayed}
 
 		
 		

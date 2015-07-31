@@ -15,8 +15,13 @@ class AddCampaingParamsPage extends Page {
 		paramsForm{ containerdiv.find("form", id:"addParams")}
 		campaignNameInput{ paramsForm.find("input", id:"companyName")}
 		campaignStartdateInput{ paramsForm.find("input", id:"startDate")}
+		campaignStartTimeChooser{ $("div.bootstrap-datetimepicker-widget.dropdown-menu").next()}
+		campaignStartTimeUp{ campaignStartTimeChooser.find("a", class:"btn")}
 		campaignStartTimeInput{ paramsForm.find("input", id:"startTime")}
+		
 		campaignEnddateInput{ paramsForm.find("input", id:"endDate")}
+		campaignEndDateChooser{ $("div.bootstrap-datetimepicker-widget.dropdown-menu").next().next()}
+		campaignEndDateSelector{ campaignEndDateChooser.find("td.day.new")}
 		campaignEndTimeInput{ paramsForm.find("input", id:"endTime")}
 		
 		userEmail{ paramsForm.find("input", id:"newEmail") }

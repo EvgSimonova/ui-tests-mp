@@ -5,15 +5,16 @@ import geb.Page
 class DemoCreateCompanyCheckAndConfirmPage extends Page {
 	//todo: Добавить id на страницу
     static url=StaticData.getServerName()+"member/createCompany/checkAndConfirm"
-	//static at = { title == "Mark project" }
+	static at = { title == "Mark project" }
 
     static content = {
 
         loginLink{ $("a.sign")}
 		registerLink{ $("a.reg")}
 		
-		bottonButtons{ $("div.nav-box.short")}
-		createCampaignButton{ $("input.button.next-button")}
+		bottomButtons{ $("div.nav-box.short")}
+		//createCampaignButton{ bottomButtons.find("input.button.next-button")}
+		createCampaignButton{ bottomButtons.children().next().next().children()}
 		
     }
  }

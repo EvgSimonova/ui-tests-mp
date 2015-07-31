@@ -11,9 +11,9 @@ class AdminModerateImagePage extends Page {
 		logoutButton{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
 		leftMenuBlock{ $("div.container-fluid")}
 		imageModerationLink{ leftMenuBlock.find("a", text: "Картинки")}
-		contentTable{ $("table.sortable")}
-		firstRow{ contentTable.children()}
-		imgIdLink{ firstRow.find("td", class:"evenselected").children()}
+		contentTable{ $("table.tablesorter.sortable.tablesorter-blue.hasFilters")}
+		firstRow{ contentTable.children().next().next()}
+		imgIdLink{ firstRow.find("a.contentId")}
 		
 		editBoxDialog{ $("div.edit-box")}
 		moderationForm{ editBoxDialog.find("form", class: "form")}

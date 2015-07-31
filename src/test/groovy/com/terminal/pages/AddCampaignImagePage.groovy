@@ -20,7 +20,7 @@ class AddCampaingImagePage extends Page {
 		uniForm{ $("div.group-action-holder.item-3").next().next().next().next().next().next().next().next().next()}
 		
 		imgContainer{ $("div.jp-container")}
-		imageLi{ imgContainer.children().children().children().children()}
+		imageLi{ imgContainer.find("input", name:"subtopic")}
 		
 		rigthButtons{ $("div.right-buttons")}
 		addImageToCampaignBtn{ rigthButtons.children()}
