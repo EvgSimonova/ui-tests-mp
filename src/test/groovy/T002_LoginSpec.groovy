@@ -17,7 +17,7 @@ class T002_LoginSpec extends GebReportingSpec {
         loginLink.click()
 
         then:
-        at MainPage
+        waitFor{at MainPage}
         waitFor {
             loginDialog.displayed
         }
@@ -26,8 +26,9 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at MainPage
-        errblock.displayed
+        waitFor{at MainPage}
+        waitFor{errorblock.displayed}
+		waitFor{errorblock.text().trim() == "Логин или пароль были введены неправильно."}
     }    
 	
 	def "can get to main page and login with empty login"() {
@@ -47,8 +48,9 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at MainPage
-        errblock.displayed
+        waitFor{at MainPage}
+        waitFor{errorblock.displayed}
+		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
     }    
 	
 	def "can get to main page and login with empty password"() {
@@ -68,8 +70,10 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at MainPage
-        errblock.displayed
+        waitFor{at MainPage}
+        waitFor{errorblock.displayed}
+		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
+
     }    
 	
 	def "can get to main page and login with unused login and empty password"() {
@@ -89,8 +93,10 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at MainPage
-        errblock.displayed
+        waitFor{at MainPage}
+        waitFor{errorblock.displayed}
+		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
+
     }   
 
 	def "can get to main page and login with unused login and unused password"() {
@@ -111,8 +117,9 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at MainPage
-        errblock.displayed
+        waitFor{at MainPage}
+        waitFor{errorblock.displayed}
+		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
     }    	
 	
 	def "can get to main page and login as user"() {
@@ -134,10 +141,10 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at UserPersonalAccountPage
-        createCompanyLink.displayed
-        myPicturesLink.displayed
-        createLink.displayed
+        waitFor{at UserPersonalAccountPage}
+        waitFor{createCompanyLink.displayed}
+        waitFor{myPicturesLink.displayed}
+        waitFor{createLink.displayed}
     }
 
     def "can get to main page and login as owner"() {
@@ -158,8 +165,8 @@ class T002_LoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at OwnerPersonalAccountPage
-        terminalsListLink.displayed
-        moneyLink.displayed
+        waitFor{at OwnerPersonalAccountPage}
+        waitFor{terminalsListLink.displayed}
+        waitFor{moneyLink.displayed}
     }
 }

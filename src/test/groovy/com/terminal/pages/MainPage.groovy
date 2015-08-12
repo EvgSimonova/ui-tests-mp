@@ -35,7 +35,7 @@ class MainPage extends Page {
 	fbRegisterButton{ socialButtonsBlock.children().children()}
 
 		
-		errblock{ $("div.errorblock")}
+		errorblock{ $("div.errorblock")}
 		
 		remindPasswordDialog{ $("div.password-box")}
 		forgotPasswordLink{$("a.forgot-password")}
