@@ -5,7 +5,7 @@ import com.terminal.pages.AdminLoginPage
 import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
 
-class T002_1AdminLoginSpec extends GebReportingSpec {
+class T002_3AdminLoginSpec extends GebReportingSpec {
 
   	def adminLogin() {
         when:
