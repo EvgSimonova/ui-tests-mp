@@ -5,7 +5,7 @@ import com.terminal.pages.AdminLoginPage
 import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
 
-class T005_AdminLoginSpec extends GebReportingSpec {
+class T002_1AdminLoginSpec extends GebReportingSpec {
 
   	def adminLogin() {
         when:
@@ -13,9 +13,9 @@ class T005_AdminLoginSpec extends GebReportingSpec {
         at AdminLoginPage
 
         then:
-        usernameInput.displayed
-		passwordInput.displayed
-		loginButton.displayed
+        waitFor{usernameInput.displayed}
+		waitFor{passwordInput.displayed}
+		waitFor{loginButton.displayed}
 
         when:
 		StaticData.setAdminName(usernameInput)
@@ -23,7 +23,10 @@ class T005_AdminLoginSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at AdminPersonalAccountPage
-		logoutButton.displayed
+        waitFor{at AdminPersonalAccountPage}
+		waitFor{logoutButton.displayed}
+		waitFor{terminalModreationLink.displayed}
+		waitFor{imageModerationLink.displayed}
+		waitFor{campaignModerationLink.displayed}
     }
 }

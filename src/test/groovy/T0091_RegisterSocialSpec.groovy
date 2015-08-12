@@ -7,7 +7,7 @@ import geb.spock.GebReportingSpec
 
 import java.text.SimpleDateFormat
 
-class T0011_RegisterSocialSpec extends GebReportingSpec {
+class T0091_RegisterSocialSpec extends GebReportingSpec {
 
     def "register as facebook user"() {
         when:

@@ -8,7 +8,7 @@ import geb.spock.GebReportingSpec
 import java.text.SimpleDateFormat
 
 
-class T002_LoginSpec extends GebReportingSpec {
+class T002_0LoginSpec extends GebReportingSpec {
 
     def "can get to main page and login with empty fields"() {
         when:
