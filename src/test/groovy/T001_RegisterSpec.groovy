@@ -25,8 +25,8 @@ class T001_RegisterSpec extends GebReportingSpec {
         registerButton.click()
 
         then:
-        messageBox.displayed
-        messageBox.text().trim() == "Вы были удачно зарегистрированы."
+        waitFor{messageBox.displayed}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
     }
 
     def "register as user with password"() {
@@ -49,8 +49,8 @@ class T001_RegisterSpec extends GebReportingSpec {
         registerButton.click()
 
         then:
-        messageBox.displayed
-        messageBox.text().trim() == "Вы были удачно зарегистрированы."
+        waitFor{messageBox.displayed}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
     }
 
     def "register as owner with password's autogeneration"() {
@@ -71,8 +71,8 @@ class T001_RegisterSpec extends GebReportingSpec {
         registerButton.click()
 
         then:
-        messageBox.displayed
-        messageBox.text().trim() == "Вы были удачно зарегистрированы."
+        waitFor{messageBox.displayed}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
     }
 
     def "register as owner with password"() {
@@ -95,7 +95,7 @@ class T001_RegisterSpec extends GebReportingSpec {
         registerButton.click()
 
         then:
-        messageBox.displayed
-        messageBox.text().trim() == "Вы были удачно зарегистрированы."
+        waitFor{messageBox.displayed}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
     }
 }
