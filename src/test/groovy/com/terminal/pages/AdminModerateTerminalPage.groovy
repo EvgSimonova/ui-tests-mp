@@ -13,7 +13,7 @@ class AdminModerateTerminalPage extends Page {
 		terminalModreationLink{ leftMenuBlock.children().children().children().children().children().children().find("a", text: contains("Модерация терминалов"))}
 		middleZone{ $("div.span9")}
 		
-		terminalAddressInput{ middleZone.find("input", type:"text", name: "address")}
+		terminalAddressInput{ middleZone.find("tr", class:"tablesorter-headerRow").next().children().next().next().children()}
 		searchTerminalButton{ middleZone.find("input", type:"submit")}
 		
 		terminalsTable{ $("table", id: "table", class: "sortable")}

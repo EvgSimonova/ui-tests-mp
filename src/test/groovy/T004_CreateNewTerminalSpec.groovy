@@ -30,16 +30,16 @@ class T004_CreateNewTerminalSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at OwnerPersonalAccountPage
-        terminalsListLink.displayed
-        moneyLink.displayed
+        waitFor{at OwnerPersonalAccountPage}
+        waitFor{terminalsListLink.displayed}
+        waitFor{moneyLink.displayed}
 		
 		when:
 		terminalsListLink.click()
 		
 		then:
-		at OwnerTerminalListPage
-		addTerminalButton.displayed
+		waitFor{at OwnerTerminalListPage}
+		waitFor{addTerminalButton.displayed}
 		
 		
 		when:
@@ -58,7 +58,7 @@ class T004_CreateNewTerminalSpec extends GebReportingSpec {
 		showMapLink.click()
 		
 		then:
-		showMapDialog.displayed
+		waitFor{showMapDialog.displayed}
 		
 		when:
 		closeMapDialogLink.click()
@@ -81,13 +81,13 @@ class T004_CreateNewTerminalSpec extends GebReportingSpec {
 		saveTerminalButton.click()
 		
 		then:
-		at OwnerTerminalListPage
-		terminalName.displayed
-		terminalsListLink.displayed
-		moneyLink.displayed
-		settingsLink.displayed
-		logoutLink.displayed
-		addTerminalButton.displayed		
+		waitFor{at OwnerTerminalListPage}
+		waitFor{terminalName.displayed}
+		waitFor{terminalsListLink.displayed}
+		waitFor{moneyLink.displayed}
+		waitFor{settingsLink.displayed}
+		waitFor{logoutLink.displayed}
+		waitFor{addTerminalButton.displayed}
 		
     }
 	

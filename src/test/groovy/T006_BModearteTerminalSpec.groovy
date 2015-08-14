@@ -36,7 +36,7 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
         		
 		when:
 		StaticData.setTerminalAddress(terminalAddressInput)
-		searchTerminalButton.click()
+		//searchTerminalButton.click()
 		
 		then:
 		waitFor{at AdminModerateTerminalPage}
