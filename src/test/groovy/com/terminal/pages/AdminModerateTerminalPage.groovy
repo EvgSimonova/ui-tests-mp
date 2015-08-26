@@ -12,17 +12,21 @@ class AdminModerateTerminalPage extends Page {
 		leftMenuBlock{ $("div.container-fluid")}
 		terminalModreationLink{ leftMenuBlock.children().children().children().children().children().children().find("a", text: contains("Модерация терминалов"))}
 		middleZone{ $("div.span9")}
+
+		terminalsTable{ middleZone.find("table", id: "table")}
 		
-		terminalAddressInput{ middleZone.find("tr", class:"tablesorter-headerRow").next().children().next().next().children()}
+		//terminalAddressInput{ middleZone.find("tr", //class:"tablesorter-headerRow").next().children().next().next().children()}
+		
+		terminalAddressInput{middleZone.find("input", type: "search", "data-column": "2")}
 		searchTerminalButton{ middleZone.find("input", type:"submit")}
 		
-		terminalsTable{ $("table", id: "table", class: "sortable")}
+		
 		//todo: переписать работу с таблицами на модули http://www.gebish.org/manual/0.9.2/modules.html
-		findedTerminalAddress{ terminalsTable.children().next().children().children().next().next().next()}
-		findedTerminalNumberLink{ findedTerminalAddress.previous().children()}
+		//findedTerminalAddress{ }
+		findedTerminalNumberLink{terminalsTable.find("tr", class:"odd").children().next().children()}
 		
 		selectedTerminalInfo{ $("div.image-preview.terminal")}
-		selectedTerminaleditButton{ selectedTerminalInfo.find("span.edit-btn")}
+		selectedTerminaleditButton{ $("span.edit-btn")}
 		
 		editTerminalDialog{ $("div.edit-box")}
 		

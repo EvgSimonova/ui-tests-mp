@@ -6,6 +6,7 @@ import com.terminal.pages.AdminModerateTerminalPage
 import geb.spock.GebReportingSpec
 import com.terminal.pages.StaticData
 import org.openqa.selenium.ElementNotVisibleException
+import org.openqa.selenium.Keys
 
 class T006_BModerateTerminalSpec extends GebReportingSpec {
 	//todo: Реализовать вызов метода для логина администратора
@@ -36,26 +37,25 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
         		
 		when:
 		StaticData.setTerminalAddress(terminalAddressInput)
-		//searchTerminalButton.click()
+		terminalAddressInput << Keys.chord(Keys.ENTER)
 		
 		then:
 		waitFor{at AdminModerateTerminalPage}
 		waitFor{terminalAddressInput.displayed}
 		waitFor{terminalsTable.displayed}
-		waitFor{findedTerminalAddress.displayed}
 		waitFor{findedTerminalNumberLink.displayed}
 		
 		when:
 		findedTerminalNumberLink.click()
 		
 		then:
-		selectedTerminalInfo.displayed
+		waitFor{selectedTerminalInfo.displayed}
 				
 		when:
 		selectedTerminaleditButton.click()
 		
 		then:
-		editTerminalDialog.displayed
+		waitFor{editTerminalDialog.displayed}
 		
 		when:
 		try{
@@ -65,14 +65,14 @@ class T006_BModerateTerminalSpec extends GebReportingSpec {
 		}	
 		
 		then:
-		editTerminalDialog.displayed
-		saveTerminalButton.displayed
+		waitFor{editTerminalDialog.displayed}
+		waitFor{saveTerminalButton.displayed}
 		
 		when:
 		saveTerminalButton.click()
 		
 		then:
-		at AdminModerateTerminalPage
+		waitFor{at AdminModerateTerminalPage}
 
     }
 	
