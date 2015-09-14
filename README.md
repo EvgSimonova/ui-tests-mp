@@ -7,7 +7,7 @@
 
 * Установить maven
 * Скачать репозиторий
-* Скачать webdriver для браузера (для Chrome http://chromedriver.storage.googleapis.com/index.html, для других браузеров - вбиваем в google "<имя браузера> web driver и ищем нужный"
+* Скачать webdriver для браузера (для Chrome http://chromedriver.storage.googleapis.com/index.html, для других браузеров - вбиваем в google "<имя браузера> web driver" и ищем нужный
 * Добавить в переменную Path (если вы на Windows, если на линуксе догадаетесь или загуглите =) ) путь к папке с web-драйверами
 * Перейти в папку с репозиторием
 * Запустить команду mvn clean install (она запустит на исполнение все тесты)
