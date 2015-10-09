@@ -65,7 +65,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
@@ -107,7 +107,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
@@ -150,7 +150,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
