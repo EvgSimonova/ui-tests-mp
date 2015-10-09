@@ -17,8 +17,8 @@ class T203_RechargeUserBalanceSpec extends GebReportingSpec {
         then:
         at MainPage
         waitFor {
-            loginDialog.displayed
-        }
+        		loginDialog.displayed
+        		}
 
         when:
         StaticData.setUserName(usernameInputOnLoginForm)
