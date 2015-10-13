@@ -9,11 +9,13 @@ import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 import org.openqa.selenium.firefox.FirefoxDriver
 import java.util.concurrent.TimeUnit;
+import geb.*
+import java.lang.*
 
 
 class T107_ChangeContactSpec extends GebReportingSpec {
 	def "can get to settings page and change the name and phone of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -44,19 +46,18 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		when:
 		nameOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
 		phoneOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
-		nameOwner << "Тимур"
+		nameOwner << "Timur"
 		phoneOwner << "84552545689"
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{nameOwnerTop.displayed}
-		waitFor{nameOwnerTop.text() == "Тимур"}
-		waitFor{nameOwner.text() == "Тимур"}
-		waitFor{phoneOwner.text() == "84552545689"}
+		waitFor{nameOwnerTop.text() == "Timur"}
+		waitFor{nameOwner.value() == "Timur"}
+		waitFor{phoneOwner.value() == "84552545689"}
 	}
 	def "can get to settings page and deleting a name in the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -71,7 +72,7 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         	when:
 			StaticData.setOwnerName(usernameInputOnLoginForm)
 			StaticData.setOwnerPassword(passwordInputOnLoginForm)
-        		loginButton.click()
+			loginButton.click()
 
 	        then:
         	at OwnerPersonalAccountPage
@@ -91,14 +92,14 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		waitFor{nameOwner.value() == ""}
+		waitFor{phoneOwner.value() == "123-45-66"}
 		waitFor{nameOwnerTop.displayed}
-		waitFor{nameOwnerTop.text() == usernameInputOnLoginForm}
-		waitFor{nameOwner.text() == ""}
-		waitFor{phoneOwner.text() == "123-45-66"}
+		waitFor{nameOwnerTop.text() == "mihailov-ta+spam44@ya.ru"}
+
 	}
 	def "can get to settings page and deleting a phone in the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -132,14 +133,14 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		
 		waitFor{nameOwnerTop.displayed}
 		waitFor{nameOwnerTop.text() == "Тимур"}
-		waitFor{nameOwner.text() == "Тимур"}
-		waitFor{phoneOwner.text() == ""}
+		waitFor{nameOwner.value() == "Тимур"}
+		waitFor{phoneOwner.value() == ""}
 	}
 	def "can get to settings page and validity a phone in the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -172,11 +173,13 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		waitFor{phoneOwner.text() == "8&#40;455&#41;4564565"}
+		
+		waitFor{phoneOwner.value() == "8&#40;455&#41;4564565"}
+		waitFor{terminalsListLink.displayed}
+		waitFor{moneyLink.displayed}
 	}
 	def "can get to settings page and deleting the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -210,14 +213,14 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		
 		waitFor{nameOwnerTop.displayed}
-		waitFor{nameOwnerTop.text() == usernameInputOnLoginForm}
-		waitFor{nameOwner.text() == ""}
-		waitFor{phoneOwner.text() == ""}
+		waitFor{nameOwnerTop.text() == "mihailov-ta+spam44@ya.ru"}
+		waitFor{nameOwner.value() == ""}
+		waitFor{phoneOwner.value() == ""}
 	}
 	def "can get to settings page and email change in the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -251,13 +254,13 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveEmail.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		
 		waitFor{emailOwner == "123@ya.ru"}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
 	}
 	def "can get to settings page and delete email in the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -290,14 +293,14 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveEmail.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
 		waitFor{emailOwner.text() == ""}
 		
 	}
 	def "can get to settings page and validity email in the contact of the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -330,7 +333,7 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 		saveEmail.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+	
 		waitFor{subscriptionEmail.displayed}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
