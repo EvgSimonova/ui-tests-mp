@@ -7,8 +7,6 @@ import com.terminal.pages.UserPersonalAccountPage
 import com.terminal.pages.UserSettingsPage
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
-import org.openqa.selenium.firefox.FirefoxDriver
-import java.util.concurrent.TimeUnit;
 
 
 class T205_ChangeUserContactSpec extends GebReportingSpec {
@@ -49,11 +47,10 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{nameUserTop.displayed}
 		waitFor{nameUserTop.text() == "Тимур"}
-		waitFor{nameUser.text() == "Тимур"}
-		waitFor{phoneUser.text() == "84552545689"}
+		waitFor{nameUser.value() == "Тимур"}
+		waitFor{phoneUser.value() == "84552545689"}
 	}
 	def "can get to settings page and deleting a name in the contact of the user of the terminal"() {
 
@@ -91,11 +88,10 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{nameUserTop.displayed}
-		waitFor{nameUserTop.text() == usernameInputOnLoginForm}
-		waitFor{nameUser.text() == ""}
-		waitFor{phoneUser.text() == "123-45-66"}
+		waitFor{nameUserTop.text() == "mihailov-ta+spam33@ya.ru"}
+		waitFor{nameUser.value() == ""}
+		waitFor{phoneUser.value() == "123-45-66"}
 	}
 	def "can get to settings page and deleting a phone in the contact of the user of the terminal"() {
 
@@ -132,11 +128,10 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{nameUserTop.displayed}
 		waitFor{nameUserTop.text() == "Тимур"}
-		waitFor{nameUser.text() == "Тимур"}
-		waitFor{phoneUser.text() == ""}
+		waitFor{nameUser.value() == "Тимур"}
+		waitFor{phoneUser.value() == ""}
 	}
 	def "can get to settings page and validity a phone in the contact of the user of the terminal"() {
 
@@ -172,8 +167,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		waitFor{phoneUser.text() == "8&#40;455&#41;4564565"}
+		waitFor{phoneUser.value() == "8&#40;455&#41;4564565"}
 		waitFor{contentLink.displayed}
 		waitFor{balanceLink.displayed}
 
@@ -213,11 +207,10 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveSettingChange.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{nameUserTop.displayed}
-		waitFor{nameUserTop.text() == usernameInputOnLoginForm}
-		waitFor{nameUser.text() == ""}
-		waitFor{phoneUser.text() == ""}
+		waitFor{nameUserTop.text() == "mihailov-ta+spam33@ya.ru"}
+		waitFor{nameUser.value() == ""}
+		waitFor{phoneUser.value() == ""}
 	}
 	def "can get to settings page and email change in the contact of the user of the terminal"() {
 
@@ -254,7 +247,6 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveEmail.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{emailUser == "123@ya.ru"}
 		waitFor{contentLink.displayed}
 		waitFor{balanceLink.displayed}
@@ -293,7 +285,6 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveEmail.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{contentLink.displayed}
 		waitFor{balanceLink.displayed}
 		waitFor{emailUser.text() == ""}
@@ -333,7 +324,6 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		saveEmail.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{subscriptionEmail.displayed}
 		waitFor{contentLink.displayed}
 		waitFor{balanceLink.displayed}
