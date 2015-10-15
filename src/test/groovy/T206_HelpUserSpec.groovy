@@ -19,7 +19,7 @@ class T206_HelpUserSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -61,7 +61,7 @@ class T206_HelpUserSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -102,7 +102,7 @@ class T206_HelpUserSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -144,7 +144,7 @@ class T206_HelpUserSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
