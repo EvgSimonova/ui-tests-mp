@@ -11,6 +11,7 @@ class OwnerBalancePage extends Page {
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }
         	moneyLink { $("div.user-menu li.item2.money a") }
+		settingsLink{ $("div.user-menu li.item5 a")}
 		sucessBlock{ $("div.successRegister")}
 		errorBlock{ $("div.errorblock")}
 		dateBlock{ $("div.date-sort")}

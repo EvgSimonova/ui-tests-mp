@@ -13,7 +13,7 @@ class T203_RechargeUserBalanceSpec extends GebReportingSpec {
 		to MainPage
         at MainPage
         loginLink.click()
-
+        
         then:
         at MainPage
         waitFor {
