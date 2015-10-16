@@ -32,15 +32,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		savePasswordButton.click()
@@ -71,15 +71,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		newPasswordInput << "222222"
@@ -113,15 +113,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
        		loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "111111"
@@ -156,15 +156,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
 		loginButton.click()
 		
 		then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "111111"
@@ -197,15 +197,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
 		loginButton.click()
 
 		then:
-		at UserPersonalAccountPage
-		settingsLink.displayed
+		waitFor{at UserPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "123456"
@@ -240,22 +240,21 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
       			loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "111111"
 		newPasswordInput << "222222"
 		confirmPasswordInput << "111111" 
 		savePasswordButton.click()
-
 
         	then:
         	waitFor{errorConfirmPassword.displayed}
@@ -284,15 +283,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"
@@ -325,15 +324,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		newPasswordInput << "111111"
@@ -366,15 +365,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		confirmPasswordInput << "111111"
@@ -409,15 +408,16 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
        		loginButton.click()
 
        		then:
-       		at UserPersonalAccountPage
-       		settingsLink.displayed
+       		waitFor{at UserPersonalAccountPage}
+       		waitFor{settingsLink.displayed}
+
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"
@@ -452,15 +452,15 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at UserPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		passwordForm.displayed
+		waitFor{at UserSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"

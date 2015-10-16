@@ -1,3 +1,4 @@
+
 import com.terminal.pages.MainPage
 import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
@@ -14,7 +15,7 @@ import java.lang.*
 
 class T205_ChangeUserContactSpec extends GebReportingSpec {
 	def "can get to settings page and change the name and phone of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         	when:
         	to MainPage
 	        at MainPage
@@ -34,6 +35,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 	        then:
         	waitFor {at UserPersonalAccountPage}
 		waitFor {settingsLink.displayed}
+
         	
 		when:
 		settingsLink.click()
@@ -41,6 +43,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		then:
 		waitFor {at UserSettingsPage}
 		waitFor {settingChange.displayed}
+
 		
 		when:
 		nameUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -56,7 +59,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		waitFor{phoneUser.value() == "84552545689"}
 	}
 	def "can get to settings page and deleting a name in the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         	when:
         	to MainPage
 	        at MainPage
@@ -97,7 +100,6 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		waitFor{phoneUser.value() == "123-45-66"}
 	}
 	def "can get to settings page and deleting a phone in the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -138,7 +140,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		waitFor{phoneUser.value() == ""}
 	}
 	def "can get to settings page and validity a phone in the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
 
         	when:
         	to MainPage
@@ -178,7 +180,6 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 
 	}
 	def "can get to settings page and deleting the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -219,7 +220,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		waitFor{phoneUser.value() == ""}
 	}
 	def "can get to settings page and email change in the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         	when:
         	to MainPage
 	        at MainPage
@@ -258,7 +259,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		waitFor{balanceLink.displayed}
 	}
 	def "can get to settings page and delete email in the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         	when:
         	to MainPage
 	        at MainPage
@@ -276,6 +277,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
+
         	waitFor {at UserPersonalAccountPage}
 		waitFor {settingsLink.displayed}
         	
@@ -285,6 +287,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		then:
 		waitFor {at UserSettingsPage}
 		waitFor {settingChange.displayed}
+
 		
 		when:
 		emailUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -297,8 +300,8 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		
 	}
 	def "can get to settings page and validity email in the contact of the user of the terminal"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        	when:
+
+			when:
         	to MainPage
 	        at MainPage
         	loginLink.click()
