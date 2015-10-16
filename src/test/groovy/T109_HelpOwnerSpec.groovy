@@ -7,35 +7,38 @@ import com.terminal.pages.OwnerPersonalAccountPage
 import org.openqa.selenium.Keys
 import org.openqa.selenium.firefox.FirefoxDriver
 import java.util.concurrent.TimeUnit;
+import geb.*
+import java.lang.*
+
 
 class T109_HelpOwnerSpec extends GebReportingSpec {
 	def "can get to main page and send a message to the technical support no subject"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -44,40 +47,38 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 		sendBtn.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorSubject.displayed}
-		waitFor{sendAccept.displayed}
 		waitFor{sendBtn.displayed}
 		waitFor{errorSubject.text() == "Заполните тему обращения."}
 		
 	}
 	def "can get to main page and send a message to the technical support no text"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -86,40 +87,38 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 		sendBtn.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorTextarea.displayed}
-		waitFor{sendAccept.displayed}
 		waitFor{sendBtn.displayed}
 		waitFor{errorTextarea.text() == "Заполните текст обращения."}
 		
 	}
 	def "can get to main page and send a message to the technical support no text and Subject"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -127,16 +126,15 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 		sendBtn.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorTextarea.displayed}
 		waitFor{errorSubject.displayed}
-		waitFor{sendAccept.displayed}
 		waitFor{sendBtn.displayed}
 		waitFor{errorSubject.text() == "Заполните тему обращения."}
 		waitFor{errorTextarea.text() == "Заполните текст обращения."}
 		
 	}
 	def "can get to main page and send a message to the technical support"() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -144,43 +142,41 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
 
         	when:
-		StaticData.setOwnerName(ownernameInputOnLoginForm)
+		StaticData.setOwnerName(usernameInputOnLoginForm)
 		StaticData.setOwnerPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
 		supTextarea << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
 		supSubject << "Проверка связи"
 		supTextarea << "Тестовое сообщение от автотеста! :) smile"
-		sendBtn.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		waitFor{sendtext.displayed}
+		waitFor{sendBtn.click()}
 
 		when:
-		waitFor{sendtext.text() == "Идёт отправка сообщения..."}
+		waitFor{sendAccept.displayed}
 		
 		then:
-		waitFor{sendAccept.displayed}
-		waitFor{sendAccept.text() == "Ваше обращение успешно отправлено.↵В ближайшее время мы свяжемся с Вами для решения вашей задачи.↵С уважением, команда Marc project.↵"}
-		
+		waitFor{sendAcceptA.text() == "Ваше обращение успешно отправлено."}
+		waitFor{sendAcceptB.text() == "В ближайшее время мы свяжемся с Вами для решения вашей задачи."}
+		waitFor{sendAcceptC.text() == "С уважением, команда Marc project."}
 	}
 }

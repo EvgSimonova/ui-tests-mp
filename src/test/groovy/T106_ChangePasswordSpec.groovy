@@ -48,7 +48,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 		
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorNewPassword.displayed}
 		waitFor{errorOldPassword.displayed}
 		waitFor{errorNewPassword.text() == "Пароль не может быть пустым."}
@@ -176,7 +175,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorConfirmPassword.displayed}
 		waitFor{errorConfirmPassword.text() == "Подтверждение должно совпадать с паролем."}
 		waitFor{terminalsListLink.displayed}
@@ -220,7 +218,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
 		then:	
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorOldPassword.displayed}
 		waitFor{errorOldPassword.text() == "Старый пароль введен неверно."}
 		waitFor{terminalsListLink.displayed}
@@ -263,7 +260,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	waitFor{errorConfirmPassword.displayed}
         	waitFor{errorConfirmPassword.text() == "Подтверждение должно совпадать с паролем."}
 		waitFor{terminalsListLink.displayed}
@@ -305,7 +301,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	waitFor{errorNewPassword.displayed}
 		waitFor{errorNewPassword.text() == "Пароль не может быть пустым."}
        	waitFor{terminalsListLink.displayed}
@@ -345,7 +340,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	waitFor{errorOldPassword.displayed}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
@@ -388,7 +382,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorOldPassword.displayed}
 		waitFor{errorNewPassword.displayed}
 		waitFor{errorConfirmPassword.displayed}
@@ -475,7 +468,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	waitFor{errorNewPassword.displayed}
         	waitFor{errorNewPassword.text() == "Пароль успешно изменён."}
 		waitFor{terminalsListLink.displayed}

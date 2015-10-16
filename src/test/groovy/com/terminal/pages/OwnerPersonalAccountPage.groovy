@@ -22,8 +22,10 @@ class OwnerPersonalAccountPage extends Page {
 		errorTextarea{ $("div.text.alert.alert-error") }
 		supTextarea{ errorTextarea.next().next() }
 		sendBtn{ supportForm.find("input", type:"button") }
-		sendtext{ $("div.sending") }
-		sendAccept{ $("div.accept") }
+		sendAccept{ supportForm.next().next()}
+		sendAcceptA{ sendAccept.children() }
+		sendAcceptB{ sendAcceptA.next()}
+		sendAcceptC{ sendAcceptB.next()}
 
 	}
 }
