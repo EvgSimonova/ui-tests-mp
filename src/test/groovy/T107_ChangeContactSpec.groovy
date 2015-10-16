@@ -33,15 +33,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		nameOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -75,15 +75,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
 			loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		nameOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -117,15 +117,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		nameOwner << "Тимур"
@@ -158,22 +158,21 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		phoneOwner << "8(455)4564565"
 		saveSettingChange.click()
 		
 		then:
-		
 		waitFor{phoneOwner.value() == "8&#40;455&#41;4564565"}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
@@ -197,15 +196,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		nameOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -238,15 +237,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		emailOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -278,15 +277,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		emailOwner << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -318,15 +317,15 @@ class T107_ChangeContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		settingChange.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{settingChange.displayed}
 		
 		when:
 		emailOwner << "test"
