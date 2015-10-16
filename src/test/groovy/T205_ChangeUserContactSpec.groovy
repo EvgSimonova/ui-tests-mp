@@ -1,5 +1,4 @@
 
-
 import com.terminal.pages.MainPage
 import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
@@ -7,6 +6,11 @@ import com.terminal.pages.UserPersonalAccountPage
 import com.terminal.pages.UserSettingsPage
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
+import org.openqa.selenium.firefox.FirefoxDriver
+import java.util.concurrent.TimeUnit;
+import geb.*
+import java.lang.*
+
 
 
 class T205_ChangeUserContactSpec extends GebReportingSpec {
@@ -29,15 +33,17 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
+
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
+
 		
 		when:
 		nameUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -71,15 +77,15 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
 		
 		when:
 		nameUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -112,15 +118,15 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
 		
 		when:
 		nameUser << "Тимур"
@@ -134,6 +140,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 		waitFor{phoneUser.value() == ""}
 	}
 	def "can get to settings page and validity a phone in the contact of the user of the terminal"() {
+
 
         	when:
         	to MainPage
@@ -152,15 +159,15 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
 		
 		when:
 		phoneUser << "8(455)4564565"
@@ -191,15 +198,15 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
 		
 		when:
 		nameUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -231,15 +238,15 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
 		
 		when:
 		emailUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -270,15 +277,17 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
+
 		
 		when:
 		emailUser << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -292,7 +301,7 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
 	}
 	def "can get to settings page and validity email in the contact of the user of the terminal"() {
 
-        	when:
+			when:
         	to MainPage
 	        at MainPage
         	loginLink.click()
@@ -309,15 +318,15 @@ class T205_ChangeUserContactSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at UserPersonalAccountPage
-		settingsLink.displayed
+        	waitFor {at UserPersonalAccountPage}
+		waitFor {settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at UserSettingsPage
-		settingChange.displayed
+		waitFor {at UserSettingsPage}
+		waitFor {settingChange.displayed}
 		
 		when:
 		emailUser << "test"

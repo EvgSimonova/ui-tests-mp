@@ -410,6 +410,7 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
        		then:
        		waitFor{at UserPersonalAccountPage}
        		waitFor{settingsLink.displayed}
+
         		
 		when:
 		settingsLink.click()

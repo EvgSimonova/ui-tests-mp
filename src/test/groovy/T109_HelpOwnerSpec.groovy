@@ -20,7 +20,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -31,14 +31,14 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -60,7 +60,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -71,14 +71,14 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -100,7 +100,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -111,14 +111,14 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -142,7 +142,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginLink.click()
 
 	        then:
-        	at MainPage
+        	waitFor {at MainPage}
 	        waitFor {
         		loginDialog.displayed
 	        	}
@@ -153,14 +153,14 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		helpLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{helpLink.displayed}
         	
 		when:
 		helpLink.click()
 		
 		then:
-		supportBox.displayed
+		waitFor{supportBox.displayed}
 		
 		when:
 		supSubject << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -169,7 +169,7 @@ class T109_HelpOwnerSpec extends GebReportingSpec {
 		supTextarea << "Тестовое сообщение от автотеста! :) smile"
 		
 		then:
-		sendBtn.click()
+		waitFor{sendBtn.click()}
 
 		when:
 		waitFor{sendAccept.displayed}
