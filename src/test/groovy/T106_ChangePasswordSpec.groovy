@@ -9,9 +9,13 @@ import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 import org.openqa.selenium.firefox.FirefoxDriver
 import java.util.concurrent.TimeUnit;
+import geb.*
+import java.lang.*
+
 
 class T106_ChangePasswordSpec extends GebReportingSpec {
 	def "can get to settings page and change the password to blank fields "() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -30,15 +34,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		savePasswordButton.click()
@@ -51,6 +55,7 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		waitFor{errorOldPassword.text() == "Пароль не может быть пустым."}
 	}
 	def "can get to settings page and change the password to blank the old password "() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
 	        to MainPage
@@ -69,15 +74,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		newPasswordInput << "222222"
@@ -85,7 +90,6 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
 		then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorOldPassword.displayed}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
@@ -94,6 +98,7 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
     	}
 
 	def "can get to settings page and change the password to blank the new password"() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -112,15 +117,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
        		loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "111111"
@@ -128,17 +133,17 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		waitFor{errorOldPassword.displayed}
+		waitFor{errorNewPassword.displayed}
 		waitFor{errorConfirmPassword.displayed}
-        	waitFor{errorOldPassword.text() == "Пароль не может быть пустым."}	
-        	waitFor{errorConfirmPassword.text() == "Подтверждение должно совпадать с паролем."}
+       	waitFor{errorNewPassword.text() == "Пароль не может быть пустым."}	
+       	waitFor{errorConfirmPassword.text() == "Подтверждение должно совпадать с паролем."}
 		
   	}
 	
 	def "can get to settings page and change the password to blank the confirm password"() {
-
-        	when:
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);        	
+		
+		when:
         	to MainPage
         	at MainPage
         	loginLink.click()
@@ -155,15 +160,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		loginButton.click()
 		
 		then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         	
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "111111"
@@ -179,6 +184,7 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		
 	}
 	def "can get to settings page and change the password to incorrect old password"() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -197,15 +203,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		loginButton.click()
 
 		then:
-		at OwnerPersonalAccountPage
-		settingsLink.displayed
+		waitFor{at OwnerPersonalAccountPage}
+		waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 				
 		when:
 		oldPasswordInput << "123456"
@@ -216,13 +222,13 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		then:	
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		waitFor{errorOldPassword.displayed}
-		waitFor{errorOldPassword.text() == "Старый пароль введён неверно."}
+		waitFor{errorOldPassword.text() == "Старый пароль введен неверно."}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
 
 	}
 	def "can get to settings page and change with mismatched the new password"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
        		at MainPage
@@ -240,15 +246,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
       		loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"
@@ -266,7 +272,7 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
   	  }
 
 	def "can get to settings page and change only with old password"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
        		to MainPage
         	at MainPage
@@ -284,15 +290,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"
@@ -301,12 +307,12 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	then:
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	waitFor{errorNewPassword.displayed}
-        	waitFor{errorNewPassword.text() == "Пароль не может быть пустым."}
-		waitFor{terminalsListLink.displayed}
+		waitFor{errorNewPassword.text() == "Пароль не может быть пустым."}
+       	waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
 	}
 	def "can get to settings page and change only with new password"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
         	at MainPage
@@ -324,15 +330,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		newPasswordInput << "111111"
@@ -341,13 +347,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	then:
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	waitFor{errorOldPassword.displayed}
+		waitFor{terminalsListLink.displayed}
+		waitFor{moneyLink.displayed}
 		waitFor{errorConfirmPassword.displayed}
   		waitFor{errorOldPassword.text() == "Пароль не может быть пустым."}
 		waitFor{errorConfirmPassword.text() == "Подтверждение должно совпадать с паролем."}
 		
 	    }
 	def "can get to settings page and change only with confirm password"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
         	at MainPage
@@ -365,15 +373,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		confirmPasswordInput << "111111"
@@ -390,7 +398,7 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 
 	}
 	def "can get to settings page and simple password at least 6 characters"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
         	at MainPage
@@ -408,15 +416,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
         	then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"
@@ -425,15 +433,14 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
 		savePasswordButton.click()
 
         	then:
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        	waitFor{errorOldPassword.displayed}
-        	waitFor{errorOldPassword.text() == "Пароль слишком простой. Должен быть не меньше 6 символов длиной и содержать хотя бы одну букву и цифру."}
+       	waitFor{errorNewPassword.displayed}
+       	waitFor{errorNewPassword.text() == "Пароль слишком простой. Должен быть не меньше 6 символов длиной и содержать хотя бы одну букву и цифру."}
 		waitFor{terminalsListLink.displayed}
 		waitFor{moneyLink.displayed}
 		
 }
     	def "can get to settings page and change the password"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
         	at MainPage
@@ -451,15 +458,15 @@ class T106_ChangePasswordSpec extends GebReportingSpec {
         	loginButton.click()
 
        		then:
-        	at OwnerPersonalAccountPage
-        	settingsLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
         		
 		when:
 		settingsLink.click()
 		
 		then:
-		at OwnerSettingsPage
-		passwordForm.displayed
+		waitFor{at OwnerSettingsPage}
+		waitFor{passwordForm.displayed}
 		
 		when:
 		oldPasswordInput << "111111"
