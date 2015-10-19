@@ -18,5 +18,13 @@ class UserCurrentCampaignPage extends Page {
 		applyDateFilterButon{ dateFilterPane.find("input", type: "button",id:"filterByDate")}
 		
 		statisticPageLink{ $("div.user-menu li.item4.statistic a")}
+
+		logoLink{ $("div.span8.logo").children().children()}
+        	createCompanyLink { $("div.user-menu li.item1 a") }
+		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
+        	myPicturesLink { $("a", href: contains("userImages")) }
+		balanceLink{ $("div.user-menu li.item5.payment a")}
+		settingsLink{ $("div.user-menu li.item6 a")}
+
 	}
 }
