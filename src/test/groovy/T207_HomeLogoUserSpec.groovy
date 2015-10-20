@@ -20,6 +20,7 @@ import java.lang.*
 class T207_HomeLogoUserSpec extends GebReportingSpec {
 	def "click on the logo and go to main page"() {
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         	when:
         	to MainPage
 	        at MainPage
@@ -36,9 +37,16 @@ class T207_HomeLogoUserSpec extends GebReportingSpec {
 		StaticData.setUserPassword(passwordInputOnLoginForm)
         	loginButton.click()
 
-	        //to main page from personal account
+ 		//to main page from logo on Add campaing page
 		then:
         	waitFor{at UserPersonalAccountPage}
+		waitFor{createCompanyLink.displayed}
+		
+		when:
+		createCompanyLink.click()
+		
+		then:
+		waitFor{at AddCampaingParamsPage}
 		waitFor{logoLink.displayed}
         	
 		when:
@@ -49,49 +57,21 @@ class T207_HomeLogoUserSpec extends GebReportingSpec {
 		waitFor{AccountPageLink.displayed}
 		waitFor{logoutLink.displayed}
 		
-		//to main page from create company page
+		//to main page from logo on current campaing page
 		when:
 		AccountPageLink.click()
-				
-		then:
-		waitFor{at UserPersonalAccountPage}
-		waitFor{createCompanyLink.displayed}
-
-		when
-		createCompanyLink.click()
 
 		then:
-		waitFor{at AddCampaingParamsPage}
-		waitFor{myPicturesLink.displayed}
-		waitFor{logoLink.displayed}
-
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{myCampaignsLink.displayed}
+		
 		when:
-		logoLink.click()
-		
-		then:
-		waitFor{at MainPage}
-		waitFor{AccountPageLink.displayed}
-		waitFor{logoutLink.displayed}
-		
-		//to main page from money page
-		when:
-		AccountPageLink.click()
-		
-		then:
-		waitFor{at UserPersonalAccountPage}
-		waitFor{createCompanyLink.displayed}
-		waitFor{myCampaignsLink.displayed}
-		waitFor{myPicturesLink.displayed}
-
-		when
 		myCampaignsLink.click()
-
+		
 		then:
 		waitFor{at UserCurrentCampaignPage}
-		waitFor{createCompanyLink.displayed}
-		waitFor{myCampaignsLink.displayed}
 		waitFor{logoLink.displayed}
-		
+        	
 		when:
 		logoLink.click()
 		
@@ -100,25 +80,21 @@ class T207_HomeLogoUserSpec extends GebReportingSpec {
 		waitFor{AccountPageLink.displayed}
 		waitFor{logoutLink.displayed}
 
-		//to main page from settings page
+		//to main page from logo on content page
 		when:
 		AccountPageLink.click()
-		
+
 		then:
-		waitFor{at UserPersonalAccountPage}
-		waitFor{createCompanyLink.displayed}
-		waitFor{myCampaignsLink.displayed}
-		waitFor{myPicturesLink.displayed}
-
-		when
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{myPicturesLink.displayed}
+		
+		when:
 		myPicturesLink.click()
-
+		
 		then:
 		waitFor{at UserContentPage}
-		waitFor{myCampaignsLink.displayed}
-		waitFor{myPicturesLink.displayed}
 		waitFor{logoLink.displayed}
-		
+        	
 		when:
 		logoLink.click()
 		
@@ -127,25 +103,21 @@ class T207_HomeLogoUserSpec extends GebReportingSpec {
 		waitFor{AccountPageLink.displayed}
 		waitFor{logoutLink.displayed}
 
-		//to main page from moneyLink page
+		//to main page from logo on balance page
 		when:
 		AccountPageLink.click()
-		
+
 		then:
-		waitFor{at UserPersonalAccountPage}
-		waitFor{createCompanyLink.displayed}
-		waitFor{myCampaignsLink.displayed}
-		waitFor{balanceLink.displayed}
-
-		when
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{balanceLink.displayed}
+		
+		when:
 		balanceLink.click()
-
+		
 		then:
 		waitFor{at UserBalancePage}
-		waitFor{createCompanyLink.displayed}
-		waitFor{myCampaignsLink.displayed}
 		waitFor{logoLink.displayed}
-		
+        	
 		when:
 		logoLink.click()
 		
@@ -153,24 +125,37 @@ class T207_HomeLogoUserSpec extends GebReportingSpec {
 		waitFor{at MainPage}
 		waitFor{AccountPageLink.displayed}
 		waitFor{logoutLink.displayed}
-			
+
+		//to main page from logo on settings page
 		when:
 		AccountPageLink.click()
+
+		then:
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{settingsLink.displayed}
+		
+		when:
+		settingsLink.click()
 		
 		then:
-		waitFor{at UserPersonalAccountPage}
-		waitFor{createCompanyLink.displayed}
-		waitFor{myCampaignsLink.displayed}
-		waitFor{settingsLink.displayed}
+		waitFor{at UserSettingsPage}
+		waitFor{logoLink.displayed}
+        	
+		when:
+		logoLink.click()
+		
+		then:
+		waitFor{at MainPage}
+		waitFor{AccountPageLink.displayed}
+		waitFor{logoutLink.displayed}
 
-		when
-		settingsLink.click()
+		//to main page from logo on personal account page
+		when:
+		AccountPageLink.click()
 
 		then:
-		waitFor{at UserSettingsPage}
-		waitFor{myCampaignsLink.displayed}
-		waitFor{myPicturesLink.displayed}
-		waitFor{logoLink.displayed}
+        	waitFor{at UserPersonalAccountPage}
+        	waitFor{logoLink.displayed}
 		
 		when:
 		logoLink.click()
