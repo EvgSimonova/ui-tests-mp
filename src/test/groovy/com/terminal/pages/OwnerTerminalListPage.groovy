@@ -66,5 +66,12 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		stopTerminalDialog{ stopTerminalHolder.find("div.group-action").find("div.title", text: "Остановить терминал")}
 		acceptStopTerminalButton{ stopTerminalHolder.find("a.delete")}
 		runTerminalLink{ terminalName.parent().parent().find("a.start")}
+
+		//links
+		AccountPageLink{ $("div.span4.navbar.singin.user-top").children()}
+		logoutLink{ AccountPageLink.next()}
+		logoLink{ $("div.span8.logo").children().children()}
+		moneyLink { $("div.user-menu li.item2.money a") }
+		settingsLink{ $("div.user-menu li.item5 a")}
     }
 }
