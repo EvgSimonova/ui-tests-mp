@@ -37,6 +37,13 @@ class AddCampaingParamsPage extends Page {
 		bottomButtons{ $("div.nav-box.short")}
 		nextButton{ bottomButtons.find("input", id: "submitButton")}
 
+		logoLink{ $("div.span8.logo").children().children()}
+        	createCompanyLink { $("div.user-menu li.item1 a") }
+		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
+        	myPicturesLink { $("a", href: contains("userImages")) }
+		balanceLink{ $("div.user-menu li.item5.payment a")}
+		settingsLink{ $("div.user-menu li.item6 a")}
+
 		
     }
 	

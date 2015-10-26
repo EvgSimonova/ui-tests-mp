@@ -12,6 +12,7 @@ class OwnerBalancePage extends Page {
 		terminalsListLink { $("div.user-menu li.item1 a") }
         	moneyLink { $("div.user-menu li.item2.money a") }
 		settingsLink{ $("div.user-menu li.item5 a")}
+		logoLink{ $("div.span8.logo").children().children()}
 		sucessBlock{ $("div.successRegister")}
 		errorBlock{ $("div.errorblock")}
 		dateBlock{ $("div.date-sort")}

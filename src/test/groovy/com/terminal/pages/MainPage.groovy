@@ -45,5 +45,9 @@ class MainPage extends Page {
 		feedbackInfo{ $("div.feedback").next()}
 		
 		demoModeLink{ $("a", text: "Попробовать сейчас.")}
+	
+	//Account page
+	AccountPageLink{ $("div.span4.navbar.singin.user-top").children()}
+	logoutLink{ AccountPageLink.next()}
     }
 }

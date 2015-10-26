@@ -11,6 +11,7 @@ class OwnerSettingsPage extends Page {
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }
         	moneyLink { $("div.user-menu li.item2.money a") }
+		logoLink{ $("div.span8.logo").children().children()}
 		settingBlock{ $("div.setting-block")}
 		settingChange{ settingBlock.children().next().children().next()}
 		nameOwner{ settingChange.find("input", id:"name", type:"text")}

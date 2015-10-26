@@ -12,7 +12,11 @@ class OwnerPersonalAccountPage extends Page {
 		statisticLink { $("div.user-menu li.item3 a")}
 		settingsLink{ $("div.user-menu li.item5 a")}
 		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
+		logoLink{ $("div.span8.logo").children().children()}
+		AccountPageLink{ $("div.span4.navbar.singin.user-top").children()}
+		
   		
+		//appeal to tech support
 		helpLink { $("div.footer-menu").find("a", class:"open-support")}
 		supportHolder{ $("div.support-holder")}
 		supportBox{ $("div.support-box")}

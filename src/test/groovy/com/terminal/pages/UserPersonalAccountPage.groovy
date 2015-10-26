@@ -13,7 +13,11 @@ class UserPersonalAccountPage extends Page {
 		balanceLink{ $("div.user-menu li.item5.payment a")}
 		settingsLink{ $("div.user-menu li.item6 a")}
         	createLink { $("div.create-link a") }
-		
+		logoLink{ $("div.span8.logo").children().children()}
+		AccountPageLink{ $("div.span4.navbar.singin.user-top").children()}
+		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
+
+
 		topBar{ $("div.span4.navbar.singin.user-top")}
 		userNameLink{ topBar.children()}
 		logoutLink{ topBar.children().next()}

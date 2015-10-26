@@ -5,7 +5,7 @@ import com.terminal.pages.StaticData
 
 class UserSettingsPage extends Page {
 	//todo: Добавить id на страницу
-    static url = StaticData.getServerName()+"/member/balans"
+    static url = StaticData.getServerName()+"/member/settings"
 	static at = { title == "Mark project" }
 
     static content = {
@@ -14,6 +14,10 @@ class UserSettingsPage extends Page {
 		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
         	balanceLink{ $("div.user-menu li.item5.payment a")}
 		contentLink{$("div.user-menu li.item3.content a")}
+		logoLink{ $("div.span8.logo").children().children()}
+        	myPicturesLink { $("a", href: contains("userImages")) }
+		settingsLink{ $("div.user-menu li.item6 a")}
+
 		settingBlock{ $("div.setting-block")}
 		settingChange{ settingBlock.children().next().children().next()}
 		nameUser{ settingChange.find("input", id:"name", type:"text")}
