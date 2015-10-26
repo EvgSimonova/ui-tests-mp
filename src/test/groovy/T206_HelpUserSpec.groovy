@@ -12,7 +12,7 @@ import java.lang.*
 
 class T206_HelpUserSpec extends GebReportingSpec {
 	def "can get to main page and send a message to the technical support no subject"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         	when:
         	to MainPage
 	        at MainPage
@@ -32,6 +32,7 @@ class T206_HelpUserSpec extends GebReportingSpec {
 	        then:
         	waitFor{at UserPersonalAccountPage}
 		waitFor{helpLink.displayed}
+
         	
 		when:
 		helpLink.click()
@@ -53,7 +54,6 @@ class T206_HelpUserSpec extends GebReportingSpec {
 		
 	}
 	def "can get to main page and send a message to the technical support no text"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -94,7 +94,6 @@ class T206_HelpUserSpec extends GebReportingSpec {
 		
 	}
 	def "can get to main page and send a message to the technical support no text and Subject"() {
-		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage

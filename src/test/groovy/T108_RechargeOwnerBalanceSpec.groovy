@@ -8,10 +8,15 @@ import com.terminal.pages.OwnerBalancePage
 import com.terminal.pages.OwnerCashoutRequestPage
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
+import org.openqa.selenium.firefox.FirefoxDriver
+import java.util.concurrent.TimeUnit;
+import geb.*
+import java.lang.*
 
 
 class T108_RechargeOwnerBalanceSpec extends GebReportingSpec {
 	def "can get to settings page and withdrawal of the terminal owner"() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -30,33 +35,34 @@ class T108_RechargeOwnerBalanceSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		moneyLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{moneyLink.displayed}
         	
 		when:
 		moneyLink.click()
 		
 		then:
-		at OwnerBalancePage
-		balanceBoxBottom.displayed
+		waitFor{at OwnerBalancePage}
+		waitFor{balanceBoxBottom.displayed}
 		
 		when:
 		moneyButton.click()
 		
 		then:
-		balanceBox.displayed
+		waitFor{balanceBox.displayed}
 		
 		when:
 		moneyAmount << "10"
+		btnRequest.click()
 		
 		then:
-		btnRequest.click()
 		waitFor{errorBlock.displayed}
 		waitFor{errorBlock.text() == "Ошибка. Запрошенная сумма слишком велика."}
 		waitFor{terminalsListLink.displayed}
-		waitFor{moneyLink.displayed}
+		waitFor{settingsLink.displayed}
 	}
 	def "can get to settings page and a withdrawal more than the balance of the owner of the terminal"() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -75,34 +81,34 @@ class T108_RechargeOwnerBalanceSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		moneyLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{moneyLink.displayed}
         	
 		when:
 		moneyLink.click()
 		
 		then:
-		at OwnerBalancePage
-		balanceBoxBottom.displayed
+		waitFor{at OwnerBalancePage}
+		waitFor{balanceBoxBottom.displayed}
 		
 		when:
 		moneyButton.click()
 		
 		then:
-		balanceBox.displayed
+		waitFor{balanceBox.displayed}
 		
 		when:
 		moneyAmount << "100"
 		
 		then:
-		btnRequest.click()
+		waitFor{btnRequest.click()}
 		waitFor{errorBlock.displayed}
 		waitFor{errorBlock.text() == "Ошибка. Запрошенная сумма слишком велика."}
 		waitFor{terminalsListLink.displayed}
-		waitFor{moneyLink.displayed}
+		waitFor{settingsLink.displayed}
 	}
 	def "can get to settings page and a withdrawal balance is less than the owner of the terminal"() {
-
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         	when:
         	to MainPage
 	        at MainPage
@@ -120,33 +126,34 @@ class T108_RechargeOwnerBalanceSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		moneyLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{moneyLink.displayed}
         	
 		when:
 		moneyLink.click()
 		
 		then:
-		at OwnerBalancePage
-		balanceBoxBottom.displayed
+		waitFor{at OwnerBalancePage}
+		waitFor{balanceBoxBottom.displayed}
 		
 		when:
 		moneyButton.click()
 		
 		then:
-		balanceBox.displayed
+		waitFor{balanceBox.displayed}
 		
 		when:
 		moneyAmount << "2"
 		
 		then:
-		btnRequest.click()
+		waitFor{btnRequest.click()}
 		waitFor{sucessBlock.displayed}
 		waitFor{sucessBlock.text() == "Операция прошла успешно."}
 		waitFor{terminalsListLink.displayed}
-		waitFor{moneyLink.displayed}
+		waitFor{settingsLink.displayed}
 	}
 	def "can get to settings page and Request to withdraw funds empty values ​​owner of the terminal"() {
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
         	when:
         	to MainPage
@@ -165,21 +172,21 @@ class T108_RechargeOwnerBalanceSpec extends GebReportingSpec {
         		loginButton.click()
 
 	        then:
-        	at OwnerPersonalAccountPage
-		moneyLink.displayed
+        	waitFor{at OwnerPersonalAccountPage}
+		waitFor{moneyLink.displayed}
         	
 		when:
 		moneyLink.click()
 		
 		then:
-		at OwnerBalancePage
-		balanceBoxBottom.displayed
+		waitFor{at OwnerBalancePage}
+		waitFor{balanceBoxBottom.displayed}
 		
 		when:
 		moneyButton.click()
 		
 		then:
-		balanceBox.displayed
+		waitFor{balanceBox.displayed}
 		
 		when:
 		moneyAmount.displayed
@@ -191,6 +198,6 @@ class T108_RechargeOwnerBalanceSpec extends GebReportingSpec {
 		waitFor{headText.text() == "Внутренняя ошибка на сервере"}
 		waitFor{openSupportLink.displayed}
 		waitFor{terminalsListLink.displayed}
-		waitFor{moneyLink.displayed}
+		waitFor{settingsLink.displayed}
 	}
 }

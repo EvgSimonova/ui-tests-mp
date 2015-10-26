@@ -17,5 +17,6 @@ class AdminPersonalAccountPage extends Page {
 		
 		imageModerationLink{ leftMenuBlock.find("a", text: "Картинки")}
 		campaignModerationLink{ leftMenuBlock.find("a", text: "Модерация кампаний")}
+		settingsRightUserLink{ leftMenuBlock.find("a", text: "Список пользователей системы")}
     }
 }
