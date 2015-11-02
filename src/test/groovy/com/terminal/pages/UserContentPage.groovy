@@ -3,7 +3,7 @@ package com.terminal.pages
 import geb.Page
 
 class UserContentPage extends Page {
-    static url=StaticData.getServerName()+"member/userImages"
+    static url=StaticData.getServerName()+"/member/userImages"
     static at = {title == "Mark project" }
 
     static content = {
