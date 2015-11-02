@@ -55,7 +55,7 @@ class T0061_AddUserImageSpec extends GebReportingSpec {
 		
 		when:
 		try{
-			fileNameSpan << "D:\\MyFiles\\myImg.jpg"
+			fileNameSpan << "E:\\MyFiles\\flower.jpg"
 		}catch(WebDriverException e){
 			println e
 		}catch (ElementNotVisibleException e){
