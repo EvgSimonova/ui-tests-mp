@@ -81,3 +81,7 @@ def static setCampaignEndTime(input){
 def static setUserEmail(input){
 	input << "mihailov-ta@ya.ru"
 }
+
+def static setUserImage(input){
+	input << "D:\\MyFiles\\flower.jpg"
+}
