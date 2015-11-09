@@ -4,7 +4,7 @@ import geb.Page
 
 class AdminLoginPage extends Page {
 	//todo: Добавить id на страницу
-    static url=StaticData.getServerName()+"/loginAdmin"
+    static url=StaticData.getServerName()+"/admin"
 	static at = { title == "Mark project" }
 
     static content = {
