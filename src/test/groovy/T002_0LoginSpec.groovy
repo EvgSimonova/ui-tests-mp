@@ -28,7 +28,7 @@ class T002_0LoginSpec extends GebReportingSpec {
         then:
         waitFor{at MainPage}
         waitFor{errorblock.displayed}
-		waitFor{errorblock.text().trim() == "Логин или пароль были введены неправильно."}
+		waitFor{errorblock.text().trim() == "Неверное имя или пароль"}
     }    
 	
 	def "can get to main page and login with empty login"() {
@@ -50,7 +50,7 @@ class T002_0LoginSpec extends GebReportingSpec {
         then:
         waitFor{at MainPage}
         waitFor{errorblock.displayed}
-		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
+		waitFor{errorblock.text().trim()=="Неверное имя или пароль"}
     }    
 	
 	def "can get to main page and login with empty password"() {
@@ -72,7 +72,7 @@ class T002_0LoginSpec extends GebReportingSpec {
         then:
         waitFor{at MainPage}
         waitFor{errorblock.displayed}
-		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
+		waitFor{errorblock.text().trim()=="Неверное имя или пароль"}
 
     }    
 	
@@ -95,7 +95,7 @@ class T002_0LoginSpec extends GebReportingSpec {
         then:
         waitFor{at MainPage}
         waitFor{errorblock.displayed}
-		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
+		waitFor{errorblock.text().trim()=="Неверное имя или пароль"}
 
     }   
 
@@ -119,7 +119,7 @@ class T002_0LoginSpec extends GebReportingSpec {
         then:
         waitFor{at MainPage}
         waitFor{errorblock.displayed}
-		waitFor{errorblock.text().trim()=="Логин или пароль были введены неправильно."}
+		waitFor{errorblock.text().trim()=="Неверное имя или пароль"}
     }    	
 	
 	def "can get to main page and login as user"() {
