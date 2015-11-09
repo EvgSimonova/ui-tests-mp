@@ -55,7 +55,7 @@ class T0061_AddUserImageSpec extends GebReportingSpec {
 		
 		when:
 		try{
-			fileNameSpan << "E:\\MyFiles\\flower.jpg"
+			StaticData.setUserImage(fileNameSpan)
 		}catch(WebDriverException e){
 			println e
 		}catch (ElementNotVisibleException e){
