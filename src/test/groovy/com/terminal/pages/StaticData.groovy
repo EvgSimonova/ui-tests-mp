@@ -81,3 +81,11 @@ def static setCampaignEndTime(input){
 def static setUserEmail(input){
 	input << "mihailov-ta@ya.ru"
 }
+
+def static setUserEmailDropbox(input){
+	input << "Mihailov-ta+spam2@ya.ru"
+}
+
+def static setUserPasswordDropbox(input){
+	input << "Lhjg<jrc909"
+}
