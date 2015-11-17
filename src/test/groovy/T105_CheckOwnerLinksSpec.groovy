@@ -48,6 +48,5 @@ class T105_CheckOwnerLinksSpec extends GebReportingSpec {
 		
 		then:
 		at OwnerBalancePage
-		dateBlock.displayed
     }
 }

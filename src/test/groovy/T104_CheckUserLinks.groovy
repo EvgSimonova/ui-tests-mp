@@ -50,7 +50,6 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
         createCompanyLink.displayed
         myPicturesLink.displayed
         createLink.displayed
-		createCompanyLink.displayed
 		topBar.displayed;
 		userNameLink.displayed
 		logoutLink.displayed
@@ -61,7 +60,6 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
 		
 		then:
 		at DemoCreateCompanyPage
-		addressFilterLink.displayed
 		currentCampaignsLink.displayed
 		
 		//check the current campaign page
@@ -72,19 +70,6 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
 		waitFor{at UserCurrentCampaignPage}
 		waitFor{headText.displayed}
 		waitFor{currentCampaignsLink.displayed}
-		waitFor{dateFilterPane.displayed}
-		waitFor{dateFromInput.displayed}
-		waitFor{dateToInput.displayed}
-		waitFor{applyDateFilterButon.displayed}
-		
-		//check the statistic page
-		when:
-		statisticPageLink.click() 
-		
-		then:
-		at UserStatisticPage
-		headText.displayed
-		balanceLink.displayed
 		
 		//check the balance page
 		when:
@@ -94,7 +79,6 @@ class T104_CheckuserLinksSpec extends GebReportingSpec {
 		at UserBalancePage
 		headText.displayed
 		settingsLink.displayed
-		outSumInput.displayed
 		addMoneyButton.displayed
 		
 		//check the settings page
