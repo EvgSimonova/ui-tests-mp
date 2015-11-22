@@ -22,7 +22,11 @@ class AddCampaingParamsPage extends Page {
 		campaignEnddateInput{ paramsForm.find("input", id:"endDate")}
 		campaignEndDateChooser{ $("div.bootstrap-datetimepicker-widget.dropdown-menu").next().next()}
 		campaignEndDateSelector{ campaignEndDateChooser.find("td.day.new")}
+
+		campaignEndTimeChooser{ $("div.bootstrap-datetimepicker-widget.dropdown-menu").next().next().next()}
+		campaignEndTimeUp{ campaignEndTimeChooser.find("a", class:"btn")}
 		campaignEndTimeInput{ paramsForm.find("input", id:"endTime")}
+		campaignEndTimeAddOn{ campaignEndTimeInput.next()}
 		
 		userEmail{ paramsForm.find("input", id:"newEmail") }
 		
@@ -46,6 +50,6 @@ class AddCampaingParamsPage extends Page {
  class FramePage extends Page{
 	static content={
 		captchaCheckbox{ $("div.recaptcha-checkbox-checkmark")}
-		
+		imageSelest{ $("div.rc-imageselect-payload")}
 	}
  }
