@@ -1,18 +1,10 @@
 
-import com.terminal.pages.MainPage
-import com.terminal.pages.UserPersonalAccountPage
-import com.terminal.pages.AddCampaingParamsPage
-import com.terminal.pages.AddCampaingImagePage
-import com.terminal.pages.AddCampaingTerminalPage
-import com.terminal.pages.DemoCreateCompanyCheckAndConfirmPage
-import com.terminal.pages.DemoCreateCompanyStartCompanyPage
-import com.terminal.pages.StaticData
-import geb.spock.GebReportingSpec
-import java.text.SimpleDateFormat
-import org.openqa.selenium.Keys
-import java.util.Date.*
-import java.util.concurrent.TimeUnit
 
+import com.terminal.pages.*
+import geb.spock.GebReportingSpec
+import org.openqa.selenium.Keys
+
+import java.text.SimpleDateFormat
 
 class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 
@@ -35,23 +27,24 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
         loginButton.click()
 
         then:
-        at UserPersonalAccountPage
-        createCompanyLink.displayed
-        myPicturesLink.displayed
-        createLink.displayed
-		createCompanyLink.displayed
+		waitFor{at UserPersonalAccountPage}
+		waitFor{createCompanyLink.displayed}
+		waitFor{myPicturesLink.displayed}
+		waitFor{createLink.displayed}
+		waitFor{createCompanyLink.displayed}
 		
 		when:
 		createCompanyLink.click()
 		
 		then:
-		at AddCampaingParamsPage
-		campaignNameInput.displayed
-		campaignStartdateInput.displayed
-		campaignStartTimeInput.displayed
-		campaignEnddateInput.displayed
-		campaignEndTimeInput.displayed
-		nextButton.displayed
+		waitFor{at AddCampaingParamsPage}
+		waitFor{campaignNameInput.displayed}
+		waitFor{campaignStartdateInput.displayed}
+		waitFor{campaignStartTimeInput.displayed}
+		waitFor{campaignEnddateInput.displayed}
+		waitFor{campaignEndTimeInput.displayed}
+		waitFor{campaignEndTimeAddOn.displayed}
+		waitFor{nextButton.displayed}
 		
 		when:
 		campaignNameInput <<  "Тестовая кампания " +new SimpleDateFormat("dd.MM.yyyyHH:mm:ss").format(new Date())
@@ -61,6 +54,8 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		campaignEnddateInput.click()
 		campaignEndDateSelector.click()
 		campaignEndTimeInput.click()
+		campaignEndTimeAddOn.click()
+		campaignEndTimeUp.click()
 		nextButton.click()
 		
 		then:
@@ -112,32 +107,33 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		nextButton.click()
 		
 		then:
-		at AddCampaingTerminalPage
-		addressInput.displayed
-		adressDistanceCheckbox.displayed
+		waitFor{at AddCampaingTerminalPage}
+		waitFor{addressInput.displayed}
+		//waitFor{adressDistanceCheckbox.displayed}
 		
 		when:
 		addressInput << "Москва"
 		addressInput << Keys.chord(Keys.ENTER)		
 		
 		then:
-		addressInput.displayed
-		adressDistanceCheckbox.displayed
+		//waitFor{addressInput.displayed}
+		waitFor{adressDistanceCheckbox.displayed}
 		
 		when:
 		adressDistanceCheckbox.click()
 
 		then:
-		adressDistanceCheckbox.displayed		
-		addressDistanceInput.displayed		
+		//adressDistanceCheckbox.displayed
+		waitFor{addressDistanceInput.displayed}
 		
 		when:
 		addressDistanceInput << "100"
-		addressInput << Keys.chord(Keys.ENTER)
+		//addressInput << Keys.chord(Keys.ENTER)
+		addressDistanceInput << Keys.chord(Keys.ENTER)
 
-		then:		
-		adressDistanceCheckbox.displayed		
-		addressDistanceInput.displayed		
+		then:
+		waitFor{adressDistanceCheckbox.displayed}
+		waitFor{addressDistanceInput.displayed}
 		waitFor{addressInput.displayed}
 		waitFor{mapCanvas.displayed}
 		waitFor{terminalsContainer.displayed}
@@ -149,26 +145,26 @@ class T008_CreateCompanyAsUserSpec extends GebReportingSpec {
 		allTerminalDiv.click()
 		
 		then:
-		terminalsContainer.displayed
-		terminalPane.displayed
-		addTerminalToCompanyDutton.displayed
+		waitFor{terminalsContainer.displayed}
+		waitFor{terminalPane.displayed}
+		waitFor{addTerminalToCompanyDutton.displayed}
 		
 		when:
 		addTerminalToCompanyDutton.click()
 		
 		then:
-		terminalsContainer.displayed
-		terminalPane.displayed
-		addTerminalToCompanyDutton.displayed
-		addedToCampaignTab.displayed
+		waitFor{terminalsContainer.displayed}
+		waitFor{terminalPane.displayed}
+		waitFor{addTerminalToCompanyDutton.displayed}
+		waitFor{addedToCampaignTab.displayed}
 		
 		when:
 		addedToCampaignTab.click()
 		
 		then:
-		addedToCampaignTab.displayed
-		bottomButtons.displayed
-		nextButton.displayed
+		waitFor{addedToCampaignTab.displayed}
+		waitFor{bottomButtons.displayed}
+		waitFor{nextButton.displayed}
 		
 		when:
 		nextButton.click()
