@@ -10,6 +10,11 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 
 	static content = {
 		addTerminalButton{ $("a.btn")}
+		terminalsListLink { $("div.user-menu li.item1 a") }
+		moneyLink { $("div.user-menu li.item2.money a") }
+		settingsLink{ $("div.user-menu li.item5 a")}
+		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
+		terminalTable{ $("table#table.sortable.terminal-table.tablesorter.tablesorter-blue.hasFilters")}
 
 		//for create new terminal group and for rename terminal group
 		groupMenuButton{ $("div.group-menu")}
@@ -43,7 +48,17 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		terminalNameInput{ createTerminalForm.find("input", name:"name", type: "text")}
 		terminalDescriptionTextarea{ createTerminalForm.find("textarea", name:"description", id: "description")}
 		terminalGroupSelect{ createTerminalForm.find("select", name:"terminalGroup")}
+		terminalGroupSelectIndex{ terminalGroupSelect.getAttribute("selectedIndex")}
+		terminalGroupSelectInactive{ terminalGroupSelect.children()}
+		terminalGroupSelectActive{ terminalGroupSelect.children().next()}
 		terminalTypeSelect{ createTerminalForm.find("select", name:"terminalType")}
+		terminalTypeSelectIndex{ terminalTypeSelect.getAttribute("selectedIndex")}
+		terminalTypeSelectMonitor{ terminalTypeSelect.children()}
+		terminalTypeSelectATM{ terminalTypeSelect.children().next()}
+		terminalTypeSelectSmartphone{ terminalTypeSelect.children().next().next()}
+		sliderRange{ $("div#slider-range.ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all")}
+		sliderLeft{ sliderRange.children().next()}
+		sliderRight{ sliderRange.children().next().next()}
 		audienceAgeBeginInput{ createTerminalForm.find("input", type:"text", id:"amount")}
 		audienceAgeEndInput{ createTerminalForm.find("input", type:"text", id:"amount1")}
 		weekAudienceInput{ createTerminalForm.find("input", type:"text", id:"weekdayAudience")}
@@ -53,6 +68,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		operationSystemInput{createTerminalForm.find("input", type:"text", id:"operationSystem")}
 		costInput{createTerminalForm.find("input", type:"text", id:"cost")}
 		saveTerminalButton{createTerminalForm.find("input", type:"button", class:"btn", id:"saveButton")}
+		errorAlert{ createTerminalForm.find("div", class:"alert alert-error", id:"create_error")}
 
 		terminalPane{ $("div.jspPane")}
 		terminalName{ terminalPane.find("h3", text: contains("Moscow"))}
