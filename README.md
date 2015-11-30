@@ -1,3 +1,5 @@
++[ ![Codeship Status for mptester2/ui-tests-mp](https://codeship.com/projects/69c00860-796d-0133-2e51-7addd7fed507/status?branch=master)](https://codeship.com/projects/118715)
+
 # Описание #
  
 Тесты для веб-прилоежения marc-project
