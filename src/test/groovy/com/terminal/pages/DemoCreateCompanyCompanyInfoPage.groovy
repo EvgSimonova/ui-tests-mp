@@ -5,7 +5,7 @@ import geb.Page
 class DemoCreateCompanyCompanyInfoPage extends Page {
 	//todo: Добавить id на страницу
     static url=StaticData.getServerName()+"/member/createCompany/addTerminal"
-	static at = { title == "Mark project" }
+	static at = { title == "real direct" }
 
     static content = {
 

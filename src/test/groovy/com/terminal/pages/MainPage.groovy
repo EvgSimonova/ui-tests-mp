@@ -4,7 +4,7 @@ import geb.Page
 
 class MainPage extends Page {
 
-    static at = { title == "Mark project" }
+    static at = { title == "real direct" }
 
     static content = {
 
