@@ -5,7 +5,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 	//todo добавить id на страницу
 	//todo добавить в переменные терминал над которым производятся действия
 	static url = StaticData.getServerName()+"/owner/terminals"
-	static at = { title == "" }
+	static at = { title == "real direct" }
 
 
 	static content = {
