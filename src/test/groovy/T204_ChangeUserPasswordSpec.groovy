@@ -474,6 +474,17 @@ class T204_ChangeUserPasswordSpec extends GebReportingSpec {
 		waitFor{balanceLink.displayed}
 		waitFor{contentLink.displayed}
 		
+		when:
+		oldPasswordInput << "222222"
+		newPasswordInput << "111111"
+		confirmPasswordInput << "111111" 
+		savePasswordButton.click()
+
+        	then:
+        	waitFor{errorNewPassword.displayed}
+        	waitFor{errorNewPassword.text() == "Пароль успешно изменён."}
+		waitFor{balanceLink.displayed}
+		waitFor{contentLink.displayed}
 	}
 	
 }
