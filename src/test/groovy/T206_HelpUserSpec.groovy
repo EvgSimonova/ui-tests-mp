@@ -178,6 +178,6 @@ class T206_HelpUserSpec extends GebReportingSpec {
 		then:
 		waitFor{sendAcceptA.text() == "Ваше обращение успешно отправлено."}
 		waitFor{sendAcceptB.text() == "В ближайшее время мы свяжемся с Вами для решения вашей задачи."}
-		waitFor{sendAcceptC.text() == "С уважением, команда Marc project."}
+		waitFor{sendAcceptC.text() == "С уважением, команда real direct."}
 	}
 }
