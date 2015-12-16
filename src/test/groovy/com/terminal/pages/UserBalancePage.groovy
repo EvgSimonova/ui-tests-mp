@@ -6,7 +6,7 @@ import com.terminal.pages.StaticData
 class UserBalancePage extends Page {
 	//todo: Добавить id на страницу
     static url = StaticData.getServerName()+"/member/balans"
-	static at = { title == "Mark project" }
+	static at = { title == "Баланс" }
 
     static content = {
 		headText{ $("H1.company")}

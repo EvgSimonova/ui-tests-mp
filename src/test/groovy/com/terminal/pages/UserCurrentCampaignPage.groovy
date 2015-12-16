@@ -6,7 +6,7 @@ import com.terminal.pages.StaticData
 class UserCurrentCampaignPage extends Page {
 	//todo: Добавить id на страницу
     static url = StaticData.getServerName()+"/member/currentCompany"
-	static at = { title == "Mark project" }
+	static at = { title == "real direct" }
 
     static content = {
 		headText{ $("H1.company")}

@@ -4,7 +4,7 @@ import geb.Page
 
 class UserContentPage extends Page {
     static url=StaticData.getServerName()+"/member/userImages"
-    static at = {title == "Mark project" }
+    static at = {title == "Контент" }
 
     static content = {
         	createCompanyLink { $("div.user-menu li.item1 a") }

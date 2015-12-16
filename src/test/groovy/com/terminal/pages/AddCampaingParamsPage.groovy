@@ -5,7 +5,7 @@ import geb.Page
 class AddCampaingParamsPage extends Page {
 	//todo: Добавить id на страницу
     static url=StaticData.getServerName()+"member/createCompany/addParams"
-	static at = { title == "Mark project" }
+	static at = { title == "real direct" }
 
     static content = {
 
