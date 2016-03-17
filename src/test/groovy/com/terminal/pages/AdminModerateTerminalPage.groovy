@@ -5,7 +5,7 @@ import geb.Page
 class AdminModerateTerminalPage extends Page {
 	//todo: Добавить id на страницу
     static url=StaticData.getServerName()+"/admin/terminals"
-	static at = { title == "Mark project" }
+	static at = { title == StaticData.getPageTitle() }
 
     static content = {
 		logoutButton{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}

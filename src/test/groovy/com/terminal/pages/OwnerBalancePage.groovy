@@ -1,12 +1,10 @@
 package com.terminal.pages
-
 import geb.Page
-import com.terminal.pages.StaticData
 
 class OwnerBalancePage extends Page {
 	//todo: Добавить id на страницу
     static url = StaticData.getServerName()+"/owner/balance"
-	static at = { title == "Mark project" }
+	static at = { title == StaticData.getPageTitle()  }
 
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }

@@ -5,7 +5,7 @@ import geb.Page
 class OwnerCashoutRequestPage extends Page {
 
     static url = StaticData.getServerName()+"/owner/cashout_request?moneyAmount="
-	static at = { title == "Mark project" }
+	static at = { title == StaticData.getPageTitle()  }
 
     static content = {
         terminalsListLink { $("div.user-menu li.item1 a") }

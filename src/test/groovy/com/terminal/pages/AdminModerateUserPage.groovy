@@ -17,7 +17,7 @@ class CartRow extends Module {
 class AdminModerateUserPage extends Page {
 
     static url=StaticData.getServerName()+"/admin/users"
-    static at = { title == "Mark project" }
+    static at = { title == StaticData.getPageTitle() }
 
     static content = {
         logoutButton { $("div.span4.navbar.singin.user-top").find("a", text: "Выйти") }

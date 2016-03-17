@@ -6,7 +6,7 @@ import com.terminal.pages.StaticData
 class OwnerSettingsPage extends Page {
 	
     static url = StaticData.getServerName()+"/owner/settings"
-	static at = { title == "Mark project" }
+	static at = { title == StaticData.getPageTitle() }
 
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }

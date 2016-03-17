@@ -3,9 +3,10 @@ package com.terminal.pages
 import geb.Page
 
 class AdminLoginPage extends Page {
+
 	//todo: Добавить id на страницу
-    static url=StaticData.getServerName()+"/loginAdmin"
-	static at = { title == "Mark project" }
+    static url = StaticData.getServerName()+"/loginAdmin"
+	static at = { title == StaticData.getPageTitle() }
 
     static content = {
 

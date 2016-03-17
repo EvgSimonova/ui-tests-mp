@@ -6,7 +6,7 @@ class AdminPersonalAccountPage extends Page {
 
 	//todo: Добавить id на страницу
     static url=StaticData.getServerName()+"/admin"
-	static at = { title == "Mark project" }
+	static at = { title == StaticData.getPageTitle() }
 
     static content = {
 		logoutButton{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
@@ -17,5 +17,7 @@ class AdminPersonalAccountPage extends Page {
 		
 		imageModerationLink{ leftMenuBlock.find("a", text: "Картинки")}
 		campaignModerationLink{ leftMenuBlock.find("a", text: "Модерация кампаний")}
+
+		settingsRightUserLink{ leftMenuBlock.find("a", text: "Список пользователей системы")}
     }
 }

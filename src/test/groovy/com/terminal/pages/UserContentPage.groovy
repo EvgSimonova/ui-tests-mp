@@ -4,7 +4,7 @@ import geb.Page
 
 class UserContentPage extends Page {
 	static url=StaticData.getServerName()+"/member/userImages"
-	static at = {title == "Mark project" }
+	static at = { title == "Контент" }
 
 	static content = {
 		createCompanyLink { $("div.user-menu li.item1 a") }
@@ -14,7 +14,6 @@ class UserContentPage extends Page {
 		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
 		balanceLink{ $("div.user-menu li.item5.payment a")}
 		settingsLink{ $("div.user-menu li.item6 a")}
-
 
 		topBar{ $("div.span4.navbar.singin.user-top")}
 		userNameLink{ topBar.children()}
@@ -34,12 +33,19 @@ class UserContentPage extends Page {
 		clearEditable{ $("span.editable-clear-x")}
 		errorNameImage{ $("div.editable-error-block.help-block")}
 		allImageList{ $("ul#all-images")}
+		liList{ $("ul#all-images li")}
 		firstImage{ $("ul#all-images li:first-child")}
 		activImage{ allImageList.find("li", class:"active")}
 		nameActiveImage{ activImage.find("H3").text()}
 		deleteImage{ firstImage.find("a", class:"close")}
 		nameFirstImage{ firstImage.find("H3").text()}
-		LiImage{ $("ul#all-images li").max { it.getAttribute("data-image-id") }}
+		jspPane{ $("div.jspPane")}
+		jspContainer{ $("div.jspContainer")}
+		jspScrollable{ $("div#scrollbarY.jp-container.jspScrollable")}
+		//jspDrag{ $("div.jspDrag")}
+		LiImage{ $("ul#all-images li").max {Integer.valueOf(it.getAttribute("data-image-id"))}}
+		idLiImage{ LiImage.getAttribute("data-image-id")}
+		offsetLiImage{ LiImage.getAttribute("offsetTop")}
 		nameLiImage{ LiImage.find("h3").text()}
 		filErrorWrapper{ $("div.errorblock")}
 		btnDropbox{ imageUploadForm.find('span',class:"dropin-btn-status")}
@@ -47,6 +53,7 @@ class UserContentPage extends Page {
 		deleteForm{ $("div.group-action")}
 		btnYes{ deleteForm.find("a", class:"delete action")}
 		numberImages{ $("div.image-menu label#total-content-counter a").children()}
-
+		endModerate{ $("label#moderation-passed-counter")}
+		startModerate{ $("label#moderation-in-progress-counter")}
 	}
 }
