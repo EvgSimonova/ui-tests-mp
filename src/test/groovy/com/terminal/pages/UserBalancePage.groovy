@@ -2,7 +2,6 @@ package com.terminal.pages
 
 mport geb.Module
 import geb.Page
-import com.terminal.pages.StaticData
 
 class CartRowBalance extends Module {
 	static content = {
