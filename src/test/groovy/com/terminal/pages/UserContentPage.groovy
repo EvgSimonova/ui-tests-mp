@@ -34,16 +34,24 @@ class UserContentPage extends Page {
 		clearEditable{ $("span.editable-clear-x")}
 		errorNameImage{ $("div.editable-error-block.help-block")}
 		allImageList{ $("ul#all-images")}
+		liList{ $("ul#all-images li")}
 		firstImage{ $("ul#all-images li:first-child")}
 		activImage{ allImageList.find("li", class:"active")}
 		nameActiveImage{ activImage.find("H3")}
 		deleteImage{ firstImage.find("a", class:"close")}
 		nameFirstImage{ firstImage.find("H3")}
-		LiImage{ $("ul#all-images li").max { it.getAttribute("data-image-id") }} 
+		jspPane{ $("div.jspPane")}
+		jspContainer{ $("div.jspContainer")}
+		jspScrollable{ $("div#scrollbarY.jp-container.jspScrollable")}
+		LiImage{ $("ul#all-images li").max {Integer.valueOf(it.getAttribute("data-image-id"))}}
+		idLiImage{ LiImage.getAttribute("data-image-id")}
+		offsetLiImage{ LiImage.getAttribute("offsetTop")}
 		nameSearchInput{ $("div.term-list-header").find("input", type:"search", class:"search")}
 		deleteForm{ $("div.group-action")}
 		btnYes{ deleteForm.find("a", class:"delete action")}
 		numberImages{ $("div.image-menu label#total-content-counter a").children()}
-		
+
+		endModerate{ $("label#moderation-passed-counter")}
+		startModerate{ $("label#moderation-in-progress-counter")}		
     }
 }

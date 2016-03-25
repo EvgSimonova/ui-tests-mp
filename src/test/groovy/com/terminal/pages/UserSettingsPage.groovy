@@ -6,7 +6,7 @@ import com.terminal.pages.StaticData
 class UserSettingsPage extends Page {
 	//todo: Добавить id на страницу
     static url = StaticData.getServerName()+"/member/settings"
-	static at = { title == "real direct" }
+	static at = { title == StaticData.getPageTitle() }
 
     static content = {
 		headText{ $("H1.company")}
@@ -14,6 +14,11 @@ class UserSettingsPage extends Page {
 		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
         	balanceLink{ $("div.user-menu li.item5.payment a")}
 		contentLink{$("div.user-menu li.item3.content a")}
+
+		topBar{ $("div.span4.navbar.singin.user-top")}
+		userNameLink{ topBar.children()}
+		logoutLink{ topBar.children().next()}		
+		
 		logoLink{ $("div.span8.logo").children().children()}
         	myPicturesLink { $("a", href: contains("userImages")) }
 		settingsLink{ $("div.user-menu li.item6 a")}
@@ -37,6 +42,18 @@ class UserSettingsPage extends Page {
 		oldPasswordInput{ passwordForm.find("input", id:"password", type:"password")}
 		errorOldPassword{ oldPasswordInput.next()}
 		savePasswordButton{ passwordForm.find("input", type:"submit") }
+
+		//alert
+		formBlockNotifications{ $("div.notification-sett form#terminalUser")}
+		inputContentModeration{ formBlockNotifications.find("input", id: 'contentModerationStatusChangedNootification1')}
+		inputContentModerationCheked{ inputContentModeration.getAttribute('checked')}
+		inputCampaingModeration{ formBlockNotifications.find("input", id: 'campaignModerationStatusChangedNotification1')}
+		inputCampaingModerationCheked{ inputCampaingModeration.getAttribute('checked')}
+		inputCampaignStatus{ formBlockNotifications.find("input", id: 'campaignStatusChangedNotification1')}
+		inputCampaignStatusCheked{ inputCampaignStatus.getAttribute('checked')}
+		inputBalanceReplenished{ formBlockNotifications.find("input", id: 'balanceReplenishedNotification1')}
+		inputBalanceReplenishedCheked{ inputBalanceReplenished.getAttribute('checked')}
+		btnSaveNotifications{ formBlockNotifications.find("input", type: "submit", class: "button")}
 		
 	}
 }

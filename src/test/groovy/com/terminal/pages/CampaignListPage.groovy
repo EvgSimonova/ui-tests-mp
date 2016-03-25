@@ -4,7 +4,7 @@ import geb.Page
 
 class CampaignListPage extends Page {
 
-    static at = { title == "real direct" }
+    static at = { title == StaticData.getPageTitle() }
 	static url = StaticData.getServerName()+"/member/currentCompany"
 
     static content = {
