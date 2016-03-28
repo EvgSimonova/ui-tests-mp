@@ -35,9 +35,9 @@ class UserBalancePage extends Page {
 		cartBalance { $("table#table.sortable.tablesorter.tablesorter-blue.hasFilters tbody tr").collect { module CartRowBalance, it } }		
 		
 		logoLink{ $("div.span8.logo").children().children()}
-        	createCompanyLink { $("div.user-menu li.item1 a") }
+       	createCompanyLink { $("div.user-menu li.item1 a") }
 		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
-        	myPicturesLink { $("a", href: contains("userImages")) }
+       	myPicturesLink { $("a", href: contains("userImages")) }
 		balanceLink{ $("div.user-menu li.item5.payment a")}
 		settingsLink{ $("div.user-menu li.item6 a")}
 
