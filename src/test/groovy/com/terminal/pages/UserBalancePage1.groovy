@@ -1,6 +1,6 @@
 package com.terminal.pages
 
-mport geb.Module
+import geb.Module
 import geb.Page
 
 class CartRowBalance extends Module {
