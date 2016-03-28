@@ -95,10 +95,6 @@ def static setUserImage(input){
 	input << "D:\\MyFiles\\flower.jpg"
 }
 
-def static setUserEmail(input){
-	input << "mihailov-ta@ya.ru"
-}
-
 def static setUserEmailDropbox(input){
 	input << "Mihailov-ta+spam2@ya.ru"
 }
