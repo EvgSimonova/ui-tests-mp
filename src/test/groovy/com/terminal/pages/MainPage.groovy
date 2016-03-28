@@ -4,7 +4,7 @@ import geb.Page
 
 class MainPage extends Page {
 
-    static at = { title == "real direct" }
+    static at = { title == StaticData.getPageTitle() }
 
     static content = {
 

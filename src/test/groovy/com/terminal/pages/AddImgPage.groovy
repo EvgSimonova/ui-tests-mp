@@ -4,7 +4,7 @@ import geb.Page
 
 class AddImgPage extends Page {
 	//todo: Добавить id на страницу
-    static url=StaticData.getServerName()
+    static url = StaticData.getServerName()
 	static at = { title == "WBMP On-line Editor" }
 
     static content = {
