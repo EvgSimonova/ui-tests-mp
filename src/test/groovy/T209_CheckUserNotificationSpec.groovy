@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriverException
 import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
-class T206_CheckUserNotificationSpec extends GebReportingSpec {
+class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
     private String idImage
     private String nameCompany
