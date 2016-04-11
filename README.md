@@ -8,7 +8,7 @@
 ### Как пользоваться? ###
 
 * Установить maven
-* Скачать репозиторий
+* Скачать репозиторий git clone https://mptester2@bitbucket.org/mptester2/ui-tests-mp.git
 * Скачать webdriver для браузера (для Chrome http://chromedriver.storage.googleapis.com/index.html, для других браузеров - вбиваем в google "<имя браузера> web driver" и ищем нужный
 * Добавить в переменную Path (если вы на Windows, если на линуксе догадаетесь или загуглите =) ) путь к папке с web-драйверами
 * Перейти в папку с репозиторием
