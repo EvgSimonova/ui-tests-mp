@@ -434,9 +434,9 @@ def static BalanceCampaignSpec(driverThis,sumCompany) {
 	waitVisibaly(driverThis.findElement(By.className("mail")),driverThis)
 	assert driverThis.currentUrl.startsWith('https://auth.robokassa.ru/Merchant/State/Done')
 	driverThis.findElements(By.className("rk-button")).find{it.getAttribute("value") == "Вернуться в магазин"}.click()
-	waitVisibaly(driverThis.findElement(By.className("successblock")),driverThis)
+	waitVisibaly(driverThis.findElement(By.xpath("//div[@class=\"alert alert-success\"]")),driverThis)
 	assert getServerName() + "member/balans" == driverThis.currentUrl
-	assert driverThis.findElement(By.className("successblock")).getText() == "Уважаемый " + getUser1Name() + ", пополнение баланса на сумму " + sumCompany + ",00 прошло успешно!"
+	assert driverThis.findElement(By.xpath("//div[@class=\"alert alert-success\"]")).getText() == "Уважаемый " + getUser1Name() + ", пополнение баланса на сумму " + sumCompany + ",00 прошло успешно!"
 	def sumText = driverThis.findElement(By.className("balance-box")).findElement(By.tagName("SPAN")).getText()
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
 
