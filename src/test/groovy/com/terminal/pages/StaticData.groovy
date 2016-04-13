@@ -203,7 +203,7 @@ def static downloadPictures(driverThis,nameImage) {
 		}
 	} catch (e) {}
 
-	waitVisibaly(driverThis.findElement(By.id("all-images")),driverThis)
+	//waitVisibaly(driverThis.findElement(By.id("all-images")),driverThis)
 	(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-image-id = '${Integer.toString(idOld + 1)}']")))
 
 	if (driverThis.findElement(By.id("all-images")).findElements(By.tagName("li")).size() > 9 ) {
@@ -336,7 +336,7 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	driverThis.findElement(By.id("submitButton")).click()
 	waitVisibaly(driverThis.findElement(By.linkText("Выйти")),driverThis)
 	assert driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/startCompany')
-	assert driverThis.findElement(By.className("warning-block")).getText() == "Ваша кампания сейчас находится на модерации."
+	assert driverThis.findElement(By.xpath("//div[@class=\"alert alert-info\"]")).getText() == "Ваша кампания отправлена на модерацию. О результатах мы оповестим вас по e-mail."
 }
 
 def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {

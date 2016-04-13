@@ -115,8 +115,17 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     then:
                     waitFor { inputContentModeration.displayed }
                     waitFor { inputContentModeration.value() == "true" }
-                    waitFor { contentLink.displayed }
+                    waitFor { logoutLink.displayed }
+                } else {
+                    waitFor { logoutLink.displayed }
                 }
+
+                when:
+                logoutLink.click()
+
+                then:
+                waitFor { at MainPage }
+                waitFor { loginLink.displayed }
             } else if ( i == 3 ) {
                 if (inputCampaingModerationCheked == "true") {
 
@@ -309,7 +318,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 } else{
                     waitFor { LiImage.displayed }
                 }*/
-                waitFor { nameLiImage == "myImg.jpg" }
+                //waitFor { nameLiImage == "myImg.jpg" }
                 waitFor { idLiImage != endIdImage }
                 waitFor { logoutLink.displayed }
 
@@ -708,7 +717,15 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 }
                 i++
             } else {
-                waitFor {newMessages.size() == 0}
+                if ( i == 1 ) {
+                    waitFor { newMessages.find({it.subject == "Статус модерации контента измененен на \"Пройдена\""}) == null }
+                } else if ( i == 3 ) {
+                    waitFor { newMessages.find({it.subject == "Статус модерации кампании измененен на Пройдена"}) == null }
+                } else if ( i == 5 ) {
+                    waitFor { newMessages.find({it.subject == "Информация о платеже"}) == null }
+                } else if ( i == 7 ) {
+                    waitFor { newMessages.find({it.subject == "Статус рекламной кампании изменен на Запущена"}) == null }
+                }
                 i++
             }
         }
