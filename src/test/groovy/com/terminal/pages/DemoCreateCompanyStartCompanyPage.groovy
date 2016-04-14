@@ -16,10 +16,9 @@ class DemoCreateCompanyStartCompanyPage extends Page {
         userNameLink{ topBar.children()}
         logoutLink{ topBar.children().next()}
 
-        infoBlock{ $("div.info-block")}
         payLink{ $("div.pay-link a")}
 
         breadcrumbs{ $("div.breadcrumbs.no-b")}
-        warningBlock{ breadcrumbs.next()}
+        infoBlock{ breadcrumbs.next()}
     }
  }

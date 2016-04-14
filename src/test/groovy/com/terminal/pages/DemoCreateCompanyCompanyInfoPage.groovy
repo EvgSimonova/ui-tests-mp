@@ -17,9 +17,10 @@ class DemoCreateCompanyCompanyInfoPage extends Page {
 
         topBar{ $("div.span4.navbar.singin.user-top")}
         userNameLink{ topBar.children()}
-        logoutLink{ topBar.children().next()}		
-		
-        errorBlockCampaign{ $("div.errorblock")}
+        logoutLink{ topBar.children().next()}
+
+        breadcrumbs{ $("div.breadcrumbs.no-b")}
+        infoBlock{ breadcrumbs.next()}
         infoCampaign{ $("div.feature-column")}
         sumCampaign{ infoCampaign.children().children().next()}
 

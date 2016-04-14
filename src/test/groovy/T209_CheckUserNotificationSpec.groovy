@@ -344,7 +344,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
                 then:
                 waitFor { at DemoCreateCompanyStartCompanyPage }
-                waitFor { warningBlock.displayed}
+                waitFor { infoBlock.displayed}
                 waitFor { logoutLink.displayed }
 
                 when:
@@ -420,8 +420,8 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
                     then:
                     waitFor { at DemoCreateCompanyStartCompanyPage }
-                    waitFor { warningBlock.displayed }
-                    if ( warningBlock.text() == "Ваша кампания сейчас находится на модерации." ) {
+                    waitFor { infoBlock.displayed }
+                    if ( infoBlock.text() == "Ваша кампания сейчас находится на модерации." ) {
                         waitFor { logoutLink.displayed }
 
                         when:
@@ -504,7 +504,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 sleep(3000)
 
                 if (driver.title != "Оплата и запуск кампании") {
-                    waitFor { errorBlockCampaign.displayed }
+                    waitFor { infoBlock.displayed }
                     waitFor { sumCampaign.displayed }
 
                     when:
