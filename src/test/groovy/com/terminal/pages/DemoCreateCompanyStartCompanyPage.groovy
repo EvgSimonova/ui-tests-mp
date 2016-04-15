@@ -11,6 +11,7 @@ class DemoCreateCompanyStartCompanyPage extends Page {
         loginLink{ $("a.sign")}
 		registerLink{ $("a.reg")}
 		settingsLink{ $("div.user-menu li.item6 a")}
+        myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
 		
 		topBar{ $("div.span4.navbar.singin.user-top")}
         userNameLink{ topBar.children()}
