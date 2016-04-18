@@ -9,7 +9,7 @@
     <name>terminal-company-ui-tests</name>
     <properties>
         <gebVersion>0.9.3</gebVersion>
-        <seleniumVersion>2.44.0</seleniumVersion>
+        <seleniumVersion>2.53.0</seleniumVersion>
         <groovyVersion>2.3.6</groovyVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
