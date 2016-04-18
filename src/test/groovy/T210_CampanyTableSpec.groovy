@@ -105,8 +105,8 @@ class T210_CampanyTableSpec extends GebReportingSpec{
                 then:
                 waitFor { at UserCurrentCampaignPage }
                 waitFor { tableCurrent.displayed }
-                waitFor { cartCurrentCampaign.displayed }
-                waitFor { cartCurrentCampaign.size > 0 }
+                waitFor { cartRowCurrentCampaign.displayed }
+                waitFor { cartRowCurrentCampaign.size > 0 }
             }
         }
         waitFor { sortStartData.displayed }
@@ -118,12 +118,12 @@ class T210_CampanyTableSpec extends GebReportingSpec{
         then:
         waitFor { at UserCurrentCampaignPage }
         waitFor { tableCurrent.displayed }
-        waitFor { cartCurrentCampaign.displayed }
+        waitFor { cartRowCurrentCampaign.displayed }
 
         when:
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm")
         String sDate = sdf.format(new Date(System.currentTimeMillis()))
-        cartCurrentCampaign.each {
+        cartRowCurrentCampaign.each {
             sDate.compareTo(it.startDataCampaign) != 1
             sDate = it.startDataCampaign
         }
@@ -131,18 +131,18 @@ class T210_CampanyTableSpec extends GebReportingSpec{
         then:
         waitFor { at UserCurrentCampaignPage }
         waitFor { tableCurrent.displayed }
-        waitFor { cartCurrentCampaign.displayed }
+        waitFor { cartRowCurrentCampaign.displayed }
         waitFor { filtrStartData.displayed }
 
         when:
-        String searchDataStart = cartCurrentCampaign[3].startDataCampaign
+        String searchDataStart = cartRowCurrentCampaign[3].startDataCampaign
         filtrStartData << searchDataStart
 
         then:
         waitFor { at UserCurrentCampaignPage }
-        waitFor { cartCurrentCampaign.displayed }
+        waitFor { cartRowCurrentCampaign.displayed }
         waitFor {
-            cartCurrentCampaign.each {
+            cartRowCurrentCampaign.each {
                 if (it.startDataCampaign != "") {
                     it.startDataCampaign == searchDataStart
                 }
@@ -156,16 +156,16 @@ class T210_CampanyTableSpec extends GebReportingSpec{
 
             then:
             waitFor { at UserCurrentCampaignPage }
-            waitFor { cartCurrentCampaign.displayed }
+            waitFor { cartRowCurrentCampaign.displayed }
             waitFor {
-                cartCurrentCampaign.each {
+                cartRowCurrentCampaign.each {
                     if (it.startDataCampaign != "") {
                         it.startDataCampaign.contains(filtrStartData.value())
                     }
                 }
             }
             waitFor { filtrStartData.displayed }
-            if (cartCurrentCampaign.findAll{it.startDataCampaign == ""}.size() == 0) {
+            if (cartRowCurrentCampaign.findAll{it.startDataCampaign == ""}.size() == 0) {
                 filtrStartData << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
                 break
             }
@@ -174,14 +174,14 @@ class T210_CampanyTableSpec extends GebReportingSpec{
         waitFor { filtrEndData.displayed }
 
         when:
-        String searchDataEnd = cartCurrentCampaign[3].endDataCampaign
+        String searchDataEnd = cartRowCurrentCampaign[3].endDataCampaign
         filtrEndData << searchDataEnd
 
         then:
         waitFor { at UserCurrentCampaignPage }
-        waitFor { cartCurrentCampaign.displayed }
+        waitFor { cartRowCurrentCampaign.displayed }
         waitFor {
-            cartCurrentCampaign.each {
+            cartRowCurrentCampaign.each {
                 if (it.endDataCampaign != "") {
                     it.endDataCampaign == searchDataEnd
                 }
@@ -195,24 +195,24 @@ class T210_CampanyTableSpec extends GebReportingSpec{
 
             then:
             waitFor { at UserCurrentCampaignPage }
-            waitFor { cartCurrentCampaign.displayed }
+            waitFor { cartRowCurrentCampaign.displayed }
             waitFor {
-                cartCurrentCampaign.each {
+                cartRowCurrentCampaign.each {
                     if (it.endDataCampaign != "") {
                         it.endDataCampaign.contains(filtrEndData.value())
                     }
                 }
             }
             waitFor { filtrEndData.displayed }
-            if (cartCurrentCampaign.findAll{it.endDataCampaign == ""}.size() == 0) {
+            if (cartRowCurrentCampaign.findAll{it.endDataCampaign == ""}.size() == 0) {
                 filtrEndData << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
                 break
             }
         }
 
-        if (cartCurrentCampaign.findAll{it.statusCampaignLink.text() == "В процессе"}.size() != 0) {
+        if (cartRowCurrentCampaign.findAll{it.statusCampaignLink.text() == "В процессе"}.size() != 0) {
             when:
-            auditCompany = cartCurrentCampaign.find { it.modCampaign.text() == "В процессе" }.nameCampaign
+            auditCompany = cartRowCurrentCampaign.find { it.modCampaign.text() == "В процессе" }.nameCampaign
 
             then:
             waitFor { logoutLink.displayed }
@@ -230,10 +230,10 @@ class T210_CampanyTableSpec extends GebReportingSpec{
 
         } else {
             when:
-            if (cartCurrentCampaign.findAll { it.statusCampaignLink.text() == "Пройдена" }.size() != 0) {
-                auditCompany = cartCurrentCampaign.find { it.statusCampaignLink.text() == "Пройдена" }.nameCampaign
+            if (cartRowCurrentCampaign.findAll { it.statusCampaignLink.text() == "Пройдена" }.size() != 0) {
+                auditCompany = cartRowCurrentCampaign.find { it.statusCampaignLink.text() == "Пройдена" }.nameCampaign
             } else {
-                auditCompany = cartCurrentCampaign.find { it.statusCampaignLink.text() == "Не пройдена"}.nameCampaign
+                auditCompany = cartRowCurrentCampaign.find { it.statusCampaignLink.text() == "Не пройдена"}.nameCampaign
             }
 
             then:
@@ -319,10 +319,10 @@ class T210_CampanyTableSpec extends GebReportingSpec{
         waitFor { at UserCurrentCampaignPage }
         waitFor { tableCurrent.displayed }
         waitFor { tbodyCurrent.displayed }
-        waitFor { cartCurrentCampaign.displayed }
+        waitFor { cartRowCurrentCampaign.displayed }
 
         when:
-        cartCurrentCampaign.find { it.nameCampaign == auditCompany }.statusCampaignLink.click()
+        cartRowCurrentCampaign.find { it.nameCampaign == auditCompany }.statusCampaignLink.click()
 
         then:
         waitFor { moderationComment.displayed }
