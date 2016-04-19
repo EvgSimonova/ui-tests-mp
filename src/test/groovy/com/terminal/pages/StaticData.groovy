@@ -174,6 +174,7 @@ def static downloadPictures(driverThis,nameImage) {
 	driverThis.executeScript("document.getElementById('imageUploadForm').children[0].removeAttribute('class');")
 	driverThis.executeScript("document.getElementById('uniform-multipartFile').removeAttribute('class');")
 	driverThis.executeScript("document.getElementById('multipartFile').removeAttribute('style');")
+
 	if (driverThis.findElement(By.id("total-content-counter")).text != "Загруженные изображения (0)") {
 		driverThis.findElement(By.id("all-images")).findElement(By.tagName("li")).displayed
 	}
