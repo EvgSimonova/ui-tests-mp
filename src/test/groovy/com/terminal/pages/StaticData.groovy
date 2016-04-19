@@ -171,9 +171,12 @@ def static downloadPictures(driverThis,nameImage) {
 	if (driverThis.findElements(By.id("multipartFile")).size() == 0){
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
 	}
+	/*if (driverThis.findElements(By.id("multipartFile")).size() == 0){
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
+	}
 	driverThis.executeScript("document.getElementById('imageUploadForm').children[0].removeAttribute('class');")
 	driverThis.executeScript("document.getElementById('uniform-multipartFile').removeAttribute('class');")
-	driverThis.executeScript("document.getElementById('multipartFile').removeAttribute('style');")
+	driverThis.executeScript("document.getElementById('multipartFile').removeAttribute('style');")*/
 	if (driverThis.findElement(By.id("total-content-counter")).text != "Загруженные изображения (0)") {
 		driverThis.findElement(By.id("all-images")).findElement(By.tagName("li")).displayed
 	}
@@ -185,7 +188,7 @@ def static downloadPictures(driverThis,nameImage) {
 		idOld = Integer.valueOf(ourPisture.getAttribute("data-image-id"))
 	} else { idOld = 0 }
 
-	try {
+	/*try {
 		driverThis.findElement(By.id("multipartFile")).with {
 			clear()
 			sendKeys(getDirImage() + nameImage)
@@ -196,7 +199,7 @@ def static downloadPictures(driverThis,nameImage) {
 
 	} catch (ElementNotVisibleException e) {
 		println e
-	}
+	}*/
 
 	try {
 		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
