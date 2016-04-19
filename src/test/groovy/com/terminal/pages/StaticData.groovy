@@ -188,6 +188,7 @@ def static downloadPictures(driverThis,nameImage) {
 	try {
 		driverThis.findElement(By.id("multipartFile")).with {
 			clear()
+			println(getDirImage() + nameImage)
 			sendKeys(getDirImage() + nameImage)
 		}
 
