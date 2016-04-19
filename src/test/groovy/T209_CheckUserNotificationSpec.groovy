@@ -285,7 +285,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { conentList.displayed }
 
                 when:
-                StaticData.PicturesDropbox(driver,"myImg.jpg")
+                StaticData.PicturesDropbox(driver,"myImg.jpg",1)
 
                 then:
                 waitFor { at UserContentPage }
