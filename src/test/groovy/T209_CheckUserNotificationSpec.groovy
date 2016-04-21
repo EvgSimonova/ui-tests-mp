@@ -405,58 +405,65 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { cartCurrentCampaign.displayed }
 
                 if (Integer.valueOf(tbodyCurrent.getAttribute("childElementCount")) == 0 || cartCurrentCampaign.findAll({it.modCampaign == "Пройдена\n" + "оплатить и запустить"}).size() == 0) {
-                    waitFor { createCompanyLink.displayed }
-
-                    when:
-                    createCompanyLink.click()
-
-                    then:
-                    waitFor { at AddCampaingParamsPage }
-                    waitFor { paramsForm.displayed }
-
-                    when:
-                    nameCompany = "Тестовая кампания " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
-                    StaticData.CreatingTestCampaign(driver,"myImg.jpg",nameCompany)
-
-                    then:
-                    waitFor { at DemoCreateCompanyStartCompanyPage }
-                    waitFor { infoBlock.displayed }
-                    if ( infoBlock.text() == "Ваша кампания сейчас находится на модерации." ) {
-                        waitFor { logoutLink.displayed }
-
+                    if (cartCurrentCampaign.findAll({it.modCampaign == "В процессе"})) {
                         when:
-                        logoutLink.click()
+                        nameCompany = cartCurrentCampaign.find({it.modCampaign == "В процессе"}).nameCampaign
 
                         then:
-                        waitFor { at MainPage }
-                        waitFor { loginLink.displayed }
+                        waitFor { at UserCurrentCampaignPage }
+
+                    } else {
+                        waitFor { createCompanyLink.displayed }
 
                         when:
-                        StaticData.ModerateCampaignSpec(driver, nameCompany, 0)
+                        createCompanyLink.click()
 
                         then:
-                        waitFor { at MainPage }
-                        waitFor { loginLink.displayed }
+                        waitFor { at AddCampaingParamsPage }
+                        waitFor { paramsForm.displayed }
 
                         when:
-                        newMessages = []
-                        ReadingYandexEmail.main(newMessages, StaticData.getUser1Name(), StaticData.getUser1PasswordEmail())
-                        loginLink.click()
+                        nameCompany = "Тестовая кампания " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+                        StaticData.CreatingTestCampaign(driver, "myImg.jpg", nameCompany)
 
                         then:
-                        waitFor { at MainPage }
-                        waitFor {
-                            loginDialog.displayed
-                        }
-
-                        when:
-                        usernameInputOnLoginForm << StaticData.getUser1Name()
-                        passwordInputOnLoginForm << StaticData.getUser1Password()
-                        loginButton.click()
-
-                        then:
-                        waitFor { at UserPersonalAccountPage }
+                        waitFor { at DemoCreateCompanyStartCompanyPage }
+                        waitFor { infoBlock.displayed }
+                        waitFor { infoBlock.text() == "Ваша кампания сейчас находится на модерации." }
                     }
+
+                    waitFor { logoutLink.displayed }
+
+                    when:
+                    logoutLink.click()
+
+                    then:
+                    waitFor { at MainPage }
+                    waitFor { loginLink.displayed }
+
+                    when:
+                    StaticData.ModerateCampaignSpec(driver, nameCompany, 0)
+
+                    then:
+                    waitFor { at MainPage }
+                    waitFor { loginLink.displayed }
+
+                    when:
+                    newMessages = []
+                    ReadingYandexEmail.main(newMessages, StaticData.getUser1Name(), StaticData.getUser1PasswordEmail())
+                    loginLink.click()
+
+                    then:
+                    waitFor { at MainPage }
+                    waitFor { loginDialog.displayed }
+
+                    when:
+                    usernameInputOnLoginForm << StaticData.getUser1Name()
+                    passwordInputOnLoginForm << StaticData.getUser1Password()
+                    loginButton.click()
+
+                    then:
+                    waitFor { at UserPersonalAccountPage }
                     waitFor { myCampaignsLink.displayed }
 
                     when:
@@ -731,3 +738,5 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
         }
     }
 }
+
+
