@@ -515,7 +515,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { sumCampaign.displayed }
 
                     when:
-                    def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))) + 1)
+                    def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))) + 1)
                     balanceLink.click()
 
                     then:
