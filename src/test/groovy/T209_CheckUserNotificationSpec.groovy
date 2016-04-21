@@ -429,7 +429,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                         then:
                         waitFor { at DemoCreateCompanyStartCompanyPage }
                         waitFor { infoBlock.displayed }
-                        waitFor { infoBlock.text() == "Ваша кампания сейчас находится на модерации." }
+                        waitFor { infoBlock.text() == "Ваша кампания отправлена на модерацию. О результатах мы оповестим вас по e-mail." }
                     }
 
                     waitFor { logoutLink.displayed }
