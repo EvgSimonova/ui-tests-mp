@@ -18,6 +18,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
         driver.manage().timeouts().pageLoadTimeout(300, TimeUnit.SECONDS);
         //Changing the status of moderation of content = true and verification notification mail
         when:
+        println("go to Main page")
         to MainPage
         def newMessages = []
         ReadingYandexEmail.main(newMessages, StaticData.getUser1Name(), StaticData.getUser1PasswordEmail())
@@ -51,6 +52,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
             }
 
             when:
+            println("go to Settings page")
             settingsLink.click()
 
             then:
@@ -92,6 +94,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Content")
                     btnSaveNotifications.click()
 
                     then:
@@ -110,6 +113,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Content")
                     btnSaveNotifications.click()
 
                     then:
@@ -136,6 +140,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Campaing")
                     btnSaveNotifications.click()
 
                     then:
@@ -153,6 +158,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Campaing")
                     btnSaveNotifications.click()
 
                     then:
@@ -191,6 +197,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 then:
                 waitFor { at UserPersonalAccountPage }
                 waitFor { settingsLink.displayed }
+                println("Log in as User")
                 sleep(5000)
 
             } else if ( i == 5 ) {
@@ -203,6 +210,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Balance")
                     btnSaveNotifications.click()
 
                     then:
@@ -220,6 +228,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Balance")
                     btnSaveNotifications.click()
 
                     then:
@@ -237,6 +246,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Campaign status")
                     btnSaveNotifications.click()
 
                     then:
@@ -254,6 +264,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { btnSaveNotifications.displayed }
 
                     when:
+                    println("changed notifications for Campaign status")
                     btnSaveNotifications.click()
 
                     then:
@@ -285,6 +296,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { conentList.displayed }
 
                 when:
+                println("Downloading pictures from Dropbox")
                 StaticData.PicturesDropbox(driver,"myImg.jpg")
 
                 then:
@@ -332,6 +344,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
             } else if ( i == 3) {
                 when:
+                println("Creating Campaing start")
                 createCompanyLink.click()
 
                 then:
@@ -340,6 +353,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
                 when:
                 nameCompany = "Тестовая кампания " +new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+                println("Creating Campaign in progress")
                 StaticData.CreatingTestCampaign(driver,"myImg.jpg",nameCompany)
 
                 then:
@@ -355,6 +369,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { loginLink.displayed }
 
                 when:
+                println("Campaign moderation proccess")
                 StaticData.ModerateCampaignSpec(driver, nameCompany, 1)
 
                 then:
@@ -386,6 +401,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { addMoneyButton.displayed }
 
                 when:
+                println("Balance changing")
                 StaticData.BalanceCampaignSpec(driver,"10")
 
                 then:
@@ -424,6 +440,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
                         when:
                         nameCompany = "Тестовая кампания " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+                        println("Creating Campaign via StaticData function CreatingTestCampaign")
                         StaticData.CreatingTestCampaign(driver, "myImg.jpg", nameCompany)
 
                         then:
@@ -442,6 +459,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { loginLink.displayed }
 
                     when:
+                    println("Moderating Campaign via StaticData function ModerateCampaignSpec")
                     StaticData.ModerateCampaignSpec(driver, nameCompany, 0)
 
                     then:
@@ -450,6 +468,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
                     when:
                     newMessages = []
+                    println("Yandex mail reading")
                     ReadingYandexEmail.main(newMessages, StaticData.getUser1Name(), StaticData.getUser1PasswordEmail())
                     loginLink.click()
 
@@ -503,6 +522,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { payLink.displayed }
 
                 when:
+                println("Start pay process")
                 payLink.click()
 
                 then:
@@ -523,6 +543,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { outSumInput.displayed }
 
                     when:
+                    println("Balance changing")
                     StaticData.BalanceCampaignSpec(driver,sumCamp)
 
                     then:
@@ -565,6 +586,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { payLink.displayed }
 
                     when:
+                    println("Pay process started")
                     payLink.click()
 
                     then:
@@ -583,6 +605,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                     waitFor { logoutLink.displayed }
 
                     when:
+                    println("Log out")
                     logoutLink.click()
 
                     then:
@@ -614,6 +637,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
 
 
                 when:
+                println("Image modearation")
                 imageModerationLink.click()
                 sleep(3000)
 
@@ -643,6 +667,7 @@ class T209_CheckUserNotificationSpec extends GebReportingSpec {
                 waitFor { ImageStatusSelect.displayed }
 
                 when:
+                println("Image status select")
                 ImageStatusSelect.click()
 
                 then:
