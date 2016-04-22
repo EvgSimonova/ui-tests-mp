@@ -19,6 +19,8 @@ class T210_CampanyTableSpec extends GebReportingSpec{
     private String nameCompany
     private String auditCompany
     private String commentModerate
+    private def sizeTable
+    private def sizeFiltr
 
     def "can get to campaings page and working with the advertiser's campaings table"() {
         when:
@@ -135,19 +137,15 @@ class T210_CampanyTableSpec extends GebReportingSpec{
         waitFor { filtrStartData.displayed }
 
         when:
+        sizeTable = cartCurrentCampaign.size()
         String searchDataStart = cartCurrentCampaign[3].startDataCampaign
         filtrStartData << searchDataStart
+        sizeFiltr = cartCurrentCampaign.findAll{it.startDataCampaign.equals(searchDataStart)}.size()
 
         then:
         waitFor { at UserCurrentCampaignPage }
-        waitFor { cartCurrentCampaign.displayed }
-        waitFor {
-            cartCurrentCampaign.each {
-                if (it.startDataCampaign != "") {
-                    it.startDataCampaign == searchDataStart
-                }
-            }
-        }
+        waitFor { filtrCartCurrentCampaign.displayed }
+        waitFor { sizeFiltr == sizeTable - filtrCartCurrentCampaign.size()}
 
         while (filtrStartData.value() != "") {
 
@@ -156,37 +154,33 @@ class T210_CampanyTableSpec extends GebReportingSpec{
 
             then:
             waitFor { at UserCurrentCampaignPage }
-            waitFor { cartCurrentCampaign.displayed }
-            waitFor {
-                cartCurrentCampaign.each {
-                    if (it.startDataCampaign != "") {
-                        it.startDataCampaign.contains(filtrStartData.value())
-                    }
-                }
-            }
+            waitFor { filtr.displayed }
             waitFor { filtrStartData.displayed }
-            if (cartCurrentCampaign.findAll{it.startDataCampaign == ""}.size() == 0) {
+            if (cartCurrentCampaign.findAll{it.startDataCampaign.contains(filtrStartData.value())}.size() == sizeTable) {
+                when:
                 filtrStartData << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+
+                then:
+                waitFor { filtrStartData.displayed }
                 break
+            } else {
+                waitFor { filtrCartCurrentCampaign.displayed }
+                waitFor { cartCurrentCampaign.findAll{it.startDataCampaign.contains(filtrStartData.value())}.size() == sizeTable - filtrCartCurrentCampaign.size() }
             }
         }
 
         waitFor { filtrEndData.displayed }
+        waitFor { cartCurrentCampaign.displayed }
 
         when:
         String searchDataEnd = cartCurrentCampaign[3].endDataCampaign
         filtrEndData << searchDataEnd
+        sizeFiltr = cartCurrentCampaign.findAll{it.endDataCampaign.equals(searchDataEnd)}.size()
 
         then:
         waitFor { at UserCurrentCampaignPage }
-        waitFor { cartCurrentCampaign.displayed }
-        waitFor {
-            cartCurrentCampaign.each {
-                if (it.endDataCampaign != "") {
-                    it.endDataCampaign == searchDataEnd
-                }
-            }
-        }
+        waitFor { filtrCartCurrentCampaign.displayed }
+        waitFor { sizeFiltr == sizeTable - filtrCartCurrentCampaign.size() }
 
         while (filtrEndData.value() != "") {
 
@@ -195,24 +189,24 @@ class T210_CampanyTableSpec extends GebReportingSpec{
 
             then:
             waitFor { at UserCurrentCampaignPage }
-            waitFor { cartCurrentCampaign.displayed }
-            waitFor {
-                cartCurrentCampaign.each {
-                    if (it.endDataCampaign != "") {
-                        it.endDataCampaign.contains(filtrEndData.value())
-                    }
-                }
-            }
+            waitFor { filtr.displayed }
             waitFor { filtrEndData.displayed }
-            if (cartCurrentCampaign.findAll{it.endDataCampaign == ""}.size() == 0) {
+            if ( cartCurrentCampaign.findAll{it.endDataCampaign.contains(filtrEndData.value())}.size() == sizeTable) {
+                when:
                 filtrEndData << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+
+                then:
+                waitFor { filtrEndData.displayed }
                 break
+            } else {
+                waitFor { filtrCartCurrentCampaign.displayed }
+                waitFor { cartCurrentCampaign.findAll{it.endDataCampaign.contains(filtrEndData.value())}.size() == sizeTable - filtrCartCurrentCampaign.size() }
             }
         }
 
         if (cartCurrentCampaign.findAll{it.statusCampaignLink.text() == "В процессе"}.size() != 0) {
             when:
-            auditCompany = cartCurrentCampaign.find { it.modCampaign.text() == "В процессе" }.nameCampaign
+            auditCompany = cartCurrentCampaign.find { it.modCampaign == "В процессе" }.nameCampaign
 
             then:
             waitFor { logoutLink.displayed }
