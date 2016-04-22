@@ -1,10 +1,7 @@
 package com.terminal.pages
 import org.openqa.selenium.By
-import org.openqa.selenium.ElementNotVisibleException
 import org.openqa.selenium.Keys
-import org.openqa.selenium.StaleElementReferenceException
 import org.openqa.selenium.WebDriverException
-import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.Select
 import org.openqa.selenium.support.ui.WebDriverWait
@@ -132,15 +129,11 @@ def static getPageTitle() {
 }
 
 def static getDirImage() {
-	return (System.getProperty("user.dir") + File.separatorChar + "images" + File.separatorChar)
+	return (new File(".").getAbsolutePath().replace(".","") + File.separatorChar + "images" + File.separatorChar)
 }
 
 def static getSupportMail() {
 	return ("support@real-direct.ru")
-}
-
-def static waitVisibaly(elt,driverThis) {
-	new WebDriverWait(driverThis, 160).until(ExpectedConditions.visibilityOf(elt))
 }
 
 def static waitPresenceOfAll(elt,driverThis) {
@@ -164,15 +157,17 @@ def static LiVisibaly(idLi,driverThis) {
 	driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idLi)}']")).click()
 }
 
-def static downloadPictures(driverThis,nameImage) {
+def static downloadPictures(driverThis,String nameImage) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 300)
 	driverThis.currentUrl == "http://terminal-company.herokuapp.com/member/userImages"
-	waitVisibaly(driverThis.findElement(By.id("total-content-counter")), driverThis)
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("total-content-counter")))
 	if (driverThis.findElements(By.id("multipartFile")).size() == 0){
-		(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
 	}
 	driverThis.executeScript("document.getElementById('imageUploadForm').children[0].removeAttribute('class');")
 	driverThis.executeScript("document.getElementById('uniform-multipartFile').removeAttribute('class');")
 	driverThis.executeScript("document.getElementById('multipartFile').removeAttribute('style');")
+
 	if (driverThis.findElement(By.id("total-content-counter")).text != "Загруженные изображения (0)") {
 		driverThis.findElement(By.id("all-images")).findElement(By.tagName("li")).displayed
 	}
@@ -193,18 +188,102 @@ def static downloadPictures(driverThis,nameImage) {
 	} catch (WebDriverException e) {
 		println e
 
-	} catch (ElementNotVisibleException e) {
-		println e
 	}
 
 	try {
 		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
-			(new WebDriverWait(driverThis, 320)).until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
 		}
 	} catch (e) {}
 
-	//waitVisibaly(driverThis.findElement(By.id("all-images")),driverThis)
-	(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-image-id = '${Integer.toString(idOld + 1)}']")))
+	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-image-id = '${Integer.toString(idOld + 1)}']")))
+
+	if (driverThis.findElement(By.id("all-images")).findElements(By.tagName("li")).size() > 9 ) {
+		LiVisibaly(idOld+1,driverThis)
+	} else {
+		driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idOld+1)}']")).click()
+		driverThis.findElement(By.xpath("//li[@class = 'active']")).displayed
+	}
+	def newLi = driverThis.findElement(By.id("all-images")).findElements(By.tagName("LI"))
+	def LiMax = newLi.max{Integer.valueOf(it.getAttribute("data-image-id"))}
+	assert LiMax.getAttribute("data-image-id") == Integer.toString(idOld + 1)
+}
+
+def static PicturesDropbox(driverThis,String nameImage) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 300)
+	driverThis.currentUrl == "http://terminal-company.herokuapp.com/member/userImages"
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("total-content-counter")))
+	if (driverThis.findElements(By.className("dropin-btn-status")).size() == 0){
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dropin-btn-status")))
+	}
+
+	if (driverThis.findElement(By.id("total-content-counter")).text != "Загруженные изображения (0)") {
+		driverThis.findElement(By.id("all-images")).findElement(By.tagName("li")).displayed
+	}
+	int idOld
+	def pictureSheet = driverThis.findElement(By.id("all-images"))
+	def ourPistures = pictureSheet.findElements(By.tagName("li"))
+	if (ourPistures.size() > 0) {
+		def ourPisture = ourPistures.max { Integer.valueOf(it.getAttribute("data-image-id")) }
+		idOld = Integer.valueOf(ourPisture.getAttribute("data-image-id"))
+	} else { idOld = 0 }
+
+	try {
+		String winHandleBefore = driverThis.getWindowHandle()
+		driverThis.findElement(By.className("dropin-btn-status")).click()
+		String winHandle = driverThis.getWindowHandles().getAt(1)
+		//for(String winHandle:driverThis.getWindowHandles()){}
+		driverThis.switchTo().window(winHandle)
+		WebDriverWait waits = new WebDriverWait(driverThis, 300)
+		if (driverThis.title == "Sign into Dropbox" || driverThis.title == "Войти в Dropbox" ) {
+			assert driverThis.currentUrl.startsWith("https://www.dropbox.com/chooser?origin=")
+			if (driverThis.findElements(By.id('regular-login-forms')).size() == 0) {
+				waits.until(ExpectedConditions.visibilityOfElementLocated(By.id('regular-login-forms')))
+			}
+			driverThis.findElement(By.xpath("//input[@name = 'login_email']")).with {
+				clear()
+				sendKeys("Mihailov-ta+spam2@ya.ru")
+			}
+			driverThis.findElement(By.xpath("//input[@name = 'login_password']")).with {
+				clear()
+				sendKeys("Lhjg<jrc909")
+			}
+			def formLogin = driverThis.findElement(By.id('regular-login-forms'))
+			formLogin.findElement(By.xpath("//button[@class = 'login-button button-primary']")).click()
+		}
+		if (driverThis.findElements(By.id('recent-file-list')).size() == 0) {
+			waits.until(ExpectedConditions.visibilityOfElementLocated(By.id('recent-file-list')))
+		}
+
+		driverThis.findElement(By.xpath("//input[@class = 'text-input-input autofocus']")).with {
+			clear()
+			sendKeys(nameImage)
+		}
+
+		def searchLi = driverThis.findElement(By.id("search-file-list"))
+		driverThis.findElement(By.id("logo")).click()
+		//waits.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),$nameImage)]")))
+		if (searchLi.getAttribute("childElementCount") == '0') {
+			waits.until(ExpectedConditions.visibilityOfElementLocated(By.id('search-file-list')))
+		}
+
+		driverThis.findElement(By.id("search-file-list")).findElement(By.tagName('LI')).click()
+		assert driverThis.findElement(By.xpath("//li[@class = 'dropin-file  selectable selected']"))
+		driverThis.findElement(By.id("select-btn")).click()
+		driverThis.switchTo().window(winHandleBefore)
+
+	} catch (WebDriverException e) {
+		println e
+
+	}
+
+	try {
+		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+		}
+	} catch (e) {}
+
+	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-image-id = '${Integer.toString(idOld + 1)}']")))
 
 	if (driverThis.findElement(By.id("all-images")).findElements(By.tagName("li")).size() > 9 ) {
 		LiVisibaly(idOld+1,driverThis)
@@ -218,6 +297,7 @@ def static downloadPictures(driverThis,nameImage) {
 }
 
 def static ModerateContentSpec(driverThis,idImager,selectIndex) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
 	driverThis.get(getServerName()+"/loginAdmin")
 	driverThis.findElement(By.name("j_username")).with {
 		clear()
@@ -228,7 +308,7 @@ def static ModerateContentSpec(driverThis,idImager,selectIndex) {
 		sendKeys("111111")
 	}
 	driverThis.findElement(By.cssSelector("input.button")).click()
-	waitVisibaly(driverThis.findElement(By.linkText("Картинки")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Картинки"))))
 	assert getServerName() + 'admin/' == driverThis.currentUrl
 	driverThis.findElement(By.linkText("Картинки")).click()
 	waitPresenceOfAll(By.tagName("tr"),driverThis)
@@ -268,10 +348,11 @@ def static ModerateContentSpec(driverThis,idImager,selectIndex) {
 		assert "Не пройдена" == ourmod.getText()
 	}
 	driverThis.findElement(By.linkText("Выйти")).click()
-	waitVisibaly(driverThis.findElement(By.className("sign")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("sign"))))
 }
 
 def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 300)
 	driverThis.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	driverThis.currentUrl == getServerName() + "member/createCompany/addParams"
 	driverThis.findElement(By.id("companyName")).with {
@@ -288,59 +369,65 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	def newday = driverThis.findElements(By.xpath("//td[@class=\'day new\']"))
 	newday.get(newday.size()-1).click()
 	driverThis.findElement(By.id("endTime")).click()
-		/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
-		def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
-		endTimeOur.click()
-		endTimeOur.click()
-		endTimeOur.click()
-		endTimeOur.click()*/
+	driverThis.findElement(By.id("endTime")).click()
+	/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
+    def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
+    endTimeOur.click()
+    endTimeOur.click()
+    endTimeOur.click()
+    endTimeOur.click()*/
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
-		(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
 	}
 	driverThis.findElement(By.id("submitButton")).click()
-	waitPresenceOfAll(By.tagName("LI"), driverThis)
 	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') && (driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') || driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true')))
-	waitVisibaly(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]")),driverThis)
-	downloadPictures(driverThis,nameImage)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]"))))
+	try {
+		waitPresenceOfAll(By.tagName("LI"), driverThis)
+		driverThis.findElements(By.tagName("LI")).find{it.text.contains('модерация:IN_PROGRESS')}.click()
+	} catch (e){
+		PicturesDropbox(driverThis,nameImage)
+	}
 	def allImages = driverThis.findElement(By.id("all-images"))
 	assert allImages.findElement(By.xpath("//li[@class=\"active\"]"))
 	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
 	if (driverThis.findElements(By.className("grey-image")).size() == 0) {
-		(new WebDriverWait(driverThis, 300)).until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-image")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-image")))
 	}
 	def newAllImages = driverThis.findElement(By.xpath("//ul[@id=\"all-images\"]"))
 	assert newAllImages.findElement(By.xpath("//li[@class=\"grey-image\"]"))
 	driverThis.findElement(By.className("nav-box")).findElement(By.tagName("INPUT")).click()
-	waitVisibaly(driverThis.findElement(By.id("all-terminals")),driverThis)
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("all-terminals")))
 	waitPresenceOfAll(By.tagName("LI"),driverThis)
 	assert getServerName() + 'member/createCompany/addTerminal' == driverThis.currentUrl
 	def field = driverThis.findElement(By.id("all-terminals"))
 	assert 0 < field.findElements(By.tagName('li')).size()
-	field.findElements(By.tagName('li')).find{ it.text.contains("Количество свободных слотов: 0") == false}.click()
-	waitVisibaly(driverThis.findElement(By.className("active")),driverThis)
+	field.findElements(By.tagName('li')).find{!it.text.contains('Количество свободных слотов: 0')}.click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("active"))))
 	assert driverThis.findElement(By.xpath("//li[@class=\"active\"]"))
 	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
 	waitPresenceOfAll(By.tagName("LI"),driverThis)
 	if (driverThis.findElements(By.className("grey-terminal")).size() == 0) {
-		(new WebDriverWait(driverThis, 300)).until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-terminal")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-terminal")))
 	}
 	def newAllTerminals = driverThis.findElement(By.xpath("//ul[@id=\"all-terminals\"]"))
 	assert newAllTerminals.findElement(By.xpath("//li[@class=\"grey-terminal\"]"))
 	driverThis.findElement(By.xpath("//input[@value=\"далее\"]")).click()
 	if (driverThis.findElements(By.tagName("create-block")).size() == 0) {
-		(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.visibilityOfElementLocated(By.className("create-block")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("create-block")))
 	}
 	driverThis.findElement(By.className("left")).displayed
 	assert getServerName() + 'member/createCompany/checkAndConfirm' == driverThis.currentUrl
 	driverThis.findElement(By.id("submitButton")).displayed
 	driverThis.findElement(By.id("submitButton")).click()
-	waitVisibaly(driverThis.findElement(By.linkText("Выйти")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Выйти"))))
 	assert driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/startCompany')
 	assert driverThis.findElement(By.xpath("//div[@class=\"alert alert-info\"]")).getText() == "Ваша кампания отправлена на модерацию. О результатах мы оповестим вас по e-mail."
 }
 
-def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {
+def static ModerateCampaignSpec(driverThis,String nameCompany,selectIndex) {
 	driverThis.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
 	driverThis.get(getServerName()+"/loginAdmin")
 	driverThis.findElement(By.name("j_username")).with {
 		clear()
@@ -351,7 +438,7 @@ def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {
 		sendKeys("111111")
 	}
 	driverThis.findElement(By.cssSelector("input.button")).click()
-	waitVisibaly(driverThis.findElement(By.linkText("Модерация кампаний")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Модерация кампаний"))))
 	assert getServerName() + 'admin/' == driverThis.currentUrl
 	driverThis.findElement(By.linkText("Модерация кампаний")).click()
 	waitPresenceOfAll(By.tagName("tr"),driverThis)
@@ -367,12 +454,13 @@ def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {
 	def ourtrs = driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
 	assert ourtrs.findElements(By.tagName('td'))
 	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(7)
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]"))))
 	ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]")).click()
 	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
 	def ourCompany = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
 	assert ourCompany.findElement(By.name('moderateStatus'))
 	ourCompany.findElement(By.name('moderateStatus')).click()
-	waitVisibaly(ourCompany.findElement(By.name("moderateStatus")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(ourCompany.findElement(By.name("moderateStatus"))))
 	new Select(ourCompany.findElement(By.name("moderateStatus"))).selectByIndex(selectIndex)
 	if (selectIndex == 0) {
 		assert 'TRUE' == ourCompany.findElement(By.name("moderateStatus")).getAttribute('value')
@@ -388,7 +476,7 @@ def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {
 		}
 	}
 	ourCompany.findElement(By.cssSelector("input.btn")).click()
-	waitVisibaly(driverThis.findElement(By.tagName("tr")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.tagName("tr"))))
 	def ourmod = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}.findElements(By.tagName('td')).getAt(7)
 	if (selectIndex == 0) {
 		assert "Пройдена" == ourmod.getText()
@@ -396,10 +484,11 @@ def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {
 		assert "Не пройдена" == ourmod.getText()
 	}
 	driverThis.findElement(By.linkText("Выйти")).click()
-	waitVisibaly(driverThis.findElement(By.className("sign")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("sign"))))
 }
 
-def static BalanceCampaignSpec(driverThis,sumCompany) {
+def static BalanceCampaignSpec(driverThis,String sumCompany) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
 	assert driverThis.currentUrl == getServerName() + "member/balans"
 	driverThis.findElement(By.id("OutSum")).with {
 		clear()
@@ -407,12 +496,12 @@ def static BalanceCampaignSpec(driverThis,sumCompany) {
 	}
 	driverThis.findElement(By.name("addMoney")).click()
 	if (driverThis.findElements(By.id("index-box")).size() == 0) {
-		(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.visibilityOfElementLocated(By.id("index-box")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("index-box")))
 	}
 	assert driverThis.currentUrl.startsWith("https://auth.robokassa.ru/Merchant/Index/")
 	driverThis.findElement(By.xpath("//img[@class = \"rect2\"]")).click()
 	if (driverThis.findElements(By.id("payment-params-box")).size() == 0) {
-		(new WebDriverWait(driverThis, 160)).until(ExpectedConditions.visibilityOfElementLocated(By.id("payment-params")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("payment-params")))
 	}
 	assert driverThis.currentUrl.startsWith("https://auth.robokassa.ru/Merchant/Payment/")
 	driverThis.findElement(By.id("CardNumber")).with {
@@ -428,16 +517,15 @@ def static BalanceCampaignSpec(driverThis,sumCompany) {
 		sendKeys(getUser1Name())
 	}
 	driverThis.findElement(By.id("BSubmit")).click()
-	waitVisibaly(driverThis.findElement(By.id('state-buttons')),driverThis)
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id('state-buttons')))
 	assert driverThis.currentUrl.startsWith('https://auth.robokassa.ru/Merchant/State/')
 	driverThis.findElement(By.id("state-buttons")).findElements(By.tagName("a")).find{it.text.contains("Успешная оплата")}.click()
-	waitVisibaly(driverThis.findElement(By.className("mail")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("mail"))))
 	assert driverThis.currentUrl.startsWith('https://auth.robokassa.ru/Merchant/State/Done')
 	driverThis.findElements(By.className("rk-button")).find{it.getAttribute("value") == "Вернуться в магазин"}.click()
-	waitVisibaly(driverThis.findElement(By.xpath("//div[@class=\"alert alert-success\"]")),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//div[@class=\"alert alert-success\"]"))))
 	assert getServerName() + "member/balans" == driverThis.currentUrl
 	assert driverThis.findElement(By.xpath("//div[@class=\"alert alert-success\"]")).getText() == "Уважаемый " + getUser1Name() + ", пополнение баланса на сумму " + sumCompany + ",00 прошло успешно!"
 	def sumText = driverThis.findElement(By.className("balance-box")).findElement(By.tagName("SPAN")).getText()
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
-
 }
