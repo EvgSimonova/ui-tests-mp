@@ -150,9 +150,7 @@ def static waitPresenceOfAll(elt,driverThis) {
 def static LiVisibaly(idLi,driverThis) {
 	if (driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idLi)}']")).displayed == false) {
 		driverThis.findElement(By.id("scrollbarY")).sendKeys(Keys.HOME)
-		def ourLi = driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idLi)}']"))
-		int LiImage
-		LiImage = (Integer.valueOf(ourLi.getAttribute("offsetTop")))
+		int LiImage = (Integer.valueOf(driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idLi)}']")).getAttribute("offsetTop")))
 		int raz = 81
 		while (driverThis.currentUrl.startsWith("http://terminal-company.herokuapp.com/member/userImages") || driverThis.currentUrl.startsWith("http://terminal-company.herokuapp.com/member/createCompany/addImage")) {
 			if (driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idLi)}']")).displayed || LiImage <= raz) {
@@ -196,8 +194,85 @@ def static downloadPictures(driverThis,nameImage) {
 	} catch (WebDriverException e) {
 		println e
 
-	} catch (e) {
+	} catch (ElementNotVisibleException e) {
 		println e
+	}
+
+	try {
+		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+		}
+	} catch (e) {}
+
+	//waitVisibaly(driverThis.findElement(By.id("all-images")),driverThis)
+	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@data-image-id = '${Integer.toString(idOld + 1)}']")))
+
+	if (driverThis.findElement(By.id("all-images")).findElements(By.tagName("li")).size() > 9 ) {
+		LiVisibaly(idOld+1,driverThis)
+	} else {
+		driverThis.findElement(By.xpath("//li[@data-image-id = '${Integer.toString(idOld+1)}']")).click()
+		driverThis.findElement(By.xpath("//li[@class = 'active']")).displayed
+	}
+	def newLi = driverThis.findElement(By.id("all-images")).findElements(By.tagName("LI"))
+	def Limax = newLi.max{Integer.valueOf(it.getAttribute("data-image-id"))}
+	assert Limax.getAttribute("data-image-id") == Integer.toString(idOld + 1)
+}
+
+def static downloadPicturesDropbox(driverThis,nameImage) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 300)
+	driverThis.currentUrl == "http://terminal-company.herokuapp.com/member/userImages"
+	waitVisibaly(driverThis.findElement(By.id("total-content-counter")), driverThis)
+	if (driverThis.findElements(By.className("dropin-btn-status")).size() == 0){
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("dropin-btn-status")))
+	}
+
+	if (driverThis.findElement(By.id("total-content-counter")).text != "Загруженные изображения (0)") {
+		driverThis.findElement(By.id("all-images")).findElement(By.tagName("li")).displayed
+	}
+	int idOld
+	def pictureSheet = driverThis.findElement(By.id("all-images"))
+	def ourPistures = pictureSheet.findElements(By.tagName("li"))
+	if (ourPistures.size() > 0) {
+		def ourPisture = ourPistures.max { Integer.valueOf(it.getAttribute("data-image-id")) }
+		idOld = Integer.valueOf(ourPisture.getAttribute("data-image-id"))
+	} else { idOld = 0 }
+
+	try {
+		String winHandleBefore = driverThis.getWindowHandle()
+		driverThis.findElement(By.className("dropin-btn-status")).click()
+		for(String winHandle:driverThis.getWindowHandles()){
+			if (driverThis.title == "Sign into Dropbox" || driverThis.title == "Войти в Dropbox" ) {
+				driverThis.switchTo().window(winHandle)
+				assert driverThis.currentUrl.startsWith("https://www.dropbox.com/chooser?origin=")
+				waitVisibaly(driverThis.findElement(By.className('clearfix credentials-form login-form'), driverThis))
+				driverThis.findElement(By.xpath("//input[@name = 'login_email']")).with {
+					clear()
+					sendKeys("Mihailov-ta+spam2@ya.ru")
+				}
+				driverThis.findElement(By.xpath("//input[@name = 'login_password']")).with {
+					clear()
+					sendKeys("Lhjg<jrc909")
+				}
+				driverThis.findElement(By.xpath("//button[@textContent = 'ВойтиПродолжить']")).click()
+			}
+			waitVisibaly(driverThis.findElement(By.id("recent-file-list")),driverThis)
+			driverThis.findElement(By.className("text-input-input autofocus")).with {
+				clear()
+				sendKeys(nameImage)
+			}
+			waitVisibaly(driverThis.findElement(By.id("search-file-list")),driverThis)
+			def searchOurLi = driverThis.findElement(By.id('search-file-list"'))
+			searchOurLi.findElement(By.tagName("LI")).click()
+			searchOurLi.displayed
+			assert driverThis.findElement(By.xpath("//li[@class = 'dropin-file  selectable selected']"))
+			driverThis.findElement(By.id("select-btn")).click()
+			driverThis.close()
+			driverThis.switchTo().window(winHandleBefore)
+		}
+
+	} catch (WebDriverException e) {
+		println e
+
 	}
 
 	try {
@@ -292,12 +367,12 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	def newday = driverThis.findElements(By.xpath("//td[@class=\'day new\']"))
 	newday.get(newday.size()-1).click()
 	driverThis.findElement(By.id("endTime")).click()
-	driverThis.findElement(By.id("endTime")).click()
-	/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
-	def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
-	endTimeOur.click()
-	endTimeOur.click()*/
-
+		/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
+		def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
+		endTimeOur.click()
+		endTimeOur.click()
+		endTimeOur.click()
+		endTimeOur.click()*/
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
 	}
@@ -305,12 +380,7 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	waitPresenceOfAll(By.tagName("LI"), driverThis)
 	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') && (driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') || driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true')))
 	waitVisibaly(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]")),driverThis)
-	if (driverThis.findElements(By.tagName('li')).find{ it.text.contains("модерация:IN_PROGRESS\nОписание изображения")}) {
-		driverThis.findElements(By.tagName('li')).find{ it.text.contains("модерация:IN_PROGRESS\nОписание изображения")}.click()
-	} else {
-		downloadPictures(driverThis,nameImage)
-	}
-
+	downloadPictures(driverThis,nameImage)
 	def allImages = driverThis.findElement(By.id("all-images"))
 	assert allImages.findElement(By.xpath("//li[@class=\"active\"]"))
 	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
@@ -376,7 +446,8 @@ def static ModerateCampaignSpec(driverThis,nameCompany,selectIndex) {
 	def ourtrs = driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
 	assert ourtrs.findElements(By.tagName('td'))
 	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(7)
-	ourtd.findElement(By.tagName("a")).click()
+	waitVisibaly(ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]")))	
+	ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]")).click()
 	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
 	def ourCompany = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
 	assert ourCompany.findElement(By.name('moderateStatus'))
