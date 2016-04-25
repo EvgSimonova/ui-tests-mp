@@ -399,6 +399,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	def newAllImages = driverThis.findElement(By.xpath("//ul[@id=\"all-images\"]"))
 	assert newAllImages.findElement(By.xpath("//li[@class=\"grey-image\"]"))
 	driverThis.findElement(By.className("nav-box")).findElement(By.tagName("INPUT")).click()
+	try {
+		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+		}
+	} catch (e) {}
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("all-terminals")))
 	waitPresenceOfAll(By.tagName("LI"),driverThis)
 	assert getServerName() + 'member/createCompany/addTerminal' == driverThis.currentUrl
