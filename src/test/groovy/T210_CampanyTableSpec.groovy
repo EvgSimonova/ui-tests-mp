@@ -165,12 +165,14 @@ class T210_CampanyTableSpec extends GebReportingSpec{
                 break
             } else {
                 waitFor {cartCurrentCampaign.displayed}
-                sleep(5000)
                 waitFor {tbodyCurrent.displayed}
+                println 'start sleep 30000'
+                sleep(30000)
                 try{
+                        println 'try to wait for filtrCartCurrentCampaign.displayed'
                         waitFor { filtrCartCurrentCampaign.displayed }
                 }catch(e){
-                        println e
+                        println 'exception during  wait for filtrCartCurrentCampaign.displayed'+ e
                 }
                 waitFor { cartCurrentCampaign.findAll{it.startDataCampaign.contains(filtrStartData.value())}.size() == sizeTable - filtrCartCurrentCampaign.size() }
             }
