@@ -458,11 +458,11 @@ def static ModerateCampaignSpec(driverThis,String nameCompany,selectIndex) {
 		}
 	}
 	driverThis.findElement(By.tagName("TBODY")).displayed
-	def ourtrs = driverThis.findElements(By.tagName("td")).find{it.text == nameCompany}.parent
+	def ourtrs = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
 	assert ourtrs.findElements(By.tagName('td'))
 	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(7)
-	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]"))))
-	ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]")).click()
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.tagName("a"))))
+	ourtd.findElement(By.tagName("a")).click()
 	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
 	def ourCompany = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
 	assert ourCompany.findElement(By.name('moderateStatus'))
