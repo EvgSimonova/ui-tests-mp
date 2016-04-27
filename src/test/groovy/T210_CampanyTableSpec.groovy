@@ -164,7 +164,7 @@ class T210_CampanyTableSpec extends GebReportingSpec{
                 waitFor { filtrStartData.displayed }
                 break
             } else {
-                waitFor { filtrCartCurrentCampaign.displayed }
+                //waitFor { filtrCartCurrentCampaign.displayed }
                 waitFor { cartCurrentCampaign.findAll{it.startDataCampaign.contains(filtrStartData.value())}.size() == sizeTable - filtrCartCurrentCampaign.size() }
             }
         }
@@ -179,7 +179,7 @@ class T210_CampanyTableSpec extends GebReportingSpec{
 
         then:
         waitFor { at UserCurrentCampaignPage }
-        waitFor { filtrCartCurrentCampaign.displayed }
+        //waitFor { filtrCartCurrentCampaign.displayed }
         waitFor { sizeFiltr == sizeTable - filtrCartCurrentCampaign.size() }
 
         while (filtrEndData.value() != "") {
@@ -199,7 +199,7 @@ class T210_CampanyTableSpec extends GebReportingSpec{
                 waitFor { filtrEndData.displayed }
                 break
             } else {
-                waitFor { filtrCartCurrentCampaign.displayed }
+                //waitFor { filtrCartCurrentCampaign.displayed }
                 waitFor { cartCurrentCampaign.findAll{it.endDataCampaign.contains(filtrEndData.value())}.size() == sizeTable - filtrCartCurrentCampaign.size() }
             }
         }
