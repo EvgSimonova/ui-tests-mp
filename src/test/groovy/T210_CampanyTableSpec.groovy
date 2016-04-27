@@ -165,6 +165,7 @@ class T210_CampanyTableSpec extends GebReportingSpec{
                 break
             } else {
                 waitFor {cartCurrentCampaign.displayed}
+                sleep(5000)
                 try{
                         waitFor { filtrCartCurrentCampaign.displayed }
                 }catch(e){
