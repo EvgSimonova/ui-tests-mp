@@ -7,12 +7,12 @@ class UserPersonalAccountPage extends Page {
     static at = { $("meta", name: "pageId").@content == "member:personalAccount" }
 
     static content = {
-        	createCompanyLink { $("div.user-menu li.item1 a") }
+        createCompanyLink { $("div.user-menu li.item1 a") }
 		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
-        	myPicturesLink { $("a", href: contains("userImages")) }
+        myPicturesLink { $("a", href: contains("userImages")) }
 		balanceLink{ $("div.user-menu li.item5.payment a")}
 		settingsLink{ $("div.user-menu li.item6 a")}
-        	createLink { $("div.create-link a") }
+        createLink { $("div.create-link a") }
 		logoLink{ $("div.span8.logo").children().children()}
 		AccountPageLink{ $("div.span4.navbar.singin.user-top").children()}
 		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
