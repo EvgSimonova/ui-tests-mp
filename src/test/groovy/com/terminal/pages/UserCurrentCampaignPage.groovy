@@ -49,7 +49,7 @@ class UserCurrentCampaignPage extends Page {
 		cartCurrentCampaign { $("table#table.tablesorter.sortable.tablesorter-blue.hasFilters tbody tr").collect { module CartRowCurrentCampaign, it } }
 		filtrOddcartCurrentCampaign { $("table#table.tablesorter.sortable.tablesorter-blue.hasFilters tbody tr.blue.odd.filtered").collect { module CartRowCurrentCampaign, it } }
 		filtrEvencartCurrentCampaign { $("table#table.tablesorter.sortable.tablesorter-blue.hasFilters tbody tr.blue.even.filtered").collect { module CartRowCurrentCampaign, it } }
-		filtrCartCurrentCampaign { tbodyCurrent.find("tr", class:contains("filtered"))}
+		filtrCartCurrentCampaign { $("table#table.tablesorter.sortable.tablesorter-blue.hasFilters tbody").find("tr", class:contains("filtered")).collect { module CartRowCurrentCampaign, it } }
 
 		filtr{ $("tr.tablesorter-filter-row.tablesorter-ignoreRow")}
 		filtrState{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(6)}

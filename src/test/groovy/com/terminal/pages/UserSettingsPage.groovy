@@ -12,7 +12,7 @@ class UserSettingsPage extends Page {
 		headText{ $("H1.company")}
 		createCompanyLink { $("div.user-menu li.item1 a") }
 		myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
-        	balanceLink{ $("div.user-menu li.item5.payment a")}
+		balanceLink{ $("div.user-menu li.item5.payment a")}
 		contentLink{$("div.user-menu li.item3.content a")}
 
 		topBar{ $("div.span4.navbar.singin.user-top")}
@@ -20,7 +20,7 @@ class UserSettingsPage extends Page {
 		logoutLink{ topBar.children().next()}		
 		
 		logoLink{ $("div.span8.logo").children().children()}
-        	myPicturesLink { $("a", href: contains("userImages")) }
+		myPicturesLink { $("a", href: contains("userImages")) }
 		settingsLink{ $("div.user-menu li.item6 a")}
 
 		settingBlock{ $("div.setting-block")}

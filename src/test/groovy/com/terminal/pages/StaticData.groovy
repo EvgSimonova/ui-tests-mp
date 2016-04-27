@@ -377,20 +377,17 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 		endTimeOur.click()
 		endTimeOur.click()
 		endTimeOur.click()*/
+
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
 	}
 	driverThis.findElement(By.id("submitButton")).click()
-	waitPresenceOfAll(By.tagName("LI"), driverThis)
 	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') && (driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') || driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true')))
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]"))))
-	if (driverThis.findElements(By.tagName("LI")).find{it.text.contains('модерация:IN_PROGRESS')}) {
-		try {
-			driverThis.findElements(By.tagName("LI")).find{it.text.contains('модерация:IN_PROGRESS')}.click()
-		} catch (e){
-			PicturesDropbox(driverThis,nameImage)
-		}
-	} else {
+	try {
+		waitPresenceOfAll(By.tagName("LI"), driverThis)
+		driverThis.findElements(By.tagName("LI")).find{it.text.contains('модерация:IN_PROGRESS')}.click()
+	} catch (e){
 		PicturesDropbox(driverThis,nameImage)
 	}
 	def allImages = driverThis.findElement(By.id("all-images"))
@@ -402,6 +399,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	def newAllImages = driverThis.findElement(By.xpath("//ul[@id=\"all-images\"]"))
 	assert newAllImages.findElement(By.xpath("//li[@class=\"grey-image\"]"))
 	driverThis.findElement(By.className("nav-box")).findElement(By.tagName("INPUT")).click()
+	try {
+		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+		}
+	} catch (e) {}
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("all-terminals")))
 	waitPresenceOfAll(By.tagName("LI"),driverThis)
 	assert getServerName() + 'member/createCompany/addTerminal' == driverThis.currentUrl
@@ -456,11 +458,11 @@ def static ModerateCampaignSpec(driverThis,String nameCompany,selectIndex) {
 		}
 	}
 	driverThis.findElement(By.tagName("TBODY")).displayed
-	def ourtrs = driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
+	def ourtrs = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
 	assert ourtrs.findElements(By.tagName('td'))
 	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(7)
-	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]"))))
-	ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]")).click()
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.tagName("a"))))
+	ourtd.findElement(By.tagName("a")).click()
 	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
 	def ourCompany = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
 	assert ourCompany.findElement(By.name('moderateStatus'))
