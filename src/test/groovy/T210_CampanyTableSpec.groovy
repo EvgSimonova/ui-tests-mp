@@ -164,7 +164,8 @@ class T210_CampanyTableSpec extends GebReportingSpec{
                 waitFor { filtrStartData.displayed }
                 break
             } else {
-                //waitFor { filtrCartCurrentCampaign.displayed }
+                waitFor {cartCurrentCampaign.displayed}
+                waitFor { filtrCartCurrentCampaign.displayed }
                 waitFor { cartCurrentCampaign.findAll{it.startDataCampaign.contains(filtrStartData.value())}.size() == sizeTable - filtrCartCurrentCampaign.size() }
             }
         }
