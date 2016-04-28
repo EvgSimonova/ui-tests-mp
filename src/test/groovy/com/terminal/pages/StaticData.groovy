@@ -1,5 +1,6 @@
 package com.terminal.pages
 import org.openqa.selenium.By
+import org.openqa.selenium.ElementNotVisibleException
 import org.openqa.selenium.Keys
 import org.openqa.selenium.WebDriverException
 import org.openqa.selenium.support.ui.ExpectedConditions
@@ -376,6 +377,7 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
     endTimeOur.click()
     endTimeOur.click()
     endTimeOur.click()*/
+
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
 	}
@@ -397,6 +399,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	def newAllImages = driverThis.findElement(By.xpath("//ul[@id=\"all-images\"]"))
 	assert newAllImages.findElement(By.xpath("//li[@class=\"grey-image\"]"))
 	driverThis.findElement(By.className("nav-box")).findElement(By.tagName("INPUT")).click()
+	try {
+		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+		}
+	} catch (e) {}
 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("all-terminals")))
 	waitPresenceOfAll(By.tagName("LI"),driverThis)
 	assert getServerName() + 'member/createCompany/addTerminal' == driverThis.currentUrl
@@ -451,11 +458,11 @@ def static ModerateCampaignSpec(driverThis,String nameCompany,selectIndex) {
 		}
 	}
 	driverThis.findElement(By.tagName("TBODY")).displayed
-	def ourtrs = driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
+	def ourtrs = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
 	assert ourtrs.findElements(By.tagName('td'))
 	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(7)
-	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]"))))
-	ourtd.findElement(By.xpath("//a[@class=\"campaignModeration\"]")).click()
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.tagName("a"))))
+	ourtd.findElement(By.tagName("a")).click()
 	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
 	def ourCompany = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
 	assert ourCompany.findElement(By.name('moderateStatus'))
@@ -477,7 +484,8 @@ def static ModerateCampaignSpec(driverThis,String nameCompany,selectIndex) {
 	}
 	ourCompany.findElement(By.cssSelector("input.btn")).click()
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.tagName("tr"))))
-	def ourmod = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}.findElements(By.tagName('td')).getAt(7)
+	def ourmodtr = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
+	def ourmod = ourmodtr.findElements(By.tagName('td')).getAt(7)
 	if (selectIndex == 0) {
 		assert "Пройдена" == ourmod.getText()
 	} else {
@@ -529,3 +537,23 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	def sumText = driverThis.findElement(By.className("balance-box")).findElement(By.tagName("SPAN")).getText()
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
 }
+
+/*if (driverThis.findElements(By.id("multipartFile")).size() == 0){
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
+	}
+	driverThis.executeScript("document.getElementById('imageUploadForm').children[0].removeAttribute('class');")
+	driverThis.executeScript("document.getElementById('uniform-multipartFile').removeAttribute('class');")
+	driverThis.executeScript("document.getElementById('multipartFile').removeAttribute('style');")
+
+	try {
+		driverThis.findElement(By.id("multipartFile")).with {
+			clear()
+			sendKeys(getDirImage() + nameImage)
+		}
+
+	} catch (WebDriverException e) {
+		println e
+
+	} catch (ElementNotVisibleException e) {
+		println e
+	}*/
