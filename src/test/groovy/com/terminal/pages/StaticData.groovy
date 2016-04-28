@@ -484,7 +484,8 @@ def static ModerateCampaignSpec(driverThis,String nameCompany,selectIndex) {
 	}
 	ourCompany.findElement(By.cssSelector("input.btn")).click()
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.tagName("tr"))))
-	def ourmod = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}.findElements(By.tagName('td')).getAt(7)
+	def ourmodtr = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameCompany)}
+	def ourmod = ourmodtr.findElements(By.tagName('td')).getAt(7)
 	if (selectIndex == 0) {
 		assert "Пройдена" == ourmod.getText()
 	} else {
