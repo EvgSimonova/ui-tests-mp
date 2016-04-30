@@ -12,6 +12,7 @@ class CartRowCurrentCampaign extends Module {
 		detailCampaign { cell(1).find("a") }
 		startDataCampaign { cell(2).text() }
 		endDataCampaign { cell(3).text() }
+		numberCampaign { cell(4).text() }
 		sumCampaign  { cell(5).text() }
 		modCampaign { cell(7).text() }
 		startCampaignLink{ cell(7).find("div.line a", text:"оплатить и запустить") }
