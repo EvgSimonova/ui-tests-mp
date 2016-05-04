@@ -14,7 +14,7 @@ import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 import java.text.SimpleDateFormat
 
-class T104_CheckuserLinksSpec extends GebReportingSpec {
+class T104_CheckUserLinksSpec extends GebReportingSpec {
 
     def "login as owner and check all links in client cabinet"() {
         when:
