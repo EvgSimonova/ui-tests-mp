@@ -8,7 +8,7 @@ class MainPage extends Page {
 
     static content = {
 
-        messageBox { $("div.alert.alert-Success") }
+        messageBox { $("div.alert.alert-success") }
 	
 	//login elements
         loginLink { $("a.sign") }
