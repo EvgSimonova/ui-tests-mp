@@ -26,7 +26,7 @@ class T001_RegisterSpec extends GebReportingSpec {
 
         then:
         waitFor{messageBox.displayed}
-        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы. Для входа на сайт проверьте вашу почту."}
     }
 
     def "register as user with password"() {
@@ -50,7 +50,7 @@ class T001_RegisterSpec extends GebReportingSpec {
 
         then:
         waitFor{messageBox.displayed}
-        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы. Для входа на сайт проверьте вашу почту."}
     }
 
     def "register as owner with password's autogeneration"() {
@@ -72,7 +72,7 @@ class T001_RegisterSpec extends GebReportingSpec {
 
         then:
         waitFor{messageBox.displayed}
-        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы. Для входа на сайт проверьте вашу почту."}
     }
 
     def "register as owner with password"() {
@@ -96,6 +96,6 @@ class T001_RegisterSpec extends GebReportingSpec {
 
         then:
         waitFor{messageBox.displayed}
-        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы."}
+        waitFor{messageBox.text().trim() == "Вы были удачно зарегистрированы. Для входа на сайт проверьте вашу почту."}
     }
 }
