@@ -9,6 +9,7 @@ class CartRowCurrentCampaign extends Module {
 		cell { $("td", it) }
 		dataCampaign { cell(0).text() }
 		nameCampaign  { cell(1).text() }
+		stopCapmaign { cell(1).find("div.line a", text:"Остановить") }
 		startDataCampaign { cell(2).text() }
 		endDataCampaign { cell(3).text() }
 		sumCampaign  { cell(5).text() }
@@ -53,6 +54,7 @@ class UserCurrentCampaignPage extends Page {
 
 		filtr{ $("tr.tablesorter-filter-row.tablesorter-ignoreRow")}
 		filtrState{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(6)}
+		filtrNameCampaign{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(1)}
 		filtrStartData{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(2)}
 		filtrEndData{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(3)}
 		filtrmModeration{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(7)}

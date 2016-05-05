@@ -14,6 +14,7 @@ class DemoCreateCompanyCompanyInfoPage extends Page {
 
         balanceLink{ $("div.user-menu li.item5.payment a")}
         settingsLink{ $("div.user-menu li.item6 a")}
+        myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
 
         topBar{ $("div.span4.navbar.singin.user-top")}
         userNameLink{ topBar.children()}

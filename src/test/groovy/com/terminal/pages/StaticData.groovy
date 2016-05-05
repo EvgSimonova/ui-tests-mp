@@ -362,7 +362,7 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	}
 	driverThis.findElement(By.id("startDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day\']"),driverThis)
-	def ourDayIndex = driverThis.findElement(By.xpath("//td[@class=\'day active\']")).text
+	String ourDayIndex = driverThis.findElement(By.xpath("//td[@class=\'day active\']")).text
 	driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
 	driverThis.findElement(By.id("startTime")).click()
 	driverThis.findElement(By.id("endDate")).click()
@@ -414,6 +414,91 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	assert driverThis.findElement(By.xpath("//li[@class=\"active\"]"))
 	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
 	waitPresenceOfAll(By.tagName("LI"),driverThis)
+	if (driverThis.findElements(By.className("grey-terminal")).size() == 0) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-terminal")))
+	}
+	def newAllTerminals = driverThis.findElement(By.xpath("//ul[@id=\"all-terminals\"]"))
+	assert newAllTerminals.findElement(By.xpath("//li[@class=\"grey-terminal\"]"))
+	driverThis.findElement(By.xpath("//input[@value=\"далее\"]")).click()
+	if (driverThis.findElements(By.tagName("create-block")).size() == 0) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("create-block")))
+	}
+	driverThis.findElement(By.className("left")).displayed
+	assert getServerName() + 'member/createCompany/checkAndConfirm' == driverThis.currentUrl
+	driverThis.findElement(By.id("submitButton")).displayed
+	driverThis.findElement(By.id("submitButton")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Выйти"))))
+	assert driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/startCompany')
+	assert driverThis.findElement(By.xpath("//div[@class=\"alert alert-info\"]")).getText() == "Ваша кампания отправлена на модерацию. О результатах мы оповестим вас по e-mail."
+}
+
+def static CreatingTestCampaignToday(driverThis,nameImage,nameCompany) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 300)
+	driverThis.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	driverThis.currentUrl == getServerName() + "member/createCompany/addParams"
+	driverThis.findElement(By.id("companyName")).with {
+		clear()
+		sendKeys(nameCompany)
+	}
+	driverThis.findElement(By.id("startDate")).click()
+	waitPresenceOfAll(By.xpath("//td[@class=\'day\']"), driverThis)
+	driverThis.findElement(By.xpath("//td[@class=\'day active\']")).click()
+	driverThis.findElement(By.id("startTime")).click()
+	driverThis.findElement(By.id("endDate")).click()
+	waitPresenceOfAll(By.xpath("//td[@class=\'day new\']"), driverThis)
+	driverThis.findElements(By.xpath("//td[@class=\'day active\']")).getAt(1).click()
+	driverThis.findElement(By.id("endTime")).click()
+	driverThis.findElement(By.id("endTime")).click()
+	def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find {
+		it.getAttribute('style').contains("display: block")
+	}
+	def endTimeOur = endTime.findElements(By.tagName("a")).find {
+		it.getAttribute('data-action').contains("incrementMinutes")
+	}
+	endTimeOur.click()
+	endTimeOur.click()
+	endTimeOur.click()
+	endTimeOur.click()
+	endTimeOur.click()
+	endTimeOur.click()
+
+	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
+	}
+	driverThis.findElement(By.id("submitButton")).click()
+	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') && (driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') || driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true')))
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]"))))
+	try {
+		waitPresenceOfAll(By.tagName("LI"), driverThis)
+		driverThis.findElements(By.tagName("LI")).find { it.text.contains('модерация:IN_PROGRESS') }.click()
+	} catch (e) {
+		PicturesDropbox(driverThis, nameImage)
+	}
+	def allImages = driverThis.findElement(By.id("all-images"))
+	assert allImages.findElement(By.xpath("//li[@class=\"active\"]"))
+	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
+	if (driverThis.findElements(By.className("grey-image")).size() == 0) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-image")))
+	}
+	def newAllImages = driverThis.findElement(By.xpath("//ul[@id=\"all-images\"]"))
+	assert newAllImages.findElement(By.xpath("//li[@class=\"grey-image\"]"))
+	driverThis.findElement(By.className("nav-box")).findElement(By.tagName("INPUT")).click()
+	try {
+		if (driverThis.findElements(By.id("fancybox-loading")).size() > 0) {
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("fancybox-loading")))
+		}
+	} catch (e) {
+	}
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("all-terminals")))
+	waitPresenceOfAll(By.tagName("LI"), driverThis)
+	assert getServerName() + 'member/createCompany/addTerminal' == driverThis.currentUrl
+	def field = driverThis.findElement(By.id("all-terminals"))
+	assert 0 < field.findElements(By.tagName('li')).size()
+	field.findElements(By.tagName('li')).find { !it.text.contains('Количество свободных слотов: 0') }.click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("active"))))
+	assert driverThis.findElement(By.xpath("//li[@class=\"active\"]"))
+	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
+	waitPresenceOfAll(By.tagName("LI"), driverThis)
 	if (driverThis.findElements(By.className("grey-terminal")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("grey-terminal")))
 	}
