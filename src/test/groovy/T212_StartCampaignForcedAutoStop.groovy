@@ -6,7 +6,6 @@ import com.terminal.pages.StaticData
 import com.terminal.pages.UserBalancePage
 import com.terminal.pages.UserCurrentCampaignPage
 import com.terminal.pages.UserPersonalAccountPage
-import email.ReadingYandexEmail
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 
