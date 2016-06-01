@@ -1,7 +1,5 @@
 import com.terminal.pages.*
-import email.ReadingYandexEmail
 import geb.spock.GebReportingSpec
-import org.codehaus.groovy.runtime.dgmimpl.arrays.ArrayMetaMethod
 import org.openqa.selenium.Keys
 
 import java.text.SimpleDateFormat
@@ -14,6 +12,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
         def "can get to campaings page and Detailed information about the campaign"() {
             when:
             i = 1
+            println("go to Main page")
             to MainPage
             at MainPage
             loginLink.click()
@@ -32,6 +31,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
             waitFor { myCampaignsLink.displayed }
 
             when:
+            println("go to Campaigns page")
             myCampaignsLink.click()
             ArrayList detCampaign = new ArrayList()
 
@@ -45,6 +45,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
                 // Create a new campaign and check the details
                 if (i == 1) {
                     when:
+                    println("Creating Campaing start")
                     createCompanyLink.click()
 
                     then:
@@ -52,6 +53,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
                     waitFor { paramsForm.displayed }
 
                     when:
+                    println("Creating Campaign in progress")
                     nameCompany = "Тестовая кампания " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
                     StaticData.CreatingTestCampaign(driver, "myImg.jpg", nameCompany)
 
@@ -83,6 +85,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
                     waitFor { loginLink.displayed }
 
                     when:
+                    println("Campaign moderation proccess")
                     if ( i == 2 ) {
                         StaticData.ModerateCampaignSpec(driver, nameCompany, 1)
                     } else {
@@ -225,6 +228,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
             waitFor { payLink.displayed }
 
             when:
+            println("Start pay process")
             payLink.click()
 
             then:
@@ -242,6 +246,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
             waitFor { outSumInput.displayed }
 
             when:
+            println("Balance changing")
             StaticData.BalanceCampaignSpec(driver,sumCamp)
 
             then:
@@ -282,6 +287,7 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
             waitFor { payLink.displayed }
 
             when:
+            println("Start pay process")
             payLink.click()
 
             then:
