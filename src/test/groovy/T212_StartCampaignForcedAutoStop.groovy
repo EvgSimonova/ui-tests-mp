@@ -18,6 +18,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
 
     def "can get to campaings page and start and stop campaign"() {
         when:
+        println("go to Main page")
         to MainPage
         at MainPage
         nameCompany = ""
@@ -40,6 +41,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
             waitFor { createCompanyLink.displayed }
 
             when:
+            println("Creating Campaing start")
             createCompanyLink.click()
 
             then:
@@ -48,6 +50,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
 
             when:
             nameCompany = "Тестовая кампания " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+            println("Creating Campaign in progress")
             StaticData.CreatingTestCampaignToday(driver, "myImg.jpg", nameCompany)
 
             then:
@@ -63,6 +66,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
             waitFor { loginLink.displayed }
 
             when:
+            println("Campaign moderation proccess")
             StaticData.ModerateCampaignSpec(driver, nameCompany, 0)
 
             then:
@@ -86,6 +90,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
             waitFor { myCampaignsLink.displayed }
 
             when:
+            println("go to Campaigns page")
             myCampaignsLink.click()
 
             then:
@@ -103,6 +108,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
                 }
                 filtrmModeration << "запустить"
             }
+
             clickOutfix.click()
 
             then:
@@ -201,6 +207,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
             waitFor { myCampaignsLink.displayed }
 
             when:
+            println("go to Campaigns page")
             myCampaignsLink.click()
 
             then:
@@ -219,14 +226,16 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
                 filtrNameCampaign << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
             }
             filtrNameCampaign << "Остановить"
+            sleep(3000)
 
             then:
             waitFor { cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).statusCampaign == "Запущена" }
 
             if ( i == 1 ) {
                 when:
+                println("Campaign suspension process")
                 cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).stopCapmaign.click()
-                withConfirm(true) { hasConfirm().click() }
+                driver.switchTo().alert().accept()
 
                 then:
                 waitFor { at UserCurrentCampaignPage }
