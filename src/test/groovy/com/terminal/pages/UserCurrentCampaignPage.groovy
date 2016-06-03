@@ -9,7 +9,7 @@ class CartRowCurrentCampaign extends Module {
 		cell { $("td", it) }
 		dataCampaign { cell(0).text() }
 		nameCampaign  { cell(1).text() }
-		stopCapmaign { cell(1).find("div.line a", text:"Остановить") }
+		stopCampaign { cell(1).find("div.line a", text:"Остановить") }
 		startDataCampaign { cell(2).text() }
 		endDataCampaign { cell(3).text() }
 		sumCampaign  { cell(5).text() }
