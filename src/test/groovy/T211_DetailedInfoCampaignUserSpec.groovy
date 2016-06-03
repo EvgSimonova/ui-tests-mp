@@ -238,7 +238,11 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
             waitFor { sumCampaign.displayed }
 
             when:
-            def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))) + 1)
+            try {
+                def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))) + 1)
+            } catch (Exception e) {
+                def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))) + 1)
+            }
             balanceLink.click()
 
             then:
