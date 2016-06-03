@@ -99,9 +99,13 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
             waitFor { cartCurrentCampaign.displayed }
             waitFor { cartCurrentCampaign.size > 0 }
             waitFor { filtrmModeration.displayed }
+            waitFor { filtrNameCampaign.displayed }
             waitFor { clickOutfix.displayed }
 
             when:
+            if (filtrNameCampaign.getAttribute("value") != "") {
+                filtrNameCampaign << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+            }
             if (filtrmModeration.getAttribute("value") != "запустить") {
                 if (filtrmModeration.getAttribute("value") != "") {
                     filtrmModeration << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -167,9 +171,13 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
                 waitFor { cartCurrentCampaign.displayed }
                 waitFor { cartCurrentCampaign.size > 0 }
                 waitFor { filtrmModeration.displayed }
+                waitFor { filtrNameCampaign.displayed }
                 waitFor { clickOutfix.displayed }
 
                 when:
+                if (filtrNameCampaign.getAttribute("value") != "") {
+                    filtrNameCampaign << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+                }
                 if (filtrmModeration.getAttribute("value") != "запустить") {
                     if (filtrmModeration.getAttribute("value") != "") {
                         filtrmModeration << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
@@ -229,12 +237,15 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
             sleep(3000)
 
             then:
+            waitFor { cartCurrentCampaign.displayed }
             waitFor { cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).statusCampaign == "Запущена" }
+            sleep(3000)
 
             if ( i == 1 ) {
                 when:
                 println("Campaign suspension process")
-                cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).stopCapmaign.click()
+                cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).stopCampaign.click()
+                cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).stopCampaign.click()
                 driver.switchTo().alert().accept()
 
                 then:
