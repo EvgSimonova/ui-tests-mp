@@ -258,7 +258,7 @@ class T212_StartCampaignForcedAutoStop  extends GebReportingSpec {
                 sleep(480000)
                 waitFor { tableCurrent.displayed }
                 waitFor { cartCurrentCampaign.displayed }
-                waitFor { cartCurrentCampaign.find({it.nameCampaign == nameCompany}).statusCampaign == "Завершена" }
+                waitFor { cartCurrentCampaign.find({it.nameCampaign.contains(nameCompany)}).statusCampaign == "Завершена" }
 
             }
         }
