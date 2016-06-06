@@ -8,8 +8,9 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
 
         private String nameCompany
         private int i
+        private String sumCamp
 
-        def "can get to campaings page and Detailed information about the campaign"() {
+    def "can get to campaings page and Detailed information about the campaign"() {
             when:
             i = 1
             println("go to Main page")
@@ -239,9 +240,9 @@ class T211_DetailedInfoCampaignUserSpec extends GebReportingSpec {
 
             when:
             try {
-                def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))) + 1)
+                sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))) + 1)
             } catch (Exception e) {
-                def sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))) + 1)
+                sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))) + 1)
             }
             balanceLink.click()
 
