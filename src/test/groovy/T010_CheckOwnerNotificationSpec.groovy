@@ -1,12 +1,10 @@
 import com.terminal.pages.*
 import email.ReadingYandexEmail
 import geb.spock.GebReportingSpec
+
 import java.util.concurrent.TimeUnit
 
 class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
-
-    private String idImage
-    private String nameCompany
 
     def "can get to settings page and Changing the status of moderation of content"() {
         driver.manage().timeouts().pageLoadTimeout(300, TimeUnit.SECONDS);

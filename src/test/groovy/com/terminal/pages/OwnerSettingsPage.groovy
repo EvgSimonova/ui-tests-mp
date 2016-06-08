@@ -5,12 +5,12 @@ import com.terminal.pages.StaticData
 
 class OwnerSettingsPage extends Page {
 	
-    static url = StaticData.getServerName()+"/owner/settings"
-	static at = { title == StaticData.getPageTitle() }
+    static url = StaticData.getServerName()+"owner/settings"
+	static at = { title == "Настройки" || title == StaticData.getPageTitle()}
 
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }
-        	moneyLink { $("div.user-menu li.item2.money a") }
+		moneyLink { $("div.user-menu li.item2.money a") }
 		logoLink{ $("div.span8.logo").children().children()}
 		settingBlock{ $("div.setting-block")}
 		settingChange{ settingBlock.children().next().children().next()}
@@ -31,5 +31,14 @@ class OwnerSettingsPage extends Page {
 		oldPasswordInput{ passwordForm.find("input", id:"password", type:"password")}
 		errorOldPassword{ oldPasswordInput.next()}
 		savePasswordButton{ passwordForm.find("input", type:"submit") }
+
+		//alert
+		formBlockNotifications{ $("div.notification-sett form#terminalUser")}
+		inputStatusModeration{ formBlockNotifications.find("input", id: 'terminalModerationStatusChangedNotification1')}
+		inputStatusModerationCheked{ inputStatusModeration.getAttribute('checked')}
+		inputChangeNotifications{ formBlockNotifications.find("input", id: 'cashoutRequestNotification1')}
+		inputChangeNotificationsCheked{ inputChangeNotifications.getAttribute('checked')}
+		btnSaveNotifications{ formBlockNotifications.find("input", type: "submit", class: "button")}
+
 	}
 }
