@@ -1,12 +1,11 @@
 package com.terminal.pages
 
 import geb.Page
-import com.terminal.pages.StaticData
 
 class OwnerSettingsPage extends Page {
 	
     static url = StaticData.getServerName()+"owner/settings"
-	static at = { title == "Настройки" || title == StaticData.getPageTitle()}
+	static at = { title == "Настройки"}
 
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }
