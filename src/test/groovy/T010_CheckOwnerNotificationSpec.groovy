@@ -67,7 +67,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
             }
 
             if (i == 1) {
-                if (inputStatusModeration.getAttribute('checked') == "true") {
+                if (inputStatusModerationCheked == "true") {
                     when:
                     inputStatusModeration.click()
 
@@ -106,7 +106,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     waitFor { loginLink.displayed }
                 }
             } else if (i == 2) {
-                if (inputStatusModeration.getAttribute('checked') != "true") {
+                if (inputStatusModerationCheked != "true") {
 
                     when:
                     inputStatusModeration.click()
@@ -123,7 +123,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     waitFor { inputStatusModeration.value() == "true" }
                 }
             } else if (i == 3) {
-                if (inputChangeNotifications.getAttribute('checked') == "true") {
+                if (inputChangeNotificationsCheked == "true") {
 
                     when:
                     inputChangeNotifications.click()
@@ -141,7 +141,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     waitFor { inputChangeNotifications.value() == false }
                 }
             } else if (i == 4) {
-                if (inputChangeNotifications.getAttribute('checked') != "true") {
+                if (inputChangeNotificationsCheked != "true") {
 
                     when:
                     inputChangeNotifications.click()

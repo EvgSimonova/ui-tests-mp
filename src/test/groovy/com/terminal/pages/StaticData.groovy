@@ -538,6 +538,53 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
 }
 
+def static AddNewTerminalOwnerSpec(driverThis) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
+	String nameTerminal = "Тестовый автоматический терминал" + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+	assert driverThis.currentUrl == getServerName()+"owner/terminals"
+	driverThis.findElement(By.cssSelector("а.btn")).click()
+	assert driverThis.findElement(By.cssSelector("div.edit-box"))
+	driverThis.findElement(By.cssSelector("input#pac-input.text")).with {
+		clear()
+		sendKeys("Клязьма, Пушкино, Московская область, Россия")
+	}
+	driverThis.findElement(By.cssSelector("input#name")).with {
+		clear()
+		sendKeys(nameTerminal)
+	}
+	driverThis.findElement(By.cssSelector("textarea#description")).with {
+		clear()
+		sendKeys("Терминал находится на цокольном этаже слева от входа. В форме пирамиды, на каждой грани установлена одна плазма")
+	}
+	driverThis.findElement(By.cssSelector("input#weekdayAudience")).with {
+		clear()
+		sendKeys("1300")
+	}
+	driverThis.findElement(By.cssSelector("input#weekendAudience")).with {
+		clear()
+		sendKeys("5300")
+	}
+	driverThis.findElement(By.cssSelector("input#startWorkTime")).with {
+		clear()
+		sendKeys("8:00")
+	}
+	driverThis.findElement(By.cssSelector("input#endWorkTime")).with {
+		clear()
+		sendKeys("20:00")
+	}
+	driverThis.findElement(By.cssSelector("input#operationSystem")).with {
+		clear()
+		sendKeys("Linux Mint")
+	}
+	driverThis.findElement(By.cssSelector("input#cost")).with {
+		clear()
+		sendKeys("100")
+	}
+	driverThis.findElement(By.cssSelector("input#saveButton.btn")).click()
+	assert driverThis.findElement(By.cssSelector("table#table.sortable.terminal-table.tablesorter.tablesorter-blue.hasFilters"))
+	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+
+}
 /*if (driverThis.findElements(By.id("multipartFile")).size() == 0){
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
 	}
@@ -557,3 +604,4 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	} catch (ElementNotVisibleException e) {
 		println e
 	}*/
+
