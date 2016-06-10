@@ -363,10 +363,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	driverThis.findElement(By.id("startDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day\']"),driverThis)
 	def ourDayIndex = driverThis.findElement(By.xpath("//td[@class=\'day active\']")).text
-	try {
+	try{	
 		driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
-	} catch (e) {
-		driverThis.findElement(By.xpath("//td[@class=\'day new\']")).click()
+	} catch (e){
+		driverThis.findElements(By.xpath("//td[@class=\'day new\']")).click()
+		
 	}
 	driverThis.findElement(By.id("startTime")).click()
 	driverThis.findElement(By.id("endDate")).click()
@@ -375,12 +376,12 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	newday.get(newday.size()-1).click()
 	driverThis.findElement(By.id("endTime")).click()
 	driverThis.findElement(By.id("endTime")).click()
-	/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
-    def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
-    endTimeOur.click()
-    endTimeOur.click()
-    endTimeOur.click()
-    endTimeOur.click()*/
+		/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
+		def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
+		endTimeOur.click()
+		endTimeOur.click()
+		endTimeOur.click()
+		endTimeOur.click()*/
 
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))

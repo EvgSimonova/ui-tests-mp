@@ -9,10 +9,8 @@ class CartRowCurrentCampaign extends Module {
 		cell { $("td", it) }
 		dataCampaign { cell(0).text() }
 		nameCampaign  { cell(1).text() }
-		detailCampaign { cell(1).find("a") }
 		startDataCampaign { cell(2).text() }
 		endDataCampaign { cell(3).text() }
-		numberCampaign { cell(4).text() }
 		sumCampaign  { cell(5).text() }
 		modCampaign { cell(7).text() }
 		startCampaignLink{ cell(7).find("div.line a", text:"оплатить и запустить") }
@@ -24,10 +22,10 @@ class CartRowCurrentCampaign extends Module {
 
 class UserCurrentCampaignPage extends Page {
 	//todo: Добавить id на страницу
-	static url = StaticData.getServerName()+"/member/currentCompany"
+    static url = StaticData.getServerName()+"/member/currentCompany"
 	static at = { title == StaticData.getPageTitle() }
 
-	static content = {
+    static content = {
 		headText{ $("H1.company")}
 		currentCampaignsLink{ $("div.user-menu li.item2 a")}
 		createCompanyLink{ $("div.user-menu li.item1 a") }
@@ -59,7 +57,7 @@ class UserCurrentCampaignPage extends Page {
 		filtrEndData{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(3)}
 		filtrmModeration{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(7)}
 		valueFiltrState{filtrState.getAttribute("value")}
-		clickOutfix{ $("div.table-pager.tablesorter-pager").find("span", id:"table_pager_info") }
+		clickOutfix{ $("div.table-pager.tablesorter-pager").find("span", id:"table_pager_info") }		
 
 		sort{ $("tr.tablesorter-headerRow")}
 		sortStartData{ sort.find("th").getAt(2)}
