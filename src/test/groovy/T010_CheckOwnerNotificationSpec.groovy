@@ -2,9 +2,12 @@ import com.terminal.pages.*
 import email.ReadingYandexEmail
 import geb.spock.GebReportingSpec
 
+import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
+
+    private String nameTerminal
 
     def "can get to settings page and Changing the status of moderation of content"() {
         driver.manage().timeouts().pageLoadTimeout(300, TimeUnit.SECONDS);
@@ -12,6 +15,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
         println("go to Main page")
         to MainPage
         def newMessages = []
+        println("checking e-mail")
         ReadingYandexEmail.main(newMessages, StaticData.getOwner1Name(), StaticData.getOwner1PasswordEmail())
 
         then:
@@ -19,22 +23,24 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
 
         int i = 1
         while ( i < 5 ) {
-            when:
-            at MainPage
-            loginLink.click()
+            if ( i == 1 ) {
+                when:
+                at MainPage
+                loginLink.click()
 
-            then:
-            waitFor { at MainPage }
-            waitFor { loginDialog.displayed }
+                then:
+                waitFor { at MainPage }
+                waitFor { loginDialog.displayed }
 
-            when:
-            usernameInputOnLoginForm << StaticData.getOwner1Name()
-            passwordInputOnLoginForm << StaticData.getOwner1Password()
-            loginButton.click()
+                when:
+                usernameInputOnLoginForm << StaticData.getOwner1Name()
+                passwordInputOnLoginForm << StaticData.getOwner1Password()
+                loginButton.click()
 
-            then:
-            waitFor { at OwnerPersonalAccountPage }
-            waitFor { settingsLink.displayed }
+                then:
+                waitFor { at OwnerPersonalAccountPage }
+                waitFor { settingsLink.displayed }
+            }
 
             when:
             println("go to Settings page")
@@ -93,17 +99,9 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
 
                     when:
                     println("Add new terminal")
-                    StaticData.AddNewTerminalOwnerSpec(driver)
+                    nameTerminal = "Тестовый автоматический терминал " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+                    StaticData.AddNewTerminalOwnerSpec(driver, nameTerminal)
 
-                    then:
-                    waitFor { logoutLink.displayed }
-
-                    when:
-                    logoutLink.click()
-
-                    then:
-                    waitFor { at MainPage }
-                    waitFor { loginLink.displayed }
                 }
             } else if (i == 2) {
                 if (inputStatusModerationCheked != "true") {
@@ -157,6 +155,68 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     waitFor { inputChangeNotifications.displayed }
                     waitFor { inputChangeNotifications.value() == "true" }
                 }
+            }
+
+            then:
+            waitFor { logoutLink.displayed }
+
+            when:
+            logoutLink.click()
+
+            then:
+            waitFor { at MainPage }
+            waitFor { loginLink.displayed }
+
+            when:
+            println("Terminal moderation process")
+            if ( i == 1 ) {
+                StaticData.ModerateTerminalSpec(driver,nameTerminal,1)
+            } else if ( i == 2 ){
+                StaticData.ModerateTerminalSpec(driver,nameTerminal,0)
+            }
+
+            then:
+            waitFor { at MainPage }
+            waitFor { loginLink.displayed }
+
+            when:
+            loginLink.click()
+
+            then:
+            waitFor { at MainPage }
+            waitFor { loginDialog.displayed }
+
+            when:
+            usernameInputOnLoginForm << StaticData.getOwner1Name()
+            passwordInputOnLoginForm << StaticData.getOwner1Password()
+            loginButton.click()
+
+            then:
+            waitFor { at OwnerPersonalAccountPage }
+            waitFor { settingsLink.displayed }
+
+            when:
+            newMessages = []
+            sleep(7000)
+            println("checking e-mail")
+            ReadingYandexEmail.main(newMessages, StaticData.getOwner1Name(), StaticData.getOwner1PasswordEmail())
+
+            then:
+            if ( i == 2  || i == 4 ) {
+                waitFor { newMessages.size() > 0 }
+                if ( i == 2 ) {
+                    waitFor { newMessages.find({it.subject == "Статус модерации терминала измененен на \"Пройдена\""}) }
+                } else if ( i == 4 ) {
+                    waitFor { newMessages.find({it.subject == "Статус модерации кампании измененен на Пройдена"}) }
+                }
+                i++
+            } else {
+                if ( i == 1 ) {
+                    waitFor { newMessages.find({it.subject == "Статус модерации терминала измененен на \"Пройдена\""}) == null }
+                } else if ( i == 3 ) {
+                    waitFor { newMessages.find({it.subject == "Статус модерации кампании измененен на Пройдена"}) == null }
+                }
+                i++
             }
         }
     }
