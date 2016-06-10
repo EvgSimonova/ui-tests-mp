@@ -538,52 +538,116 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
 }
 
-def static AddNewTerminalOwnerSpec(driverThis) {
-	WebDriverWait wait = new WebDriverWait(driverThis, 160)
-	String nameTerminal = "Тестовый автоматический терминал" + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+def static AddNewTerminalOwnerSpec(driverThis, String nameTerminal) {
 	assert driverThis.currentUrl == getServerName()+"owner/terminals"
-	driverThis.findElement(By.cssSelector("а.btn")).click()
-	assert driverThis.findElement(By.cssSelector("div.edit-box"))
-	driverThis.findElement(By.cssSelector("input#pac-input.text")).with {
+	driverThis.findElement(By.className("add-group")).findElement(By.tagName("a")).click()
+	assert driverThis.findElement(By.className("edit-box"))
+	driverThis.findElement(By.id("pac-input")).with {
 		clear()
 		sendKeys("Клязьма, Пушкино, Московская область, Россия")
 	}
-	driverThis.findElement(By.cssSelector("input#name")).with {
+	driverThis.findElement(By.id("name")).with {
 		clear()
 		sendKeys(nameTerminal)
 	}
-	driverThis.findElement(By.cssSelector("textarea#description")).with {
+	driverThis.findElement(By.id("description")).with {
 		clear()
 		sendKeys("Терминал находится на цокольном этаже слева от входа. В форме пирамиды, на каждой грани установлена одна плазма")
 	}
-	driverThis.findElement(By.cssSelector("input#weekdayAudience")).with {
+	driverThis.findElement(By.id("weekdayAudience")).with {
 		clear()
 		sendKeys("1300")
 	}
-	driverThis.findElement(By.cssSelector("input#weekendAudience")).with {
+	driverThis.findElement(By.id("weekendAudience")).with {
 		clear()
 		sendKeys("5300")
 	}
-	driverThis.findElement(By.cssSelector("input#startWorkTime")).with {
+	driverThis.findElement(By.id("startWorkTime")).with {
 		clear()
 		sendKeys("8:00")
 	}
-	driverThis.findElement(By.cssSelector("input#endWorkTime")).with {
+	driverThis.findElement(By.id("endWorkTime")).with {
 		clear()
 		sendKeys("20:00")
 	}
-	driverThis.findElement(By.cssSelector("input#operationSystem")).with {
+	driverThis.findElement(By.id("operationSystem")).with {
 		clear()
 		sendKeys("Linux Mint")
 	}
-	driverThis.findElement(By.cssSelector("input#cost")).with {
+	driverThis.findElement(By.id("cost")).with {
 		clear()
 		sendKeys("100")
 	}
-	driverThis.findElement(By.cssSelector("input#saveButton.btn")).click()
-	assert driverThis.findElement(By.cssSelector("table#table.sortable.terminal-table.tablesorter.tablesorter-blue.hasFilters"))
+	driverThis.findElement(By.id("saveButton")).click()
 	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
 
+}
+
+def static ModerateTerminalSpec(driverThis,String nameTerminal,selectIndex) {
+	driverThis.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
+	driverThis.get(getServerName()+"/loginAdmin")
+	driverThis.findElement(By.name("j_username")).with {
+		clear()
+		sendKeys("1@1.1")
+	}
+	driverThis.findElement(By.name("j_password")).with {
+		clear()
+		sendKeys("111111")
+	}
+	driverThis.findElement(By.cssSelector("input.button")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Модерация терминалов"))))
+	assert getServerName() + 'admin/' == driverThis.currentUrl
+	driverThis.findElement(By.linkText("Модерация терминалов")).click()
+	waitPresenceOfAll(By.tagName("tr"),driverThis)
+	assert getServerName() + 'admin/terminals' == driverThis.currentUrl
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5){
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "4"}.with {
+			clear()
+			sendKeys(nameTerminal)
+		}
+	}
+	driverThis.findElement(By.tagName("TBODY")).displayed
+	def ourtrs = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+	assert ourtrs.findElements(By.tagName('td'))
+	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(1)
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.tagName("a"))))
+	ourtd.findElement(By.tagName("a")).click()
+	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
+	def ourTerminal = driverThis.findElements(By.xpath("//div[@class=\'none right-info\']")).find{ it.getAttribute('style').contains("display: block") }
+	assert ourTerminal.findElement(By.className("edit-btn"))
+	ourTerminal.findElement(By.className("edit-btn")).click()
+	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
+	def infoTerminal = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
+	assert infoTerminal.findElement(By.name('moderate'))
+	infoTerminal.findElement(By.name('moderate')).click()
+	wait.until(ExpectedConditions.visibilityOf(infoTerminal.findElement(By.name("moderate"))))
+	new Select(infoTerminal.findElement(By.name("moderate"))).selectByIndex(selectIndex)
+	if (selectIndex == 0) {
+		assert 'TRUE' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
+		infoTerminal.findElement(By.name('moderationComment')).with {
+			clear()
+			sendKeys("Тестовая модерация терминала пройдена")
+		}
+	} else {
+		assert 'FALSE' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
+		infoTerminal.findElement(By.name('moderationComment')).with {
+			clear()
+			sendKeys("Тестовая модерация терминала не пройдена")
+		}
+	}
+	infoTerminal.findElement(By.cssSelector("input.btn")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.tagName("tr"))))
+	def ourmodtr = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+	def ourmod = ourmodtr.findElements(By.tagName('td')).getAt(6)
+	if (selectIndex == 0) {
+		assert "Пройдена" == ourmod.getText()
+	} else {
+		assert "Не пройдена" == ourmod.getText()
+	}
+	driverThis.findElement(By.linkText("Выйти")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("sign"))))
 }
 /*if (driverThis.findElements(By.id("multipartFile")).size() == 0){
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
