@@ -363,8 +363,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	driverThis.findElement(By.id("startDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day\']"),driverThis)
 	def ourDayIndex = driverThis.findElement(By.xpath("//td[@class=\'day active\']")).text
-	driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
-	driverThis.findElement(By.id("startTime")).click()
+	try{
+		driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
+	} catch (e) {
+		driverThis.findElements(By.xpath("//td[@class=\'day new\']")).click()
+	}	driverThis.findElement(By.id("startTime")).click()
 	driverThis.findElement(By.id("endDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day new\']"),driverThis)
 	def newday = driverThis.findElements(By.xpath("//td[@class=\'day new\']"))

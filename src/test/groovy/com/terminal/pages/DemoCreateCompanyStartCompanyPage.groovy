@@ -16,7 +16,7 @@ class DemoCreateCompanyStartCompanyPage extends Page {
 		topBar{ $("div.span4.navbar.singin.user-top")}
         userNameLink{ topBar.children()}
         logoutLink{ topBar.children().next()}
-
+        myCampaignsLink { $("div.user-menu li.item2.campaigns a") }
         payLink{ $("div.pay-link a")}
 
         breadcrumbs{ $("div.breadcrumbs.no-b")}
