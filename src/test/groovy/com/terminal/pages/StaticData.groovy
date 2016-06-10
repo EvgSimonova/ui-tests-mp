@@ -367,7 +367,8 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 		driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
 	} catch (e) {
 		driverThis.findElements(By.xpath("//td[@class=\'day new\']")).click()
-	}	driverThis.findElement(By.id("startTime")).click()
+	}
+	driverThis.findElement(By.id("startTime")).click()
 	driverThis.findElement(By.id("endDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day new\']"),driverThis)
 	def newday = driverThis.findElements(By.xpath("//td[@class=\'day new\']"))
