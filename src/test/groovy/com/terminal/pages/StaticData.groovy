@@ -594,7 +594,12 @@ def static AddNewTerminalOwnerSpec(driverThis, nameTerminal) {
 	}
 	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
 	println("The successful creation of a new terminal")
-
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5){
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "4"}.with {
+			clear()
+		}
+	}
 }
 
 def static ModerateTerminalSpec(driverThis,String nameTerminal,selectIndex) {
