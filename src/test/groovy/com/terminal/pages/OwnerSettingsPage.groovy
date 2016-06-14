@@ -11,6 +11,7 @@ class OwnerSettingsPage extends Page {
 		terminalsListLink { $("div.user-menu li.item1 a") }
 		moneyLink { $("div.user-menu li.item2.money a") }
 		logoLink{ $("div.span8.logo").children().children()}
+		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
 		settingBlock{ $("div.setting-block")}
 		settingChange{ settingBlock.children().next().children().next()}
 		nameOwner{ settingChange.find("input", id:"name", type:"text")}

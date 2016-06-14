@@ -382,7 +382,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
 	}
 	driverThis.findElement(By.id("submitButton")).click()
-	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') && (driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') || driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true')))
+	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') &&
+			(driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') ||
+			 driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true') ||
+			 driverThis.currentUrl.endsWith('isUserWithoutEmail=false') ||
+			 driverThis.currentUrl.endsWith('isUserWithoutEmail=true')))
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]"))))
 	try {
 		waitPresenceOfAll(By.tagName("LI"), driverThis)
@@ -538,7 +542,7 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
 }
 
-def static AddNewTerminalOwnerSpec(driverThis, String nameTerminal) {
+def static AddNewTerminalOwnerSpec(driverThis, nameTerminal) {
 	assert driverThis.currentUrl == getServerName()+"owner/terminals"
 	driverThis.findElement(By.className("add-group")).findElement(By.tagName("a")).click()
 	assert driverThis.findElement(By.className("edit-box"))
@@ -574,12 +578,15 @@ def static AddNewTerminalOwnerSpec(driverThis, String nameTerminal) {
 		clear()
 		sendKeys("Linux Mint")
 	}
-	driverThis.findElement(By.id("cost")).with {
+	driverThis.findElement(By.id("newTerminal")).findElement(By.id("cost")).with {
 		clear()
 		sendKeys("100")
 	}
 	driverThis.findElement(By.id("saveButton")).click()
+	println("Проверяем отображение кампании")
+	waitPresenceOfAll(By.tagName("tr"),driverThis)
 	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+	println("The successful creation of a new terminal")
 
 }
 
@@ -625,26 +632,26 @@ def static ModerateTerminalSpec(driverThis,String nameTerminal,selectIndex) {
 	wait.until(ExpectedConditions.visibilityOf(infoTerminal.findElement(By.name("moderate"))))
 	new Select(infoTerminal.findElement(By.name("moderate"))).selectByIndex(selectIndex)
 	if (selectIndex == 0) {
-		assert 'TRUE' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
+		assert 'true' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
 		infoTerminal.findElement(By.name('moderationComment')).with {
 			clear()
 			sendKeys("Тестовая модерация терминала пройдена")
 		}
 	} else {
-		assert 'FALSE' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
+		assert 'false' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
 		infoTerminal.findElement(By.name('moderationComment')).with {
 			clear()
 			sendKeys("Тестовая модерация терминала не пройдена")
 		}
 	}
-	infoTerminal.findElement(By.cssSelector("input.btn")).click()
+	infoTerminal.findElements(By.cssSelector("input.btn")).find{ it.getAttribute('value') == "Сохранить"}.click()
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.tagName("tr"))))
 	def ourmodtr = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
 	def ourmod = ourmodtr.findElements(By.tagName('td')).getAt(6)
 	if (selectIndex == 0) {
 		assert "Пройдена" == ourmod.getText()
 	} else {
-		assert "Не пройдена" == ourmod.getText()
+		assert "Не Пройдена" == ourmod.getText()
 	}
 	driverThis.findElement(By.linkText("Выйти")).click()
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("sign"))))
