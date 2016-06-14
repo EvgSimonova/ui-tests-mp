@@ -363,11 +363,7 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	driverThis.findElement(By.id("startDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day\']"),driverThis)
 	def ourDayIndex = driverThis.findElement(By.xpath("//td[@class=\'day active\']")).text
-	try{
-		driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
-	} catch (e) {
-		driverThis.findElements(By.xpath("//td[@class=\'day new\']")).click()
-	}
+	driverThis.findElements(By.xpath("//td[@class=\'day\']")).find{it.text == Integer.toString(Integer.valueOf(ourDayIndex) + 1)}.click()
 	driverThis.findElement(By.id("startTime")).click()
 	driverThis.findElement(By.id("endDate")).click()
 	waitPresenceOfAll(By.xpath("//td[@class=\'day new\']"),driverThis)
@@ -375,18 +371,22 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	newday.get(newday.size()-1).click()
 	driverThis.findElement(By.id("endTime")).click()
 	driverThis.findElement(By.id("endTime")).click()
-		/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
-		def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
-		endTimeOur.click()
-		endTimeOur.click()
-		endTimeOur.click()
-		endTimeOur.click()*/
+	/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
+    def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
+    endTimeOur.click()
+    endTimeOur.click()
+    endTimeOur.click()
+    endTimeOur.click()*/
 
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
 	}
 	driverThis.findElement(By.id("submitButton")).click()
-	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') && (driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') || driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true')))
+	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') &&
+			(driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') ||
+					driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true') ||
+					driverThis.currentUrl.endsWith('isUserWithoutEmail=false') ||
+					driverThis.currentUrl.endsWith('isUserWithoutEmail=true')))
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]"))))
 	try {
 		waitPresenceOfAll(By.tagName("LI"), driverThis)
@@ -542,6 +542,124 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
 }
 
+def static AddNewTerminalOwnerSpec(driverThis, nameTerminal) {
+	WebDriverWait wait = new WebDriverWait(driverThis, 300)
+	assert driverThis.currentUrl == getServerName()+"owner/terminals"
+	driverThis.findElement(By.className("add-group")).findElement(By.tagName("a")).click()
+	assert driverThis.findElement(By.className("edit-box"))
+	driverThis.findElement(By.id("pac-input")).with {
+		clear()
+		sendKeys("Клязьма, Пушкино, Московская область, Россия")
+	}
+	driverThis.findElement(By.id("name")).with {
+		clear()
+		sendKeys(nameTerminal)
+	}
+	driverThis.findElement(By.id("description")).with {
+		clear()
+		sendKeys("Терминал находится на цокольном этаже слева от входа. В форме пирамиды, на каждой грани установлена одна плазма")
+	}
+	driverThis.findElement(By.id("weekdayAudience")).with {
+		clear()
+		sendKeys("1300")
+	}
+	driverThis.findElement(By.id("weekendAudience")).with {
+		clear()
+		sendKeys("5300")
+	}
+	driverThis.findElement(By.id("startWorkTime")).with {
+		clear()
+		sendKeys("8:00")
+	}
+	driverThis.findElement(By.id("endWorkTime")).with {
+		clear()
+		sendKeys("20:00")
+	}
+	driverThis.findElement(By.id("operationSystem")).with {
+		clear()
+		sendKeys("Linux Mint")
+	}
+	driverThis.findElement(By.id("newTerminal")).findElement(By.id("cost")).with {
+		clear()
+		sendKeys("100")
+	}
+	driverThis.findElement(By.id("saveButton")).click()
+	driverThis.findElement(By.tagName("TBODY")).displayed
+	println("1111111111111111111")
+	waitPresenceOfAll(By.tagName("tr"),driverThis)
+	println("22222222222222222")
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))))
+	println("333333333333")
+	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+	println("The successful creation of a new terminal")
+}
+
+def static ModerateTerminalSpec(driverThis,String nameTerminal,selectIndex) {
+	driverThis.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
+	driverThis.get(getServerName()+"/loginAdmin")
+	driverThis.findElement(By.name("j_username")).with {
+		clear()
+		sendKeys("1@1.1")
+	}
+	driverThis.findElement(By.name("j_password")).with {
+		clear()
+		sendKeys("111111")
+	}
+	driverThis.findElement(By.cssSelector("input.button")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Модерация терминалов"))))
+	assert getServerName() + 'admin/' == driverThis.currentUrl
+	driverThis.findElement(By.linkText("Модерация терминалов")).click()
+	waitPresenceOfAll(By.tagName("tr"),driverThis)
+	assert getServerName() + 'admin/terminals' == driverThis.currentUrl
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5){
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "4"}.with {
+			clear()
+			sendKeys(nameTerminal)
+		}
+	}
+	driverThis.findElement(By.tagName("TBODY")).displayed
+	def ourtrs = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+	assert ourtrs.findElements(By.tagName('td'))
+	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(1)
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.tagName("a"))))
+	ourtd.findElement(By.tagName("a")).click()
+	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
+	def ourTerminal = driverThis.findElements(By.xpath("//div[@class=\'none right-info\']")).find{ it.getAttribute('style').contains("display: block") }
+	assert ourTerminal.findElement(By.className("edit-btn"))
+	ourTerminal.findElement(By.className("edit-btn")).click()
+	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder adt\']"),driverThis)
+	def infoTerminal = driverThis.findElements(By.xpath("//div[@class=\'edit-holder adt\']")).find{ it.getAttribute('style').contains("display: block") }
+	assert infoTerminal.findElement(By.name('moderate'))
+	infoTerminal.findElement(By.name('moderate')).click()
+	wait.until(ExpectedConditions.visibilityOf(infoTerminal.findElement(By.name("moderate"))))
+	new Select(infoTerminal.findElement(By.name("moderate"))).selectByIndex(selectIndex)
+	if (selectIndex == 0) {
+		assert 'true' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
+		infoTerminal.findElement(By.name('moderationComment')).with {
+			clear()
+			sendKeys("Тестовая модерация терминала пройдена")
+		}
+	} else {
+		assert 'false' == infoTerminal.findElement(By.name("moderate")).getAttribute('value')
+		infoTerminal.findElement(By.name('moderationComment')).with {
+			clear()
+			sendKeys("Тестовая модерация терминала не пройдена")
+		}
+	}
+	infoTerminal.findElements(By.cssSelector("input.btn")).find{ it.getAttribute('value') == "Сохранить"}.click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.tagName("tr"))))
+	def ourmodtr = driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
+	def ourmod = ourmodtr.findElements(By.tagName('td')).getAt(6)
+	if (selectIndex == 0) {
+		assert "Пройдена" == ourmod.getText()
+	} else {
+		assert "Не Пройдена" == ourmod.getText()
+	}
+	driverThis.findElement(By.linkText("Выйти")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("sign"))))
+}
 /*if (driverThis.findElements(By.id("multipartFile")).size() == 0){
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
 	}
@@ -561,3 +679,4 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	} catch (ElementNotVisibleException e) {
 		println e
 	}*/
+

@@ -1,5 +1,23 @@
 package com.terminal.pages
+
+import geb.Module
+
 import java.text.SimpleDateFormat
+
+class CartRowCurrentTerminal extends Module {
+	static content = {
+		cell { $("td", it) }
+		dataTerminal { cell(0).text() }
+		numberTerminal  { cell(1).text() }
+		detailTerminal { cell(1).find("a") }
+		adressTerminal { cell(2).text() }
+		statusTerminal { cell(3).text() }
+		nameTerminal { cell(4).text() }
+		sumTerminal  { cell(5).text() }
+		modTerminal { cell(6).text() }
+		commentTerminal { cell(7).text() }
+	}
+}
 
 class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 	//todo добавить id на страницу
@@ -15,6 +33,9 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		settingsLink{ $("div.user-menu li.item5 a")}
 		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
 		terminalTable{ $("table#table.sortable.terminal-table.tablesorter.tablesorter-blue.hasFilters")}
+		cartCurrentTerminal{ $("table#table.sortable.terminal-table.tablesorter.tablesorter-blue.hasFilters tbody tr").collect{ module CartRowCurrentTerminal, it } }
+		filtr{ $("tr.tablesorter-filter-row.tablesorter-ignoreRow")}
+		filtrName{filtr.find ("input", type:"search", class:"tablesorter-filter").getAt(4)}
 
 		//for create new terminal group and for rename terminal group
 		groupMenuButton{ $("div.group-menu")}
@@ -79,5 +100,12 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		stopTerminalDialog{ stopTerminalHolder.find("div.group-action").find("div.title", text: "Остановить терминал")}
 		acceptStopTerminalButton{ stopTerminalHolder.find("a.delete")}
 		runTerminalLink{ terminalName.parent().parent().find("a.start")}
+
+		//for add picture to terminal
+		bodyTerminal{ $("body")}
+		activeTerminal{ bodyTerminal.find("div", class:"edit-holder adt", style:"display: block;")}
+		idTerminal{activeTerminal.getAttribute("id")}
+		btnLoadingPicture{ bodyTerminal.find("input", data:"file" + idTerminal.substring(4,idTerminal.length()), name:"file" )}
+
 	}
 }
