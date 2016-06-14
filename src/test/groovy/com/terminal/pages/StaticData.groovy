@@ -371,12 +371,12 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	newday.get(newday.size()-1).click()
 	driverThis.findElement(By.id("endTime")).click()
 	driverThis.findElement(By.id("endTime")).click()
-		/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
-		def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
-		endTimeOur.click()
-		endTimeOur.click()
-		endTimeOur.click()
-		endTimeOur.click()*/
+	/*def endTime = driverThis.findElements(By.xpath("//div[@class=\'bootstrap-datetimepicker-widget dropdown-menu pull-right\']")).find{ it.getAttribute('style').contains("display: block")}
+    def endTimeOur = endTime.findElements(By.tagName("a")).find{ it.getAttribute('data-action').contains("incrementHours")}
+    endTimeOur.click()
+    endTimeOur.click()
+    endTimeOur.click()
+    endTimeOur.click()*/
 
 	if (driverThis.findElements(By.id("submitButton")).size() == 0) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submitButton")))
@@ -384,9 +384,9 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	driverThis.findElement(By.id("submitButton")).click()
 	assert (driverThis.currentUrl.startsWith(getServerName() + 'member/createCompany/addImage') &&
 			(driverThis.currentUrl.endsWith('isOwnerWithoutEmail=false') ||
-			 driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true') ||
-			 driverThis.currentUrl.endsWith('isUserWithoutEmail=false') ||
-			 driverThis.currentUrl.endsWith('isUserWithoutEmail=true')))
+					driverThis.currentUrl.endsWith('isOwnerWithoutEmail=true') ||
+					driverThis.currentUrl.endsWith('isUserWithoutEmail=false') ||
+					driverThis.currentUrl.endsWith('isUserWithoutEmail=true')))
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//label[@id=\"moderation-passed-counter\"]"))))
 	try {
 		waitPresenceOfAll(By.tagName("LI"), driverThis)
@@ -585,6 +585,13 @@ def static AddNewTerminalOwnerSpec(driverThis, nameTerminal) {
 	driverThis.findElement(By.id("saveButton")).click()
 	println("Проверяем отображение кампании")
 	waitPresenceOfAll(By.tagName("tr"),driverThis)
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5){
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "4"}.with {
+			clear()
+			sendKeys(nameTerminal)
+		}
+	}
 	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
 	println("The successful creation of a new terminal")
 
