@@ -60,14 +60,14 @@ class T111_LoadingTerminalPicturesOwnerSpec  extends GebReportingSpec {
         waitFor { cartCurrentTerminal.displayed }
 
         when:
-        cartCurrentTerminal.find{it.nameCampaign == nameTerminal}.detailTerminal.click()
+        cartCurrentTerminal.find{it.nameTerminal == nameTerminal}.detailTerminal.click()
 
         then:
         waitFor { activeTerminal.displayed }
+        waitFor { btnLoadingPicture.displayed }
 
         when:
-        driverThis.executeScript("document.getElementById('uniform-undefined').removeAttribute('class');")
-        driverThis.executeScript("document.getElementById('multipartFile').removeAttribute('style');")
+        btnLoadingPicture.click()
 
         then:
         waitFor { activeTerminal.displayed }
