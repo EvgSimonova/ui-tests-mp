@@ -423,9 +423,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 btnRequest.click()
 
                 then:
-
-                when:
-
+                waitFor { at OwnerBalancePage }
             }
             waitFor { settingsLink.displayed }
 
@@ -453,5 +451,13 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 i++
             }
         }
+
+        waitFor { logoutLink.displayed}
+
+        when:
+        logoutLink.click()
+
+        then:
+        waitFor { at MainPage }
     }
 }
