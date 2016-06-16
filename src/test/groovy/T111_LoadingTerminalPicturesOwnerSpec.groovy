@@ -3,6 +3,7 @@ import com.terminal.pages.OwnerPersonalAccountPage
 import com.terminal.pages.OwnerTerminalListPage
 import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
+import org.openqa.selenium.Keys
 
 import java.text.SimpleDateFormat
 
@@ -54,6 +55,7 @@ class T111_LoadingTerminalPicturesOwnerSpec  extends GebReportingSpec {
         waitFor { filtrName.displayed }
 
         when:
+        filtrName << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
         filtrName << nameTerminal
 
         then:
@@ -64,10 +66,10 @@ class T111_LoadingTerminalPicturesOwnerSpec  extends GebReportingSpec {
 
         then:
         waitFor { activeTerminal.displayed }
-        waitFor { btnLoadingPicture.displayed }
+        waitFor { panLoading.displayed }
 
         when:
-        btnLoadingPicture.click()
+        btnLoading.click()
 
         then:
         waitFor { activeTerminal.displayed }
