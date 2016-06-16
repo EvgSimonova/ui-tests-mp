@@ -392,7 +392,11 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 		waitPresenceOfAll(By.tagName("LI"), driverThis)
 		driverThis.findElements(By.tagName("LI")).find{it.text.contains('модерация:IN_PROGRESS')}.click()
 	} catch (e){
-		PicturesDropbox(driverThis,nameImage)
+		if ( nameImage == "myImg.jpg" ) {
+			PicturesDropbox(driverThis, nameImage)
+		} else {
+			PicturesDropbox(driverThis, "cve29.jpg")
+		}
 	}
 	def allImages = driverThis.findElement(By.id("all-images"))
 	assert allImages.findElement(By.xpath("//li[@class=\"active\"]"))
@@ -413,7 +417,34 @@ def static CreatingTestCampaign(driverThis,nameImage,nameCompany) {
 	assert getServerName() + 'member/createCompany/addTerminal' == driverThis.currentUrl
 	def field = driverThis.findElement(By.id("all-terminals"))
 	assert 0 < field.findElements(By.tagName('li')).size()
-	field.findElements(By.tagName('li')).find{!it.text.contains('Количество свободных слотов: 0')}.click()
+	if ( nameImage == "myImg.jpg" ) {
+		field.findElements(By.tagName('li')).find{!it.text.contains('Количество свободных слотов: 0')}.click()
+	} else {
+		if (field.findElements(By.tagName('li')).size() > 9) {
+			try {
+				field.findElements(By.tagName('li')).find{it.text.contains(nameImage) }.click()
+			} catch (Exception e) {
+				driverThis.findElement(By.id("scrollbarY")).sendKeys(Keys.HOME)
+				def s = field.findElements(By.tagName('li'))
+				int LiEnd = (Integer.valueOf(s.getAt(s.size() - 1).getAttribute("offsetTop")))
+				int raz = 81
+				while (driverThis.currentUrl.startsWith("http://terminal-company.herokuapp.com/member/createCompany/addTerminal")) {
+					try {
+						field.findElements(By.tagName('li')).find{it.text.contains(nameImage) }.click()
+						break
+					} catch (Exception e1){
+						if (LiEnd <= raz) {
+							break
+						}
+						driverThis.findElement(By.id("scrollbarY")).sendKeys(Keys.PAGE_DOWN)
+						raz = raz + 82*8
+					}
+				}
+			}
+		} else {
+			field.findElements(By.tagName('li')).find{it.text.contains(nameImage) }.click()
+		}
+	}
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("active"))))
 	assert driverThis.findElement(By.xpath("//li[@class=\"active\"]"))
 	driverThis.findElement(By.className("right-buttons")).findElement(By.tagName("INPUT")).click()
@@ -539,7 +570,11 @@ def static BalanceCampaignSpec(driverThis,String sumCompany) {
 	assert getServerName() + "member/balans" == driverThis.currentUrl
 	assert driverThis.findElement(By.xpath("//div[@class=\"alert alert-success\"]")).getText() == "Уважаемый " + getUser1Name() + ", пополнение баланса на сумму " + sumCompany + ",00 прошло успешно!"
 	def sumText = driverThis.findElement(By.className("balance-box")).findElement(By.tagName("SPAN")).getText()
-	assert Float.valueOf(sumText.substring(0,sumText.indexOf(' ')).replace(",", ".")) >= Float.valueOf(sumCompany)
+	try {
+		assert Float.valueOf(sumText.substring(0,sumText.indexOf(',')).replace(" ", "")) >= Float.valueOf(sumCompany)
+	} catch (Exception e) {
+		assert Float.valueOf(sumText.substring(0,sumText.indexOf('.')).replace(" ", "")) >= Float.valueOf(sumCompany)
+	}
 }
 
 def static AddNewTerminalOwnerSpec(driverThis, nameTerminal) {
@@ -584,14 +619,18 @@ def static AddNewTerminalOwnerSpec(driverThis, nameTerminal) {
 		sendKeys("100")
 	}
 	driverThis.findElement(By.id("saveButton")).click()
-	driverThis.findElement(By.tagName("TBODY")).displayed
-	println("1111111111111111111")
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("TBODY")))
 	waitPresenceOfAll(By.tagName("tr"),driverThis)
-	println("22222222222222222")
-	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))))
-	println("333333333333")
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5) {
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find { it.getAttribute('data-column') == "4" }.with {
+			clear()
+			sendKeys(nameTerminal)
+		}
+	}
 	assert driverThis.findElements(By.tagName("tr")).find{it.text.contains(nameTerminal)}
 	println("The successful creation of a new terminal")
+
 }
 
 def static ModerateTerminalSpec(driverThis,String nameTerminal,selectIndex) {

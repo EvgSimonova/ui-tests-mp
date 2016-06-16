@@ -105,7 +105,7 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		bodyTerminal{ $("body")}
 		activeTerminal{ bodyTerminal.find("div", class:"edit-holder adt", style:"display: block;")}
 		idTerminal{activeTerminal.getAttribute("id")}
-		btnLoadingPicture{ bodyTerminal.find("input", data:"file" + idTerminal.substring(4,idTerminal.length()), name:"file" )}
-
+		panLoading{activeTerminal.find("div", class:"photo-box", data:startsWith("images"))}
+		btnLoading{panLoading.find("input",class:"file")}
 	}
 }
