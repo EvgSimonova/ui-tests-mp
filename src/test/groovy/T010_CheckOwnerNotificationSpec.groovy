@@ -101,7 +101,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
 
                 when:
                 println("Add new terminal")
-                nameTerminal = "Тестовый автоматический терминал " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+                nameTerminal = "Тест терминал " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
                 StaticData.AddNewTerminalOwnerSpec(driver, nameTerminal)
             } else if (i == 2) {
                 if (inputStatusModerationCheked != "true") {
@@ -197,7 +197,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 when:
                 nameCompany = "Тестовая кампания " +new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
                 println("Creating Campaign in progress")
-                StaticData.CreatingTestCampaign(driver,"myImg.jpg",nameCompany)
+                StaticData.CreatingTestCampaign(driver,nameTerminal,nameCompany)
 
                 then:
                 waitFor { at DemoCreateCompanyStartCompanyPage }
@@ -284,9 +284,11 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
 
                     when:
                     try {
-                        sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))) + 1)
+                        String stroka = (sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))).replaceAll(" ", "")
+                        sumCamp = Integer.toString(Integer.valueOf(stroka) + 1)
                     } catch (Exception e) {
-                        sumCamp = Integer.toString(Integer.valueOf(sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))) + 1)
+                        String stroka = (sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))).replaceAll(" ", "")
+                        sumCamp = Integer.toString(Integer.valueOf(stroka) + 1)
                     }
                     balanceLink.click()
 
@@ -389,12 +391,42 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
             passwordInputOnLoginForm << StaticData.getOwner1Password()
             loginButton.click()
 
-            if ( i > 2 ) {
-                
-            }
-
             then:
             waitFor { at OwnerPersonalAccountPage }
+            if ( i > 2 ) {
+                waitFor { moneyLink.displayed }
+
+                when:
+                moneyLink.click()
+
+                then:
+                waitFor { at OwnerBalancePage }
+                waitFor { sumBalanceBox.displayed }
+                waitFor { moneyButton.displayed }
+
+                when:
+                String sum
+                try {
+                    sum = sumBalanceBox.substring(0,indexOf(','))
+                } catch (Exception e) {
+                    sum = sumBalanceBox.substring(0,indexOf('.'))
+                }
+                moneyButton.click()
+
+                then:
+                waitFor { balanceForm.displayed }
+                waitFor { moneyAmount.displayed}
+                waitFor { btnRequest.displayed}
+
+                when:
+                moneyAmount << sum
+                btnRequest.click()
+
+                then:
+
+                when:
+
+            }
             waitFor { settingsLink.displayed }
 
             when:

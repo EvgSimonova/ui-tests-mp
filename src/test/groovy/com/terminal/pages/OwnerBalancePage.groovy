@@ -10,7 +10,7 @@ class OwnerBalancePage extends Page {
 
     static content = {
 		terminalsListLink { $("div.user-menu li.item1 a") }
-        	moneyLink { $("div.user-menu li.item2.money a") }
+		moneyLink { $("div.user-menu li.item2.money a") }
 		settingsLink{ $("div.user-menu li.item5 a")}
 		logoLink{ $("div.span8.logo").children().children()}
 		sucessBlock{ $("div.successRegister")}
@@ -18,6 +18,7 @@ class OwnerBalancePage extends Page {
 		dateBlock{ $("div.date-sort")}
 		balanceHolder{ $("div#edit.edit-holder.adt")}
 		balanceBoxBottom{ $("div.balance-box.bottom")}
+		sumBalanceBox{ balanceBoxBottom.find("span")}
 		moneyButton{ balanceBoxBottom.find("a", id:"money-button")}
 		balanceBox{ balanceHolder.find("div.edit-box")}
 		balanceForm{ balanceBox.find("form", class: "form")}
