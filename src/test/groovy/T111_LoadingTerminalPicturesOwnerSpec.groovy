@@ -69,88 +69,142 @@ class T111_LoadingTerminalPicturesOwnerSpec  extends GebReportingSpec {
 
         when:
         cartCurrentTerminal.find{it.nameTerminal == nameTerminal}.detailTerminal.click()
+        def someList = ["Bear.jpg","file1.png","file2.gif","file4.bmp","file5.mp4","file6.mov","file8.jpg","file9.gif","file10.bmp"]
 
         then:
         waitFor { activeTerminal.displayed }
         waitFor { panLoading.displayed }
 
-        when:
-        btnLoading.click()
-        Robot rob = new Robot()
-        InputContext InCon = InputContext.getInstance()
-        if (InCon.getLocale().getLanguage().equals("ru")) {
-            rob.delay(300)
-            rob.keyPress(KeyEvent.VK_SHIFT)
-            rob.keyPress(KeyEvent.VK_ALT)
-            rob.keyRelease(KeyEvent.VK_SHIFT)
-            rob.keyRelease(KeyEvent.VK_ALT)
-            rob.delay(300)
-        }
-        String fileName = StaticData.getDirImage() + "file1.png"
-        for (char symvol : fileName.toCharArray()) {
-             boolean needShiftPress = Character.isUpperCase(symvol) && Character.isLetter(symvol)
-            if (needShiftPress) {
+        for (int i = 0; i < 9; i++) {
+            when:
+            btnLoading.click()
+            Robot rob = new Robot()
+            InputContext InCon = InputContext.getInstance()
+            if (InCon.getLocale().getLanguage().equals("ru")) {
+                rob.delay(300)
                 rob.keyPress(KeyEvent.VK_SHIFT)
+                rob.keyPress(KeyEvent.VK_ALT)
+                rob.keyRelease(KeyEvent.VK_SHIFT)
+                rob.keyRelease(KeyEvent.VK_ALT)
+                rob.delay(300)
             }
-            int event = KeyEvent.getExtendedKeyCodeForChar(symvol.hashCode())
-            
-            try {
-                if (symvol.toString() == ":") {
-                    rob.delay(300)
+            String fileName = StaticData.getDirImage() + someList[i]
+            if ( i > 3 ) {
+                if ( i == 4 || i == 5 ) {
                     try {
-                        rob.delay(300)
-                        rob.keyPress(KeyEvent.VK_SHIFT)
-                        rob.keyPress(KeyEvent.VK_ALT)
-                        rob.delay(300)
-                        rob.keyRelease(KeyEvent.VK_SHIFT)
-                        rob.keyRelease(KeyEvent.VK_ALT)
-                        rob.delay(300)
-                        rob.keyPress(KeyEvent.VK_SHIFT)
-                        rob.keyPress(KeyEvent.VK_6)
-                        rob.delay(300)
-                        rob.keyRelease(KeyEvent.VK_6)
-                        rob.keyRelease(KeyEvent.VK_SHIFT)
-                        rob.delay(300)
-                        rob.keyPress(KeyEvent.VK_SHIFT)
-                        rob.keyPress(KeyEvent.VK_ALT)
-                        rob.delay(300)
-                        rob.keyRelease(KeyEvent.VK_SHIFT)
-                        rob.keyRelease(KeyEvent.VK_ALT)
-                        rob.delay(300)
-                    }catch (AWTException e) {
-                        println(e.printStackTrace())
-                    }
-                    
-                } else if(symvol.toString() == ".") {
-                    rob.delay(300)
-                    rob.keyPress(KeyEvent.VK_SHIFT)
-                    rob.keyPress(KeyEvent.VK_ALT)
-                    rob.keyRelease(KeyEvent.VK_SHIFT)
-                    rob.keyRelease(KeyEvent.VK_ALT)
-                    rob.delay(300)
-                    rob.keyPress(event)
-                    rob.keyRelease(event)
-                    rob.delay(300)
-                    rob.keyPress(KeyEvent.VK_SHIFT)
-                    rob.keyPress(KeyEvent.VK_ALT)
-                    rob.keyRelease(KeyEvent.VK_SHIFT)
-                    rob.keyRelease(KeyEvent.VK_ALT)
-                    rob.delay(300)
-                    //rob.keyPress(KeyEvent.VK_PERIOD)
-                    //rob.keyRelease(KeyEvent.VK_PERIOD)
+                        driver.switchTo().alert().accept()
+                    } catch (Exception e) { }
                 } else {
-                    rob.keyPress(event)
+                    then:
+                    waitFor { at OwnerTerminalListPage }
+                    waitFor { errorPhoto.displayed }
+                    waitFor { errorPhoto.text == "Загружаемый файл имеет некорректный формат или превышает допустимый размер." }
+                    waitFor { cartCurrentTerminal.displayed }
+                    waitFor { filtrName.displayed }
+
+                    when:
+                    filtrName << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+                    filtrName << nameTerminal
+
+                    then:
+                    waitFor { cartCurrentTerminal.displayed }
+
+                    when:
+                    cartCurrentTerminal.find{it.nameTerminal == nameTerminal}.detailTerminal.click()
+
+                    then:
+                    waitFor { activeTerminal.displayed }
+                    waitFor { panLoading.displayed }
+
                 }
-            } catch (Exception e) {}
-            if (needShiftPress) {
-                    rob.keyRelease(KeyEvent.VK_SHIFT)
+            } else {
+                for (char symvol : fileName.toCharArray()) {
+                    boolean needShiftPress = Character.isUpperCase(symvol) && Character.isLetter(symvol)
+                    if (needShiftPress) {
+                        rob.keyPress(KeyEvent.VK_SHIFT)
+                    }
+                    int event = KeyEvent.getExtendedKeyCodeForChar(symvol.hashCode())
+
+                    try {
+                        if (symvol.toString() == ":") {
+                            rob.delay(300)
+                            try {
+                                rob.delay(300)
+                                rob.keyPress(KeyEvent.VK_SHIFT)
+                                rob.keyPress(KeyEvent.VK_ALT)
+                                rob.delay(300)
+                                rob.keyRelease(KeyEvent.VK_SHIFT)
+                                rob.keyRelease(KeyEvent.VK_ALT)
+                                rob.delay(300)
+                                rob.keyPress(KeyEvent.VK_SHIFT)
+                                rob.keyPress(KeyEvent.VK_6)
+                                rob.delay(300)
+                                rob.keyRelease(KeyEvent.VK_6)
+                                rob.keyRelease(KeyEvent.VK_SHIFT)
+                                rob.delay(300)
+                                rob.keyPress(KeyEvent.VK_SHIFT)
+                                rob.keyPress(KeyEvent.VK_ALT)
+                                rob.delay(300)
+                                rob.keyRelease(KeyEvent.VK_SHIFT)
+                                rob.keyRelease(KeyEvent.VK_ALT)
+                                rob.delay(300)
+                            } catch (AWTException e) {
+                                println(e.printStackTrace())
+                            }
+
+                        } else if (symvol.toString() == ".") {
+                            rob.delay(300)
+                            rob.keyPress(KeyEvent.VK_SHIFT)
+                            rob.keyPress(KeyEvent.VK_ALT)
+                            rob.keyRelease(KeyEvent.VK_SHIFT)
+                            rob.keyRelease(KeyEvent.VK_ALT)
+                            rob.delay(300)
+                            rob.keyPress(event)
+                            rob.keyRelease(event)
+                            rob.delay(300)
+                            rob.keyPress(KeyEvent.VK_SHIFT)
+                            rob.keyPress(KeyEvent.VK_ALT)
+                            rob.keyRelease(KeyEvent.VK_SHIFT)
+                            rob.keyRelease(KeyEvent.VK_ALT)
+                            rob.delay(300)
+                            //rob.keyPress(KeyEvent.VK_PERIOD)
+                            //rob.keyRelease(KeyEvent.VK_PERIOD)
+                        } else {
+                            rob.keyPress(event)
+                        }
+                    } catch (Exception e) {
+                    }
+                    if (needShiftPress) {
+                        rob.keyRelease(KeyEvent.VK_SHIFT)
+                    }
+                }
+                rob.keyPress(KeyEvent.VK_ENTER)
             }
+
+            then:
+            waitFor { activeTerminal.displayed }
+            waitFor { panLoading.displaed }
+            waitFor { photoAll.displaed }
+
         }
-        rob.keyPress(KeyEvent.VK_ENTER)
+
+        when:
+        photoAll[0].click()
+
+        then:
+        waitFor { giffka.displayed }
+        waitFor { photoReal.displayed }
+        waitFor { closePhotoReal.displayed }
+
+        when:
+        closePhotoReal[0].click()
 
         then:
         waitFor { activeTerminal.displayed }
-        waitFor { }
+        waitFor { photoReal.displayed }
+        waitFor { saveTerminalButton.displayed }
+
+
 
         }
 }
