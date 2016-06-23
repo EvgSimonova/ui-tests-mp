@@ -5,10 +5,16 @@ import com.terminal.pages.StaticData
 import geb.spock.GebReportingSpec
 import org.openqa.selenium.Keys
 
+import java.awt.AWTException
+import java.awt.Robot
+import java.awt.event.KeyEvent
+import java.awt.im.InputContext
 import java.text.SimpleDateFormat
 
 class T111_LoadingTerminalPicturesOwnerSpec  extends GebReportingSpec {
 
+    private Locale ru = new Locale("ru", "RU")
+    private Locale en = new Locale("en", "US")
     private String nameTerminal
 
     def "can get to Terminal list page and Loading the Pictures of terminal"() {
@@ -70,10 +76,81 @@ class T111_LoadingTerminalPicturesOwnerSpec  extends GebReportingSpec {
 
         when:
         btnLoading.click()
+        Robot rob = new Robot()
+        InputContext InCon = InputContext.getInstance()
+        if (InCon.getLocale().getLanguage().equals("ru")) {
+            rob.delay(300)
+            rob.keyPress(KeyEvent.VK_SHIFT)
+            rob.keyPress(KeyEvent.VK_ALT)
+            rob.keyRelease(KeyEvent.VK_SHIFT)
+            rob.keyRelease(KeyEvent.VK_ALT)
+            rob.delay(300)
+        }
+        String fileName = StaticData.getDirImage() + "file1.png"
+        for (char symvol : fileName.toCharArray()) {
+             boolean needShiftPress = Character.isUpperCase(symvol) && Character.isLetter(symvol)
+            if (needShiftPress) {
+                rob.keyPress(KeyEvent.VK_SHIFT)
+            }
+            int event = KeyEvent.getExtendedKeyCodeForChar(symvol.hashCode())
+            
+            try {
+                if (symvol.toString() == ":") {
+                    rob.delay(300)
+                    try {
+                        rob.delay(300)
+                        rob.keyPress(KeyEvent.VK_SHIFT)
+                        rob.keyPress(KeyEvent.VK_ALT)
+                        rob.delay(300)
+                        rob.keyRelease(KeyEvent.VK_SHIFT)
+                        rob.keyRelease(KeyEvent.VK_ALT)
+                        rob.delay(300)
+                        rob.keyPress(KeyEvent.VK_SHIFT)
+                        rob.keyPress(KeyEvent.VK_6)
+                        rob.delay(300)
+                        rob.keyRelease(KeyEvent.VK_6)
+                        rob.keyRelease(KeyEvent.VK_SHIFT)
+                        rob.delay(300)
+                        rob.keyPress(KeyEvent.VK_SHIFT)
+                        rob.keyPress(KeyEvent.VK_ALT)
+                        rob.delay(300)
+                        rob.keyRelease(KeyEvent.VK_SHIFT)
+                        rob.keyRelease(KeyEvent.VK_ALT)
+                        rob.delay(300)
+                    }catch (AWTException e) {
+                        println(e.printStackTrace())
+                    }
+                    
+                } else if(symvol.toString() == ".") {
+                    rob.delay(300)
+                    rob.keyPress(KeyEvent.VK_SHIFT)
+                    rob.keyPress(KeyEvent.VK_ALT)
+                    rob.keyRelease(KeyEvent.VK_SHIFT)
+                    rob.keyRelease(KeyEvent.VK_ALT)
+                    rob.delay(300)
+                    rob.keyPress(event)
+                    rob.keyRelease(event)
+                    rob.delay(300)
+                    rob.keyPress(KeyEvent.VK_SHIFT)
+                    rob.keyPress(KeyEvent.VK_ALT)
+                    rob.keyRelease(KeyEvent.VK_SHIFT)
+                    rob.keyRelease(KeyEvent.VK_ALT)
+                    rob.delay(300)
+                    //rob.keyPress(KeyEvent.VK_PERIOD)
+                    //rob.keyRelease(KeyEvent.VK_PERIOD)
+                } else {
+                    rob.keyPress(event)
+                }
+            } catch (Exception e) {}
+            if (needShiftPress) {
+                    rob.keyRelease(KeyEvent.VK_SHIFT)
+            }
+        }
+        rob.keyPress(KeyEvent.VK_ENTER)
 
         then:
         waitFor { activeTerminal.displayed }
+        waitFor { }
 
-
-    }
+        }
 }

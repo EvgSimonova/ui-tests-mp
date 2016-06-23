@@ -130,7 +130,7 @@ def static getPageTitle() {
 }
 
 def static getDirImage() {
-	return (new File(".").getAbsolutePath().replace(".","") + File.separatorChar + "images" + File.separatorChar)
+	return (new File(".").getAbsolutePath().replace(".","") + "images" + File.separatorChar)
 }
 
 def static getSupportMail() {
