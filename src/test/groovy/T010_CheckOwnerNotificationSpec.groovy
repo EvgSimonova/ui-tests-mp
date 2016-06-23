@@ -350,9 +350,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 } else {
                     waitFor { startBlock.displayed }
                 }
-
                 waitFor { startBlock.text() == "Поздравляем, ваша рекламная кампания оплачена и запущена!"}
-                waitFor { logoutLink.displayed }
             }
 
             then:
