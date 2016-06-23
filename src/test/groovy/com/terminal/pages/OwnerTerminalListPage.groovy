@@ -107,6 +107,11 @@ class OwnerTerminalListPage extends OwnerPersonalAccountPage {
 		idTerminal{activeTerminal.getAttribute("id")}
 		panLoading{activeTerminal.find("div", class:"photo-box", data:startsWith("images"))}
 		btnLoading{panLoading.find("input",class:"file")}
-		giffka{ bodyTerminal.find("div", id: "fancybox-loading") }
+		giffka{ bodyTerminal.find("div", id:"fancybox-loading") }
+		photoAll{ panLoading.find("a", class:"fancy_image") }
+		deletePhoto{ photoAll.find("div", class:"close-image")}
+		photoReal{ bodyTerminal.find("div", class:"fancybox-wrap fancybox-desktop fancybox-type-image fancybox-opened")}
+		closePhotoReal{ bodyTerminal.find("a", class:"fancybox-item fancybox-close")}
+		errorPhoto{ bodyTerminal.find("div",id:"errorWrapper")}
 	}
 }
