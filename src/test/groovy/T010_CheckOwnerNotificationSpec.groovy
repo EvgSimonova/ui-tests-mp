@@ -155,153 +155,84 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     then:
                     waitFor { inputChangeNotifications.displayed }
                     waitFor { inputChangeNotifications.value() == "true" }
-                    waitFor { logoutLink.displayed }
                 }
             }
 
-            if ( i > 2) {
-                when:
-                logoutLink.click()
+            if ( i < 4) {
+                if (i == 3) {
+                    when:
+                    logoutLink.click()
 
-                then:
-                waitFor { at MainPage }
-                waitFor { loginLink.displayed }
+                    then:
+                    waitFor { at MainPage }
+                    waitFor { loginLink.displayed }
 
-                when:
-                at MainPage
-                loginLink.click()
+                    when:
+                    at MainPage
+                    loginLink.click()
 
-                then:
-                waitFor { at MainPage }
-                waitFor {
-                    loginDialog.displayed
-                }
-
-                when:
-                usernameInputOnLoginForm << StaticData.getUser1Name()
-                passwordInputOnLoginForm << StaticData.getUser1Password()
-                loginButton.click()
-
-                then:
-                waitFor { at UserPersonalAccountPage }
-                waitFor { createCompanyLink.displayed }
-
-                when:
-                println("Creating Campaing start")
-                createCompanyLink.click()
-
-                then:
-                waitFor { at AddCampaingParamsPage }
-                waitFor { paramsForm.displayed }
-
-                when:
-                nameCompany = "Тестовая кампания " +new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
-                println("Creating Campaign in progress")
-                StaticData.CreatingTestCampaign(driver,nameTerminal,nameCompany)
-
-                then:
-                waitFor { at DemoCreateCompanyStartCompanyPage }
-                waitFor { infoBlock.displayed}
-                waitFor { logoutLink.displayed }
-
-                when:
-                logoutLink.click()
-
-                then:
-                waitFor { at MainPage }
-                waitFor { loginLink.displayed }
-
-                when:
-                println("Campaign moderation proccess")
-                StaticData.ModerateCampaignSpec(driver, nameCompany, 0)
-
-                then:
-                waitFor { at MainPage }
-                waitFor { loginLink.displayed }
-
-                when:
-                loginLink.click()
-
-                then:
-                waitFor { at MainPage }
-                waitFor { loginDialog.displayed }
-
-                when:
-                usernameInputOnLoginForm << StaticData.getUser1Name()
-                passwordInputOnLoginForm << StaticData.getUser1Password()
-                loginButton.click()
-
-                then:
-                waitFor { at UserPersonalAccountPage }
-                waitFor { myCampaignsLink.displayed }
-
-                when:
-                myCampaignsLink.click()
-
-                then:
-                waitFor { at UserCurrentCampaignPage }
-                waitFor { tableCurrent.displayed }
-                waitFor { cartCurrentCampaign.displayed }
-                waitFor { cartCurrentCampaign.size > 0 }
-
-                waitFor { filtrmModeration.displayed }
-                waitFor { clickOutfix.displayed }
-
-                when:
-                if (filtrmModeration.getAttribute("value") != "запустить") {
-                    if (filtrmModeration.getAttribute("value") != "") {
-                        filtrmModeration << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+                    then:
+                    waitFor { at MainPage }
+                    waitFor {
+                        loginDialog.displayed
                     }
-                    filtrmModeration << "запустить"
-                }
-                clickOutfix.click()
 
-                then:
-                waitFor { tbodyCurrent.displayed }
-                waitFor { cartCurrentCampaign.displayed }
-                waitFor { cartCurrentCampaign.find({it.modCampaign == "Пройдена\n" + "оплатить и запустить"}).startCampaignLink.displayed }
+                    when:
+                    usernameInputOnLoginForm << StaticData.getUser1Name()
+                    passwordInputOnLoginForm << StaticData.getUser1Password()
+                    loginButton.click()
 
-                when:
-                cartCurrentCampaign.find({it.modCampaign == "Пройдена\n" + "оплатить и запустить"}).startCampaignLink.click()
+                    then:
+                    waitFor { at UserPersonalAccountPage }
+                    waitFor { createCompanyLink.displayed }
 
-                then:
-                waitFor { at DemoCreateCompanyStartCompanyPage }
-                waitFor { infoBlock.displayed }
-                waitFor { payLink.displayed }
+                    when:
+                    println("Creating Campaing start")
+                    createCompanyLink.click()
 
-                when:
-                println("Start pay process")
-                payLink.click()
+                    then:
+                    waitFor { at AddCampaingParamsPage }
+                    waitFor { paramsForm.displayed }
 
-                then:
-                waitFor { at DemoCreateCompanyCompanyInfoPage}
-                waitFor { balanceLink.displayed }
-                sleep(3000)
+                    when:
+                    nameCompany = "Тестовая кампания " + new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date())
+                    println("Creating Campaign in progress")
+                    StaticData.CreatingTestCampaign(driver, nameTerminal, nameCompany)
 
-                if (driver.title != "Оплата и запуск кампании") {
+                    then:
+                    waitFor { at DemoCreateCompanyStartCompanyPage }
                     waitFor { infoBlock.displayed }
-                    waitFor { sumCampaign.displayed }
+                    waitFor { logoutLink.displayed }
 
                     when:
-                    try {
-                        String stroka = (sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf(','))).replaceAll(" ", "")
-                        sumCamp = Integer.toString(Integer.valueOf(stroka) + 1)
-                    } catch (Exception e) {
-                        String stroka = (sumCampaign.text().substring(0,sumCampaign.text().lastIndexOf('.'))).replaceAll(" ", "")
-                        sumCamp = Integer.toString(Integer.valueOf(stroka) + 1)
-                    }
-                    balanceLink.click()
+                    logoutLink.click()
 
                     then:
-                    waitFor { at UserBalancePage }
-                    waitFor { outSumInput.displayed }
+                    waitFor { at MainPage }
+                    waitFor { loginLink.displayed }
 
                     when:
-                    println("Balance changing")
-                    StaticData.BalanceCampaignSpec(driver,sumCamp)
+                    println("Campaign moderation proccess")
+                    StaticData.ModerateCampaignSpec(driver, nameCompany, 0)
 
                     then:
-                    waitFor { at UserBalancePage }
+                    waitFor { at MainPage }
+                    waitFor { loginLink.displayed }
+
+                    when:
+                    loginLink.click()
+
+                    then:
+                    waitFor { at MainPage }
+                    waitFor { loginDialog.displayed }
+
+                    when:
+                    usernameInputOnLoginForm << StaticData.getUser1Name()
+                    passwordInputOnLoginForm << StaticData.getUser1Password()
+                    loginButton.click()
+
+                    then:
+                    waitFor { at UserPersonalAccountPage }
                     waitFor { myCampaignsLink.displayed }
 
                     when:
@@ -312,6 +243,7 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     waitFor { tableCurrent.displayed }
                     waitFor { cartCurrentCampaign.displayed }
                     waitFor { cartCurrentCampaign.size > 0 }
+
                     waitFor { filtrmModeration.displayed }
                     waitFor { clickOutfix.displayed }
 
@@ -327,12 +259,16 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     then:
                     waitFor { tbodyCurrent.displayed }
                     waitFor { cartCurrentCampaign.displayed }
-                    waitFor { cartCurrentCampaign.find({it.modCampaign == "Пройдена\n" + "оплатить и запустить"}).startCampaignLink.displayed }
+                    waitFor {
+                        cartCurrentCampaign.find({
+                            it.modCampaign == "Пройдена\n" + "оплатить и запустить"
+                        }).startCampaignLink.displayed
+                    }
 
                     when:
-                    cartCurrentCampaign.find({it.modCampaign == "Пройдена\n" + "оплатить и запустить"}).startCampaignLink.click()
-                    newMessages = []
-                    ReadingYandexEmail.main(newMessages, StaticData.getUser1Name(), StaticData.getUser1PasswordEmail())
+                    cartCurrentCampaign.find({
+                        it.modCampaign == "Пройдена\n" + "оплатить и запустить"
+                    }).startCampaignLink.click()
 
                     then:
                     waitFor { at DemoCreateCompanyStartCompanyPage }
@@ -340,57 +276,135 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                     waitFor { payLink.displayed }
 
                     when:
-                    println("Pay process started")
+                    println("Start pay process")
                     payLink.click()
 
                     then:
-                    waitFor { at DemoCreateCompanyCompanyInfoPage}
-                    waitFor { startBlock.displayed }
+                    waitFor { at DemoCreateCompanyCompanyInfoPage }
+                    waitFor { balanceLink.displayed }
+                    sleep(3000)
 
-                } else {
-                    waitFor { startBlock.displayed }
+                    if (driver.title != "Оплата и запуск кампании") {
+                        waitFor { infoBlock.displayed }
+                        waitFor { sumCampaign.displayed }
+
+                        when:
+                        try {
+                            String stroka = (sumCampaign.text().substring(0, sumCampaign.text().lastIndexOf(','))).replaceAll(" ", "")
+                            sumCamp = Integer.toString(Integer.valueOf(stroka) + 1)
+                        } catch (Exception e) {
+                            String stroka = (sumCampaign.text().substring(0, sumCampaign.text().lastIndexOf('.'))).replaceAll(" ", "")
+                            sumCamp = Integer.toString(Integer.valueOf(stroka) + 1)
+                        }
+                        balanceLink.click()
+
+                        then:
+                        waitFor { at UserBalancePage }
+                        waitFor { outSumInput.displayed }
+
+                        when:
+                        println("Balance changing")
+                        StaticData.BalanceCampaignSpec(driver, sumCamp)
+
+                        then:
+                        waitFor { at UserBalancePage }
+                        waitFor { myCampaignsLink.displayed }
+
+                        when:
+                        myCampaignsLink.click()
+
+                        then:
+                        waitFor { at UserCurrentCampaignPage }
+                        waitFor { tableCurrent.displayed }
+                        waitFor { cartCurrentCampaign.displayed }
+                        waitFor { cartCurrentCampaign.size > 0 }
+                        waitFor { filtrmModeration.displayed }
+                        waitFor { clickOutfix.displayed }
+
+                        when:
+                        if (filtrmModeration.getAttribute("value") != "запустить") {
+                            if (filtrmModeration.getAttribute("value") != "") {
+                                filtrmModeration << Keys.chord(Keys.CONTROL, "a") + Keys.DELETE
+                            }
+                            filtrmModeration << "запустить"
+                        }
+                        clickOutfix.click()
+
+                        then:
+                        waitFor { tbodyCurrent.displayed }
+                        waitFor { cartCurrentCampaign.displayed }
+                        waitFor {
+                            cartCurrentCampaign.find({
+                                it.modCampaign == "Пройдена\n" + "оплатить и запустить"
+                            }).startCampaignLink.displayed
+                        }
+
+                        when:
+                        cartCurrentCampaign.find({
+                            it.modCampaign == "Пройдена\n" + "оплатить и запустить"
+                        }).startCampaignLink.click()
+                        newMessages = []
+                        ReadingYandexEmail.main(newMessages, StaticData.getUser1Name(), StaticData.getUser1PasswordEmail())
+
+                        then:
+                        waitFor { at DemoCreateCompanyStartCompanyPage }
+                        waitFor { infoBlock.displayed }
+                        waitFor { payLink.displayed }
+
+                        when:
+                        println("Pay process started")
+                        payLink.click()
+
+                        then:
+                        waitFor { at DemoCreateCompanyCompanyInfoPage }
+                        waitFor { startBlock.displayed }
+
+                    } else {
+                        waitFor { startBlock.displayed }
+                    }
+                    waitFor { startBlock.text() == "Поздравляем, ваша рекламная кампания оплачена и запущена!" }
                 }
-                waitFor { startBlock.text() == "Поздравляем, ваша рекламная кампания оплачена и запущена!"}
-            }
 
-            then:
-            waitFor { logoutLink.displayed }
+                then:
+                waitFor { logoutLink.displayed }
 
-            when:
-            logoutLink.click()
-
-            then:
-            waitFor { at MainPage }
-            waitFor { loginLink.displayed }
-
-            if ( i < 3) {
                 when:
-                println("Terminal moderation process")
-                if ( i == 1 ) {
-                    StaticData.ModerateTerminalSpec(driver,nameTerminal,1)
-                } else {
-                    StaticData.ModerateTerminalSpec(driver,nameTerminal,0)
-                }
+                logoutLink.click()
 
                 then:
                 waitFor { at MainPage }
                 waitFor { loginLink.displayed }
+
+                if (i < 3) {
+                    when:
+                    println("Terminal moderation process")
+                    if (i == 1) {
+                        StaticData.ModerateTerminalSpec(driver, nameTerminal, 1)
+                    } else {
+                        StaticData.ModerateTerminalSpec(driver, nameTerminal, 0)
+                    }
+
+                    then:
+                    waitFor { at MainPage }
+                    waitFor { loginLink.displayed }
+                }
+
+                when:
+                loginLink.click()
+
+                then:
+                waitFor { at MainPage }
+                waitFor { loginDialog.displayed }
+
+                when:
+                usernameInputOnLoginForm << StaticData.getOwner1Name()
+                passwordInputOnLoginForm << StaticData.getOwner1Password()
+                loginButton.click()
+
+                then:
+                waitFor { at OwnerPersonalAccountPage }
             }
 
-            when:
-            loginLink.click()
-
-            then:
-            waitFor { at MainPage }
-            waitFor { loginDialog.displayed }
-
-            when:
-            usernameInputOnLoginForm << StaticData.getOwner1Name()
-            passwordInputOnLoginForm << StaticData.getOwner1Password()
-            loginButton.click()
-
-            then:
-            waitFor { at OwnerPersonalAccountPage }
             if ( i > 2 ) {
                 waitFor { moneyLink.displayed }
 
@@ -405,9 +419,9 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 when:
                 String sum
                 try {
-                    sum = sumBalanceBox.substring(0,indexOf(','))
+                    sum = sumBalanceBox.text().substring(0,sumBalanceBox.text().indexOf(",")).replace(" ", "")
                 } catch (Exception e) {
-                    sum = sumBalanceBox.substring(0,indexOf('.'))
+                    sum = sumBalanceBox.text().substring(0,sumBalanceBox.text().indexOf(".")).replace(" ", "")
                 }
                 moneyButton.click()
 
@@ -417,11 +431,45 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 waitFor { btnRequest.displayed}
 
                 when:
-                moneyAmount << sum
+                moneyAmount << Integer.toString((int)Math.floor((Integer.valueOf(sum) - 1)/2))
                 btnRequest.click()
 
                 then:
                 waitFor { at OwnerBalancePage }
+                waitFor { alertSms.displayed}
+                waitFor { alertSms.text() == "Запрос на вывод средств успешно отправлен."}
+                waitFor { logoutLink.displayed}
+
+                /*when:
+                logoutLink.click()
+
+                then:
+                waitFor { at MainPage }
+                waitFor { loginLink.displayed }
+
+                when:
+                println("Confirmation administrator Withdrawal")
+                StaticData.ModerateMoneyOwnerSpec(driver,(int)Math.floor((Integer.valueOf(sum) - 1)/2),0)
+
+                then:
+                waitFor { at MainPage }
+                waitFor { loginLink.displayed }
+
+                when:
+                loginLink.click()
+
+                then:
+                waitFor { at MainPage }
+                waitFor { loginDialog.displayed }
+
+                when:
+                usernameInputOnLoginForm << StaticData.getOwner1Name()
+                passwordInputOnLoginForm << StaticData.getOwner1Password()
+                loginButton.click()
+
+                then:
+                waitFor { at OwnerPersonalAccountPage }*/
+
             }
             waitFor { settingsLink.displayed }
 
@@ -437,15 +485,17 @@ class T010_CheckOwnerNotificationSpec extends GebReportingSpec {
                 if ( i == 2 ) {
                     waitFor { newMessages.find({it.subject == "Статус модерации терминала измененен на Пройдена"}) }
                 } else if ( i == 4 ) {
-                    waitFor { newMessages.find({it.subject == "Статус модерации кампании измененен на Пройдена"}) }
+                    waitFor { newMessages.find({it.subject.startsWith("Запрос на вывод денежных средств.")}) }
                 }
+                println("notice is received")
                 i++
             } else {
                 if ( i == 1 ) {
                     waitFor { newMessages.find({it.subject == "Статус модерации терминала измененен на Пройдена"}) == null }
                 } else if ( i == 3 ) {
-                    waitFor { newMessages.find({it.subject == "Статус модерации кампании измененен на Пройдена"}) == null }
+                    waitFor { newMessages.find({it.subject.startsWith("Запрос на вывод денежных средств.")}) == null }
                 }
+                println("notice is not received")
                 i++
             }
         }

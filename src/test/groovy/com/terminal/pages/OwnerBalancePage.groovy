@@ -13,6 +13,7 @@ class OwnerBalancePage extends Page {
 		moneyLink { $("div.user-menu li.item2.money a") }
 		settingsLink{ $("div.user-menu li.item5 a")}
 		logoLink{ $("div.span8.logo").children().children()}
+		logoutLink{ $("div.span4.navbar.singin.user-top").find("a", text: "Выйти")}
 		sucessBlock{ $("div.successRegister")}
 		errorBlock{ $("div.errorblock")}
 		dateBlock{ $("div.date-sort")}
@@ -24,5 +25,6 @@ class OwnerBalancePage extends Page {
 		balanceForm{ balanceBox.find("form", class: "form")}
 		moneyAmount{ balanceForm.find("input", type:"number", name:"moneyAmount")}
 		btnRequest{ balanceForm.find("input", class: "btn", type:"submit")}
+		alertSms{ $("div.alert.alert-success")}
 	}
 }

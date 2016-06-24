@@ -698,7 +698,90 @@ def static ModerateTerminalSpec(driverThis,String nameTerminal,selectIndex) {
 	}
 	driverThis.findElement(By.linkText("Выйти")).click()
 	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.className("sign"))))
+
 }
+
+def static ModerateMoneyOwnerSpec(driverThis,int Sum, selectIndex) {
+	driverThis.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	WebDriverWait wait = new WebDriverWait(driverThis, 160)
+	driverThis.get(getServerName()+"/loginAdmin")
+	driverThis.findElement(By.name("j_username")).with {
+		clear()
+		sendKeys("1@1.1")
+	}
+	driverThis.findElement(By.name("j_password")).with {
+		clear()
+		sendKeys("111111")
+	}
+	driverThis.findElement(By.cssSelector("input.button")).click()
+	wait.until(ExpectedConditions.visibilityOf(driverThis.findElement(By.linkText("Запросы на вывод средств владельцами"))))
+	assert getServerName() + 'admin/' == driverThis.currentUrl
+	driverThis.findElement(By.linkText("Запросы на вывод средств владельцами")).click()
+	waitPresenceOfAll(By.tagName("tr"),driverThis)
+	assert getServerName() + 'admin/confirmWithdrawRequest' == driverThis.currentUrl
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5){
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "1"}.with {
+			clear()
+			sendKeys(Integer.toString(Sum))
+		}
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "3"}.with {
+			clear()
+			sendKeys("Отправлен")
+		}
+	}
+	driverThis.findElement(By.tagName("TBODY")).displayed
+	def ourtrs = driverThis.findElements(By.tagName("tr")).find{it.text.contains(Integer.toString(Sum))}
+	assert ourtrs.findElements(By.tagName('td'))
+	def ourtd = ourtrs.findElements(By.tagName('td')).getAt(5)
+	waitPresenceOfAll(By.xpath("//input[@class='withDraw']"),driverThis)
+	wait.until(ExpectedConditions.visibilityOf(ourtd.findElement(By.xpath("//input[@class='withDraw']"))))
+	def dop = ourtd.findElement(By.xpath("//input[@class='withDraw']"))
+	dop.click()
+	waitPresenceOfAll(By.xpath("//div[@class=\'edit-holder  adt\']"),driverThis)
+	def infoSumOwner = driverThis.findElements(By.xpath("//div[@class=\'edit-holder  adt\']")).find{ it.getAttribute('style').contains("display: block") }
+	assert infoSumOwner.findElement(By.name('status'))
+	infoSumOwner.findElement(By.name('status')).click()
+	wait.until(ExpectedConditions.visibilityOf(infoSumOwner.findElement(By.name("status"))))
+	new Select(infoSumOwner.findElement(By.name("status"))).selectByIndex(selectIndex)
+	if (selectIndex == 0) {
+		assert 'SUCCESS' == infoSumOwner.findElement(By.name("status")).getAttribute('value')
+		infoSumOwner.findElement(By.name('moderationComment')).with {
+			clear()
+			sendKeys("Тестовая модерация вывода средств владельцем пройдена")
+		}
+	} else {
+		assert 'FAILURE' == infoSumOwner.findElement(By.name("status")).getAttribute('value')
+		infoSumOwner.findElement(By.name('moderationComment')).with {
+			clear()
+			sendKeys("Тестовая модерация вывода средств владельцем не пройдена")
+		}
+	}
+	infoSumOwner.findElement(By.cssSelector("input.btn")).click()
+	waitPresenceOfAll(By.tagName("tr"),driverThis)
+	if (driverThis.findElement(By.tagName("TBODY")).findElements(By.tagName("tr")).size() > 5){
+		def searchTr = driverThis.findElement(By.xpath("//tr[@class=\"tablesorter-filter-row tablesorter-ignoreRow\"]"))
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "1"}.with {
+			clear()
+		}
+		searchTr.findElements(By.tagName("INPUT")).find{ it.getAttribute('data-column') == "3"}.with {
+			clear()
+			sendKeys("Успех")
+		}
+	}
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("tr")))
+	def ourmodtr = driverThis.findElements(By.tagName("tr")).find{it.text.contains(Integer.toString(Sum))}
+	def ourmod = ourmodtr.findElements(By.tagName('td')).getAt(3)
+	if (selectIndex == 0) {
+		assert "Успех" == ourmod.getText()
+	} else {
+		assert "Ошибка" == ourmod.getText()
+	}
+	driverThis.findElement(By.linkText("Выйти")).click()
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("sign")))
+
+}
+
 /*if (driverThis.findElements(By.id("multipartFile")).size() == 0){
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("multipartFile")))
 	}
